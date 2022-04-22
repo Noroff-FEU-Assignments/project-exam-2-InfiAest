@@ -3,12 +3,12 @@ import { useState, useContext } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import AuthContext from "../../context/AuthContext";
-import { BASE_URL, TOKEN_PATH } from "../../constants/api";
+import AuthContext from "../../../context/AuthContext";
+import { BASE_URL, TOKEN_PATH } from "../../../constants/api";
 import { useRouter } from "next/router";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import DisplayMessage from "../messages/DisplayMessage";
+import DisplayMessage from "../../messages/DisplayMessage";
 
 const url = BASE_URL + TOKEN_PATH;
 
