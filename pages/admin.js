@@ -1,3 +1,4 @@
+import AddAccomodationForm from "../components/forms/accomodation/AddAccomodationForm";
 import Head from "../components/layout/Head";
 import Layout from "../components/layout/Layout";
 
@@ -8,6 +9,7 @@ export default function Admin() {
 
       <div className="container">
         <h1>Admin page</h1>
+        <AddAccomodationForm />
       </div>
     </Layout>
   );
