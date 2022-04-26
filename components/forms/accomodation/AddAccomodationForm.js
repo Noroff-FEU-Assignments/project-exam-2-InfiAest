@@ -15,7 +15,15 @@ const schema = yup.object().shape({
     .number()
     .oneOf([1, 2, 3, 4, 5])
     .required("Please select the rating"),
-  images: yup.string(),
+  images: yup
+    .mixed()
+    .required("Please select an image")
+    .test("type", "Please choose a JPEG or PNG file", (value) => {
+      return (value && value[0].type === "image/jpeg") || "image/png";
+    })
+    .test("type", "Maximum 3 images allowed", (value) => {
+      return value && value.length <= 3;
+    }),
   description: yup
     .string()
     .required("Please enter a description of the accomodation"),
@@ -28,11 +36,12 @@ const schema = yup.object().shape({
     .required("Please enter information about the accomodation"),
 });
 
-export default function AddAccomodationForm() {
+const AddAccomodationForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(null);
-
-  const http = useAxios();
+  const [image1, setImage1] = useState(false);
+  const [image2, setimage2] = useState(false);
+  const [image3, setimage3] = useState(false);
 
   const {
     register,
@@ -42,27 +51,38 @@ export default function AddAccomodationForm() {
     resolver: yupResolver(schema),
   });
 
+  const handleInputChange = (event) => {
+    setImage1(event.target.files[0]);
+    setimage2(event.target.files[1]);
+    setimage3(event.target.files[2]);
+  };
+
+  const http = useAxios();
+
   async function onSubmit(data) {
     setSubmitting(true);
     setServerError(null);
 
-    console.log(data);
+    const postData = {
+      name: data.name,
+      location: data.location,
+      price_per_night: data.price_per_night,
+      rating: data.rating,
+      description: data.description,
+      amenities: data.amenities,
+      tags: data.tags,
+      information: data.information,
+    };
+
+    let formData = new FormData();
+    formData.append("files.images", image1);
+    formData.append("files.images", image2);
+    formData.append("files.images", image3);
+    formData.append("data", JSON.stringify(postData));
 
     try {
-      const response = await http.post("accomodations", {
-        data: {
-          name: data.name,
-          location: data.location,
-          price_per_night: data.price_per_night,
-          rating: data.rating,
-          images: data.images.name,
-          description: data.description,
-          amenities: data.amenities,
-          tags: data.tags,
-          information: data.information,
-        },
-      });
-      console.log("response", response.data);
+      const response = await http.post("accomodations", formData);
+      console.log("Response", response.data);
     } catch (error) {
       console.log("error", error);
       setServerError(error.toString());
@@ -70,6 +90,7 @@ export default function AddAccomodationForm() {
       setSubmitting(false);
     }
   }
+
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)} className="mt-5 mb-5">
@@ -124,7 +145,12 @@ export default function AddAccomodationForm() {
           </Form.Group>
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Images</Form.Label>
-            <Form.Control type="file" multiple {...register("images")} />
+            <Form.Control
+              type="file"
+              {...register("images")}
+              onChange={handleInputChange}
+              multiple
+            />
             {errors.images && <span>{errors.images.message}</span>}
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicTextArea">
@@ -175,4 +201,6 @@ export default function AddAccomodationForm() {
       </Form>
     </>
   );
-}
+};
+
+export default AddAccomodationForm;
