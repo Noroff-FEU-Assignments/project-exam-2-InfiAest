@@ -17,7 +17,7 @@ const schema = yup.object().shape({
     .required("Please select the rating"),
   images: yup
     .mixed()
-    .required("Please select an image")
+    .required("Please select up to 3 images")
     .test("type", "Please choose a JPEG or PNG file", (value) => {
       return (value && value[0].type === "image/jpeg") || "image/png";
     })
