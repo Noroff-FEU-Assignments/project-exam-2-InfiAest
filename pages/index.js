@@ -1,3 +1,4 @@
+import Chips from "../components/forms/accomodation/Chips";
 import Head from "../components/layout/Head";
 import Layout from "../components/layout/Layout";
 
@@ -8,6 +9,7 @@ export default function Home() {
 
       <div className="container">
         <h1>Home page</h1>
+        <Chips />
       </div>
     </Layout>
   );

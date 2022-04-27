@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
 
 const schema = yup.object().shape({
   name: yup.string().required("Please enter the accomodation name"),
@@ -18,19 +20,18 @@ const schema = yup.object().shape({
   images: yup
     .mixed()
     .required("Please select up to 3 images")
-    .test("type", "Please choose a JPEG or PNG file", (value) => {
-      return (value && value[0].type === "image/jpeg") || "image/png";
-    })
     .test("type", "Maximum 3 images allowed", (value) => {
       return value && value.length <= 3;
     }),
   description: yup
     .string()
     .required("Please enter a description of the accomodation"),
-  amenities: yup
-    .array()
-    .required("Please enter amenities eg.['item1','item2','item3']"),
-  tags: yup.array().required("Please enter tags eg.['tag1','tag2','tag3']"),
+  amenities: yup.array(
+    yup.object({ key: yup.number().required(), label: yup.string().required() })
+  ),
+  tags: yup.array(
+    yup.object({ key: yup.number().required(), label: yup.string().required() })
+  ),
   information: yup
     .string()
     .required("Please enter information about the accomodation"),
@@ -42,6 +43,10 @@ const AddAccomodationForm = () => {
   const [image1, setImage1] = useState(false);
   const [image2, setimage2] = useState(false);
   const [image3, setimage3] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [tagsInputValue, setTagsInputValue] = useState("");
+  const [amenities, setAmenities] = useState([]);
+  const [amenitiesInputValue, setAmenitiesInputValue] = useState("");
 
   const {
     register,
@@ -55,6 +60,44 @@ const AddAccomodationForm = () => {
     setImage1(event.target.files[0]);
     setimage2(event.target.files[1]);
     setimage3(event.target.files[2]);
+  };
+
+  const handleTagsKeyPress = (event) => {
+    if (event.key === "Enter") {
+      setTags((tags) => [
+        ...tags,
+        { key: tags.length + 1, label: `${event.target.value}` },
+      ]);
+      setTagsInputValue("");
+    }
+  };
+
+  const handleTagsInput = (e) => {
+    setTagsInputValue(e.target.value);
+  };
+
+  const handleTagDelete = (chipsToDelete) => () => {
+    setTags((chips) => chips.filter((chip) => chip.key !== chipsToDelete.key));
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      setAmenities((amenity) => [
+        ...amenities,
+        { key: amenity.length + 1, label: event.target.value },
+      ]);
+      setAmenitiesInputValue("");
+    }
+  };
+
+  const handleUserInput = (e) => {
+    setAmenitiesInputValue(e.target.value);
+  };
+
+  const handleAmenitiyDelete = (chipsToDelete) => () => {
+    setAmenities((chips) =>
+      chips.filter((chip) => chip.key !== chipsToDelete.key)
+    );
   };
 
   const http = useAxios();
@@ -74,6 +117,7 @@ const AddAccomodationForm = () => {
       information: data.information,
     };
 
+    console.log(postData);
     let formData = new FormData();
     formData.append("files.images", image1);
     formData.append("files.images", image2);
@@ -163,24 +207,63 @@ const AddAccomodationForm = () => {
             />
             {errors.description && <span>{errors.description.message}</span>}
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicAmenities">
-            <Form.Label>Amenities</Form.Label>
+          <Form.Group className="mb-3" controlId="formBasicamenities">
+            <Form.Label>amenities</Form.Label>
             <Form.Control
               type="text"
-              placeholder="eg.['item1','item2','item3']"
+              placeholder="press enter to add each amenity"
+              onKeyPress={handleKeyPress}
+              value={amenitiesInputValue}
+              onChange={handleUserInput}
+            />
+            <Form.Control
+              className="hidden"
+              type="text"
+              value={JSON.stringify(amenities)}
+              readOnly
               {...register("amenities")}
             />
+            <Stack direction="row" spacing={1}>
+              {amenities.map((amenity) => (
+                <Chip
+                  key={amenity.key}
+                  label={amenity.label}
+                  onDelete={handleAmenitiyDelete(amenity)}
+                />
+              ))}
+            </Stack>
             {errors.amenities && <span>{errors.amenities.message}</span>}
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicTags">
             <Form.Label>Tags</Form.Label>
             <Form.Control
               type="text"
-              placeholder="eg.['tag1','tag2','tag3']"
+              placeholder="press enter to add each tag"
+              onKeyPress={handleTagsKeyPress}
+              value={tagsInputValue}
+              onChange={handleTagsInput}
+            />
+
+            <Form.Control
+              className="hidden"
+              type="text"
+              value={JSON.stringify(tags)}
+              readOnly
               {...register("tags")}
             />
+            <Stack direction="row" spacing={1}>
+              {tags.map((tag) => (
+                <Chip
+                  key={tag.key}
+                  label={tag.label}
+                  onDelete={handleTagDelete(tag)}
+                />
+              ))}
+            </Stack>
             {errors.tags && <span>{errors.tags.message}</span>}
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicTextArea">
             <Form.Label>Extra information</Form.Label>
             <Form.Control
