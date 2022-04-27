@@ -12,12 +12,47 @@ body {
   color: #ffffff;
   margin-right: 10px;
  }
- 
+ .wrapper {
+   min-height: 100vh;
+ }
  .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 0 1rem;
  }
+ .form-container {
+   max-width: 1000px;
+   margin: 0 auto;
+   padding: 0 2rem;
+   position: relative;
+   margin-top: -24px;
+ }
+
+ .card-text {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   width: 100%;
+ }
+ .card-tags-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+ }
+ .card-tag {
+   font-size: 0.9rem;
+ }
+
+ .fa-star {
+  width: 25px;
+  padding-right: 5px;
+  color: #E6C532;
+}
+.fa-wifi, .fa-paw, .fa-user-group, .fa-snowflake {
+  width: 22px;
+  padding-right: 5px;
+  color: #566D73;
+}
 
  /* .hidden {
    display: none;

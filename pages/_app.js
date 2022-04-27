@@ -1,11 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/globals.css";
 import { AuthProvider } from "../context/AuthContext";
+import Footer from "../components/layout/Footer";
 
 function MyApp({ Component, pageProps }) {
   return (
     <AuthProvider>
-      <Component {...pageProps} />
+      <div className="wrapper">
+        <Component {...pageProps} />
+      </div>
+      <Footer />
     </AuthProvider>
   );
 }
