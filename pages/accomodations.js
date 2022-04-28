@@ -82,8 +82,9 @@ export default function Accomodations(props) {
             }
             return (
               <Col key={accomodation.id}>
-                <Card>
+                <Card className="accomodation-card">
                   <Image
+                    className="accomodation-card-img"
                     src={accomodation.attributes.images.data[0].attributes.url}
                     width="384"
                     height="384"
@@ -107,7 +108,11 @@ export default function Accomodations(props) {
                       </Button>
                     </div>
                     <div className="card-tags-container">
-                      {accomodation.attributes.tags.map((tag) => {
+                      <span>{accomodation.attributes.tags[0].label}</span>
+                      <span>{accomodation.attributes.tags[1].label}</span>
+                      <span>{accomodation.attributes.tags[2].label}</span>
+                      <span>{accomodation.attributes.tags[3].label}</span>
+                      {/* {accomodation.attributes.tags.map((tag) => {
                         let tagIcon = "";
                         if (tag.label === "Wifi") {
                           tagIcon = (
@@ -140,7 +145,7 @@ export default function Accomodations(props) {
                             {tag.label}
                           </span>
                         );
-                      })}
+                      })} */}
                     </div>
                   </Card.Body>
                 </Card>

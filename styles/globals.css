@@ -5,7 +5,7 @@ body {
  
  nav {
   background: #1D1F1E;
-  padding: 1rem;
+  height: 65px;
  }
  
  nav a {
@@ -16,9 +16,12 @@ body {
    min-height: 100vh;
  }
  .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
+ }
+ .section-container {
+   margin: 2rem 0 6rem 0;
  }
  .form-container {
    max-width: 1000px;
@@ -28,7 +31,7 @@ body {
    margin-top: -24px;
  }
 
- .card-text {
+ .accomodation-card.card-text {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
@@ -42,7 +45,19 @@ body {
  .card-tag {
    font-size: 0.9rem;
  }
-
+.accomodation-card {
+  height: 550px;
+  padding: 25px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 3px 3px 12px rgba(86, 109, 115, 0.4);
+}
+.accomodation-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 0 0 0;
+}
  .fa-star {
   width: 25px;
   padding-right: 5px;
@@ -53,7 +68,33 @@ body {
   padding-right: 5px;
   color: #566D73;
 }
-
+.accomodation-card-img {
+  padding: 1rem;
+  border-radius: 10px;
+}
+h1 {
+  margin: 4rem 0 2rem 0;
+}
+.inspo-tiles {
+  background-color: #D3E4E8;
+  text-align: center;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 3px 3px 12px rgba(86, 109, 115, 0.4);
+}
+.inspo-card {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 3px 3px 12px rgba(86, 109, 115, 0.4);
+}
+.inspo-tiles img, .inspo-card img {
+  border-radius: 10px 10px 0 0;
+}
+.button {
+  width: 100%;
+  max-width: 800px !important;
+  margin: 0 auto;
+}
  /* .hidden {
    display: none;
  } */

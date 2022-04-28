@@ -6,10 +6,23 @@ import AuthContext from "../../context/AuthContext";
 import { useRouter } from "next/router";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import useWindowSize from "../../hooks/useWindowSize";
+import Image from "next/image";
+import desktopLogo from "../../images/logo/logo-white.png";
+import mobileIcon from "../../images/logo/Icon-white.png";
 
 export default function Layout({ children }) {
   const [auth, setAuth] = useContext(AuthContext);
   const router = useRouter();
+  const windowSize = useWindowSize();
+
+  // console.log(windowSize.width);
+
+  let navLogo = <Image src={desktopLogo} width={"150"} height={"50"} alt="" />;
+
+  if (windowSize.width < 768) {
+    navLogo = <Image src={mobileIcon} width={"49"} height={"40"} alt="" />;
+  }
 
   let userName = "";
 
@@ -28,6 +41,7 @@ export default function Layout({ children }) {
         <Container>
           {auth ? (
             <>
+              {navLogo}
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -56,6 +70,7 @@ export default function Layout({ children }) {
             </>
           ) : (
             <>
+              {navLogo}
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">

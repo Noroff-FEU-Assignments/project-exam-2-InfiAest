@@ -10,14 +10,14 @@ export default function Footer() {
         width: "100%",
         position: "relative",
         margin: "4rem auto 0 auto",
-        padding: "0.5rem",
+        padding: "0.5rem 1rem",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "end",
       }}
     >
-      <Image src={Logo} width={"200"} height={"66"} alt="" />
+      <Image src={Logo} width={"150"} height={"50"} alt="" />
       <div
         style={{
           display: "flex",

@@ -1,4 +1,4 @@
-import headerImg from "../../images/bryggen-header-img.jpg";
+import headerImg from "../../images/header/bryggen-header-img.jpg";
 
 export default function ImageHead() {
   return (
