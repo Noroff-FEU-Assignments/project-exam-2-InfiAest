@@ -35,6 +35,15 @@ const schema = yup.object().shape({
   information: yup
     .string()
     .required("Please enter information about the accomodation"),
+  accomodation_type: yup
+    .string()
+    .required("Please select the accomodation type"),
+  maximum_guests: yup
+    .string()
+    .required("Please select the maximum number of guests"),
+  accomodation_area: yup
+    .string()
+    .required("Please select the accomodation location type"),
 });
 
 const AddAccomodationForm = () => {
@@ -115,6 +124,9 @@ const AddAccomodationForm = () => {
       amenities: data.amenities,
       tags: data.tags,
       information: data.information,
+      accomodation_type: data.accomodation_type,
+      maximum_guests: data.maximum_guests,
+      accomodation_area: data.accomodation_area,
     };
 
     console.log(postData);
@@ -186,6 +198,52 @@ const AddAccomodationForm = () => {
               <option value="5">5</option>
             </Form.Select>
             {errors.rating && <span>{errors.rating.message}</span>}
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Accomodation type</Form.Label>
+            <Form.Select defaultValue={null} {...register("accomodation_type")}>
+              <option value=""></option>
+              <option value="hotel">hotel</option>
+              <option value="apartment">apartment</option>
+              <option value="studio">studio</option>
+              <option value="bungalow">bungalow</option>
+              <option value="house">house</option>
+            </Form.Select>
+            {errors.accomodation_type && (
+              <span>{errors.accomodation_type.message}</span>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Location type</Form.Label>
+            <Form.Select defaultValue={null} {...register("accomodation_area")}>
+              <option value=""></option>
+              <option value="city">city</option>
+              <option value="mountainside">mountainside</option>
+              <option value="sea">sea</option>
+              <option value="rural">rural</option>
+            </Form.Select>
+            {errors.accomodation_area && (
+              <span>{errors.accomodation_area.message}</span>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Maximum number of guests</Form.Label>
+            <Form.Select defaultValue={null} {...register("maximum_guests")}>
+              <option value=""></option>
+              <option value="one">one</option>
+              <option value="two">two</option>
+              <option value="three">three</option>
+              <option value="four">four</option>
+              <option value="five">five</option>
+              <option value="six">six</option>
+              <option value="seven">seven</option>
+              <option value="eight">eight</option>
+              <option value="nine">nine</option>
+              <option value="ten">ten</option>
+            </Form.Select>
+            {errors.maximum_guests && (
+              <span>{errors.maximum_guests.message}</span>
+            )}
           </Form.Group>
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Images</Form.Label>

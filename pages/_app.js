@@ -1,5 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/globals.css";
+import "../styles/sass/style.scss";
 import { AuthProvider } from "../context/AuthContext";
 import Footer from "../components/layout/Footer";
 

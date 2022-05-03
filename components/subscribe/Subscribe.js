@@ -23,15 +23,10 @@ export default function Subscribe() {
           <p>Subscribe to the Holidaze newsletter here</p>
           <Form>
             <Form.Group className="mb-3">
-              <Form.Control
-                size="lg"
-                placeholder="Enter email address here"
-                aria-label="subscribe form"
-                aria-describedby="basic-addon2"
-              />
+              <Form.Control size="md" placeholder="email@emailaddress.com" />
             </Form.Group>
             <div className="d-grid gap-2">
-              <Button variant="primary" size="md" className="button">
+              <Button variant="secondary" size="md" className="button" disabled>
                 Sign up
               </Button>
             </div>

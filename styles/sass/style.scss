@@ -1,0 +1,14 @@
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/functions";
+@import "partials/layout";
+@import "partials/buttons";
+@import "partials/cards";
+@import "partials/forms";
+@import "partials/nav";
+@import "partials/typography";
+@import "partials/footer";
+
+@import "partials/custom";
+
+@import "/node_modules/bootstrap/scss/bootstrap.scss";

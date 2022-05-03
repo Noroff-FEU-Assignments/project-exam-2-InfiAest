@@ -1,0 +1,19 @@
+$colors: (
+  primary: #a84952,
+  secondary: #e6c532,
+  light-blue: #d3e4e8,
+  dark-blue: #566d73,
+  body: #1d1f1e,
+  background: #ffffff,
+);
+
+$box-shadow: 3px 3px 12px rgba(86, 109, 115, 0.4);
+$box-shadow-hover: 3px 3px 12px rgba(86, 109, 115, 0.9);
+
+$font-primary: "montserrat", sans-serif;
+$font-headings: "bebas-neue", sans-serif;
+
+//screen widths
+$large-mobile-width: 641px;
+$tablet-width: 768px;
+$desktop-width: 961px;

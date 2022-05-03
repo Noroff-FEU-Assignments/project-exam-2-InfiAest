@@ -1,0 +1,69 @@
+.card {
+  box-shadow: $box-shadow;
+}
+.card-title {
+  font-family: "bebas-neue", sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+.card-subtitle,
+.card-tags-container span {
+  font-size: 0.9rem;
+}
+
+.accomodation-card.card-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.card-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.card-tag {
+  font-size: 0.9rem;
+}
+.accomodation-card {
+  height: 600px;
+  padding: 25px;
+  border-radius: 10px;
+  border: none;
+}
+.accomodation-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 0 0 0;
+}
+.fa-star {
+  width: 25px;
+  padding-right: 5px;
+  color: #e6c532;
+}
+.fa-wifi,
+.fa-paw,
+.fa-user-group,
+.fa-snowflake {
+  width: 22px;
+  padding-right: 5px;
+  color: #566d73;
+}
+.accomodation-card-img {
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.inspo-tiles {
+  background-color: map-get($colors, light-blue) !important;
+  text-align: center;
+}
+.inspo-tiles:hover {
+  box-shadow: $box-shadow-hover;
+}
+
+.inspo-tiles img,
+.inspo-card img {
+  border-radius: 10px 10px 0 0;
+}

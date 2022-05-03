@@ -1,37 +1,44 @@
 import Image from "next/image";
 import Logo from "../../images/logo/logo-white.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        background: "#1d1f1e",
-        color: "#ffffff",
-        width: "100%",
-        position: "relative",
-        margin: "4rem auto 0 auto",
-        padding: "0.5rem 1rem",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "end",
-      }}
-    >
-      <Image src={Logo} width={"150"} height={"50"} alt="" />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          width: "400px",
-        }}
-      >
-        <p>Facebook</p>
-        <p>Instagram</p>
-        <p>Contact Us</p>
-        <p>Login</p>
+    <footer>
+      <div className="footer__logo--container">
+        <Image
+          className="footer__logo"
+          src={Logo}
+          width={"150"}
+          height={"50"}
+          alt=""
+        />
       </div>
-      <p>&copy;Holidaze 2022</p>
+      <div className="footer__flex-container">
+        <div className="footer__socials">
+          <div className="footer__socials--flex">
+            <a href="" className="footer__link">
+              <FontAwesomeIcon icon={faFacebookSquare} />
+              <span className="footer__link--name">Facebook</span>
+            </a>
+
+            <a href="" className="footer__link">
+              <FontAwesomeIcon icon={faInstagram} />
+              <span className="footer__link--name">Instagram</span>
+            </a>
+          </div>
+          <a href="/contact" className="footer__link">
+            Contact Us
+          </a>
+
+          <a href="/login" className="footer__link">
+            Login
+          </a>
+        </div>
+      </div>
+      <span className="footer__copyright">&copy;Holidaze 2022</span>
     </footer>
   );
 }

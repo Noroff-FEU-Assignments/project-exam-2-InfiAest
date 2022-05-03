@@ -3,11 +3,20 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import inspoImg from "../../images/inspo/utsikt-floien.jpg";
 import useWindowSize from "../../hooks/useWindowSize";
+import Heading from "../layout/Heading";
 
 function InspoCard() {
   const windowSize = useWindowSize();
 
-  let image = <Image src={inspoImg} objectFit="cover" height="600" alt="" />;
+  let image = (
+    <Image
+      src={inspoImg}
+      objectFit="cover"
+      height="600"
+      alt=""
+      priority="true"
+    />
+  );
 
   if (windowSize.width < 768) {
     image = <Image src={inspoImg} objectFit="cover" height="1000" alt="" />;
@@ -18,7 +27,10 @@ function InspoCard() {
       <Card className="inspo-card">
         {image}
         <Card.Body>
-          <Card.Title>Haven't decided what to do in Bergen yet?</Card.Title>
+          <Heading
+            size="3"
+            content="Haven't decided what to do in Bergen yet?"
+          />
           <Card.Text>
             Get comfy in one of these locations and make plans from there!
           </Card.Text>

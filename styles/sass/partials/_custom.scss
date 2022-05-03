@@ -1,0 +1,48 @@
+$grid-gutter-width: 4rem;
+
+$body-color: map-get($colors, body);
+$body-background-color: map-get($colors, background);
+$primary: map-get($colors, primary);
+$secondary: map-get($colors, secondary);
+$btn-secondary: map-get($colors, secondary);
+$dark: map-get($colors, body);
+
+$h1-font-size: 2rem;
+$h2-font-size: 2rem;
+$h3-font-size: 1.75rem;
+$h4-font-size: 1.65rem;
+$h5-font-size: 1.55rem;
+$headings-margin-bottom: 2rem;
+
+$link-color: map-get($colors, background);
+$link-hover-color: none;
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+$navbar-dark-toggler-border-color: none;
+$navbar-dark-color: map-get($colors, background);
+$navbar-toggler-transition: none;
+$navbar-toggler-focus-width: none;
+
+$border-radius: 10px;
+
+$card-border-width: none;
+$card-box-shadow: $box-shadow;
+$card-bg: map-get($colors, background);
+
+$input-border-color: map-get($colors, light-blue);
+$input-border-width: 2px;
+$input-border-radius: $border-radius !important;
+$input-box-shadow: none;
+$input-focus-border-color: map-get($colors, dark-blue);
+$input-focus-box-shadow: none;
+
+$btn-focus-box-shadow: none !important;
+$btn-active-box-shadow: none;
+
+.btn {
+  box-shadow: $box-shadow;
+}
+.btn:hover {
+  box-shadow: $box-shadow-hover;
+}
