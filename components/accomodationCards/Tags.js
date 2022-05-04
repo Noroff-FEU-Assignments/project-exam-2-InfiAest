@@ -20,105 +20,105 @@ import {
 function Tags({ tagActive, content }) {
   if (tagActive === true && content === "WiFi") {
     return (
-      <div>
+      <div className="card__tags--item">
         <FaWifi className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Aircon") {
     return (
-      <div>
+      <div className="card__tags--item">
         <FaSnowflake className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Breakfast included") {
     return (
-      <div>
+      <div className="card__tags--item">
         <GiKnifeFork className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Free parking") {
     return (
-      <div>
+      <div className="card__tags--item">
         <FaParking className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Heating") {
     return (
-      <div>
+      <div className="card__tags--item">
         <GiHeatHaze className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Kitchen") {
     return (
-      <div>
+      <div className="card__tags--item">
         <MdKitchen className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Kitchenette") {
     return (
-      <div>
+      <div className="card__tags--item">
         <MdKitchen className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Pets allowed") {
     return (
-      <div>
+      <div className="card__tags--item">
         <FaPaw className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Room service") {
     return (
-      <div>
+      <div className="card__tags--item">
         <MdRoomService className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Couples") {
     return (
-      <div>
+      <div className="card__tags--item">
         <FaUserFriends className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Families") {
     return (
-      <div>
+      <div className="card__tags--item">
         <MdFamilyRestroom className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Groups") {
     return (
-      <div>
+      <div className="card__tags--item">
         <FaUsers className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Single travellers") {
     return (
-      <div>
+      <div className="card__tags--item">
         <FaUser className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Washer") {
     return (
-      <div>
+      <div className="card__tags--item">
         <GiWashingMachine className="tag__icon" />
         {content}
       </div>
     );
   } else if (tagActive === true && content === "Dryer") {
     return (
-      <div>
+      <div className="card__tags--item">
         <MdLocalLaundryService className="tag__icon" />
         {content}
       </div>
