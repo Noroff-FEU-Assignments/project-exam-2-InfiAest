@@ -55,15 +55,22 @@
   border-radius: 10px;
 }
 
-.inspo-tiles {
+.inspo__tiles--card {
   background-color: map-get($colors, light-blue) !important;
   text-align: center;
 }
-.inspo-tiles:hover {
+.inspo__tiles--card:hover {
   box-shadow: $box-shadow-hover;
 }
 
-.inspo-tiles img,
+.inspo__tiles--card img,
 .inspo-card img {
   border-radius: 10px 10px 0 0;
+}
+
+.inspo__tiles--link {
+  color: map-get($colors, body);
+}
+.inspo__tiles--link:hover {
+  text-decoration: none;
 }

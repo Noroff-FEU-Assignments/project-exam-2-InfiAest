@@ -1,7 +1,44 @@
-.form-container {
+.search__form--container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
   margin-top: -24px;
+  & .mb-3 {
+    position: relative;
+  }
+}
+
+.list-container {
+  position: relative;
+  width: inherit;
+}
+.list-group {
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  background-color: red;
+}
+
+.search__form--button {
+  position: absolute !important;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 4 !important;
+  box-shadow: none !important;
+  color: map-get($colors, light-blue) !important;
+}
+.search__form--button:hover {
+  box-shadow: none;
+  color: map-get($colors, dark-blue) !important;
+}
+.search__form--button:disabled:hover,
+.search__form--button[disabled]:hover {
+  color: map-get($colors, light-blue) !important;
+  box-shadow: none;
+}
+.fa-magnifying-glass {
+  width: 25px;
+  margin: 4px 0;
 }

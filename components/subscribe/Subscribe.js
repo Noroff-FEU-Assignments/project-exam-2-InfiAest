@@ -1,10 +1,11 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Heading from "../layout/Heading";
+import SectionWrapper from "../layout/SectionWrapper";
 
 export default function Subscribe() {
   return (
-    <div className="section-container">
+    <SectionWrapper>
       <div
         style={{
           background: "#566D73",
@@ -33,6 +34,6 @@ export default function Subscribe() {
           </Form>
         </div>
       </div>
-    </div>
+    </SectionWrapper>
   );
 }

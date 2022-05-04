@@ -37,25 +37,39 @@ export default function Layout({ children }) {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="md">
-        <Container fluid="xxl">
-          {auth ? (
-            <>
-              {navLogo}
+      <Navbar bg="dark" variant="dark" expand="md" sticky="top">
+        {auth ? (
+          <>
+            <div className="nav__logo--container">{navLogo}</div>
+            <Container>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Link href="/">
-                    <a>Home</a>
+                    <a className={router.pathname === "/" ? "active" : ""}>
+                      Home
+                    </a>
                   </Link>
                   <Link href="/accomodations">
-                    <a>Accomodations</a>
+                    <a
+                      className={
+                        router.pathname == "/accomodations" ? "active" : ""
+                      }
+                    >
+                      Accomodations
+                    </a>
                   </Link>
                   <Link href="/contact">
-                    <a>Contact us</a>
+                    <a
+                      className={router.pathname == "/contact" ? "active" : ""}
+                    >
+                      Contact us
+                    </a>
                   </Link>
                   <Link href="/admin">
-                    <a>Admin</a>
+                    <a className={router.pathname == "/admin" ? "active" : ""}>
+                      Admin
+                    </a>
                   </Link>
                 </Nav>
               </Navbar.Collapse>
@@ -67,30 +81,46 @@ export default function Layout({ children }) {
                   </Button>
                 </Navbar.Text>
               </Navbar.Collapse>
-            </>
-          ) : (
-            <>
-              {navLogo}
+            </Container>
+          </>
+        ) : (
+          <>
+            <div className="nav__logo--container">{navLogo}</div>
+            <Container>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Link href="/">
-                    <a>Home</a>
+                    <a className={router.pathname === "/" ? "active" : ""}>
+                      Home
+                    </a>
                   </Link>
                   <Link href="/accomodations">
-                    <a>Accomodations</a>
+                    <a
+                      className={
+                        router.pathname == "/accomodations" ? "active" : ""
+                      }
+                    >
+                      Accomodations
+                    </a>
                   </Link>
                   <Link href="/contact">
-                    <a>Contact us</a>
+                    <a
+                      className={router.pathname == "/contact" ? "active" : ""}
+                    >
+                      Contact us
+                    </a>
                   </Link>
                   <Link href="/login">
-                    <a>Login</a>
+                    <a className={router.pathname == "/login" ? "active" : ""}>
+                      Login
+                    </a>
                   </Link>
                 </Nav>
               </Navbar.Collapse>
-            </>
-          )}
-        </Container>
+            </Container>
+          </>
+        )}
       </Navbar>
 
       {children}

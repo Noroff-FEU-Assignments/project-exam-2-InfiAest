@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import inspoImg from "../../images/inspo/utsikt-floien.jpg";
 import useWindowSize from "../../hooks/useWindowSize";
 import Heading from "../layout/Heading";
+import SectionWrapper from "../layout/SectionWrapper";
 
 function InspoCard() {
   const windowSize = useWindowSize();
@@ -23,7 +24,7 @@ function InspoCard() {
   }
 
   return (
-    <div className="section-container">
+    <SectionWrapper>
       <Card className="inspo-card">
         {image}
         <Card.Body>
@@ -41,7 +42,7 @@ function InspoCard() {
           </div>
         </Card.Body>
       </Card>
-    </div>
+    </SectionWrapper>
   );
 }
 

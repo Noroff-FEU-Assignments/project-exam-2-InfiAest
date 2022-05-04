@@ -103,3 +103,7 @@ End of week 7: Report with link to website or a Github link and feedback from co
 ### Resources
 
 Report template included in the repo.
+
+## References
+
+https://www.youtube.com/watch?v=LlvBzyy-558 - searchbar
