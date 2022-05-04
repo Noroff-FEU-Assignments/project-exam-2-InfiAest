@@ -12,7 +12,8 @@ $h1-font-size: 2rem;
 $h2-font-size: 2rem;
 $h3-font-size: 1.75rem;
 $h4-font-size: 1.65rem;
-$h5-font-size: 1.55rem;
+$h5-font-size: 1.4rem;
+$h6-font-size: 0.9rem;
 $headings-margin-bottom: 2rem;
 
 $link-color: map-get($colors, background);
@@ -27,6 +28,7 @@ $navbar-toggler-focus-width: none;
 
 $border-radius: 10px;
 
+$card-title-spacer-y: 0;
 $card-border-width: none;
 $card-box-shadow: $box-shadow;
 $card-bg: map-get($colors, background);

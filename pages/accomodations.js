@@ -8,18 +8,17 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Heading from "../components/layout/Heading";
+import Rating from "../components/accomodationCards/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
-import { faStar as regStar } from "@fortawesome/free-regular-svg-icons";
-import {
-  faWifi,
-  faPaw,
-  faSnowflake,
-  faUserGroup,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import Tags from "../components/accomodationCards/Tags";
 
 export default function Accomodations(props) {
-  console.log(props.accomodations.data);
+  // console.log(props.accomodations.data[0].attributes.tags);
+  // const tags = props.accomodations.data[0].attributes.tags;
+
+  // console.log(tags);
+
   return (
     <Layout>
       <Head title="Holidaze Accomodations" />
@@ -28,58 +27,6 @@ export default function Accomodations(props) {
         <Heading size="1" content="Accomodation" />
         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
           {props.accomodations.data.map((accomodation) => {
-            let rating = `${accomodation.attributes.rating}`;
-            if (accomodation.attributes.rating === 1) {
-              rating = (
-                <span>
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                </span>
-              );
-            } else if (accomodation.attributes.rating === 2) {
-              rating = (
-                <span>
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                </span>
-              );
-            } else if (accomodation.attributes.rating === 3) {
-              rating = (
-                <span>
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                </span>
-              );
-            } else if (accomodation.attributes.rating === 4) {
-              rating = (
-                <span>
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={regStar} />
-                </span>
-              );
-            } else if (accomodation.attributes.rating === 5) {
-              rating = (
-                <span>
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                  <FontAwesomeIcon icon={solidStar} />
-                </span>
-              );
-            }
             return (
               <Col key={accomodation.id}>
                 <Card className="accomodation-card">
@@ -93,25 +40,100 @@ export default function Accomodations(props) {
                   <Card.Body>
                     <Card.Title>{accomodation.attributes.name}</Card.Title>
                     <Card.Subtitle>
-                      {accomodation.attributes.location}
+                      <FontAwesomeIcon icon={faLocationDot} />
+                      {accomodation.attributes.location.street_address}
                     </Card.Subtitle>
-                    <Card.Text>
-                      <span>{rating}</span>
-                      <span>{accomodation.attributes.price_per_night},-</span>
-                    </Card.Text>
+                    <div className="card__text--container">
+                      <Rating
+                        ratingValue={JSON.stringify(
+                          accomodation.attributes.rating
+                        )}
+                      />
+                      <div className="card__text--price">
+                        {accomodation.attributes.price_per_night},-
+                      </div>
+                    </div>
                     <div className="d-grid gap-2">
                       <Button
                         variant="primary"
-                        href={`detail/${accomodation.id}`}
+                        href={`accomodations/${accomodation.id}`}
                       >
                         See more
                       </Button>
                     </div>
-                    <div className="card-tags-container">
-                      <span>{accomodation.attributes.tags[0].label}</span>
-                      <span>{accomodation.attributes.tags[1].label}</span>
-                      <span>{accomodation.attributes.tags[2].label}</span>
-                      <span>{accomodation.attributes.tags[3].label}</span>
+                    <div className="card__tags--container">
+                      <Tags
+                        tagActive={accomodation.attributes.tags.Airconditioning}
+                        content="Aircon"
+                      />
+                      <Tags
+                        tagActive={
+                          accomodation.attributes.tags.Breakfast_included
+                        }
+                        content="Breakfast included"
+                      />
+                      {/* <Tags
+                        tagActive={accomodation.attributes.tags.Free_parking}
+                        content="Free parking"
+                      /> */}
+                      {/* <Tags
+                        tagActive={accomodation.attributes.tags.Heating}
+                        content="Heating"
+                      /> */}
+                      {/* <Tags
+                        tagActive={accomodation.attributes.tags.Kitchen}
+                        content="Kitchen"
+                      /> */}
+                      {/* <Tags
+                        tagActive={accomodation.attributes.tags.Kitchenette}
+                        content="Kitchenette"
+                      /> */}
+                      <Tags
+                        tagActive={accomodation.attributes.tags.Pets_allowed}
+                        content="Pets allowed"
+                      />
+                      {/* <Tags
+                        tagActive={accomodation.attributes.tags.Room_service}
+                        content="Room Service"
+                      /> */}
+                      <Tags
+                        tagActive={
+                          accomodation.attributes.tags.Suitable_for_couples
+                        }
+                        content="Couples"
+                      />
+                      <Tags
+                        tagActive={
+                          accomodation.attributes.tags.Suitable_for_families
+                        }
+                        content="Families"
+                      />
+                      <Tags
+                        tagActive={
+                          accomodation.attributes.tags.Suitable_for_groups
+                        }
+                        content="Groups"
+                      />
+                      <Tags
+                        tagActive={
+                          accomodation.attributes.tags
+                            .Suitable_for_single_travellers
+                        }
+                        content="Single travellers"
+                      />
+                      {/* <Tags
+                        tagActive={accomodation.attributes.tags.Washing_machine}
+                        content="Washer"
+                      /> */}
+                      <Tags
+                        tagActive={accomodation.attributes.tags.WiFi}
+                        content="WiFi"
+                      />
+                      {/* <Tags
+                        tagActive={accomodation.attributes.tags.tumble_dryer}
+                        content="Dryer"
+                      /> */}
+
                       {/* {accomodation.attributes.tags.map((tag) => {
                         let tagIcon = "";
                         if (tag.label === "Wifi") {

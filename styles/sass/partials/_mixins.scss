@@ -15,4 +15,16 @@
   @media (min-width: $desktop-width) {
     @content;
   }
-} ;
+}
+
+@mixin for-xl-desktop {
+  @media (min-width: $xl-desktop-width) {
+    @content;
+  }
+}
+
+@mixin for-xxl-desktop {
+  @media (min-width: $xxl-desktop-width) {
+    @content;
+  }
+}

@@ -1,32 +1,32 @@
+.card__text--container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.card__text--price {
+  font-weight: 500;
+}
+
 .card {
   box-shadow: $box-shadow;
 }
-.card-title {
-  font-family: "bebas-neue", sans-serif;
-  font-size: 1.5rem;
-  margin-bottom: 0;
-}
+
 .card-subtitle,
 .card-tags-container span {
   font-size: 0.9rem;
 }
-
-.accomodation-card.card-text {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
+.card-subtitle {
+  height: 40px;
 }
-.card-tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+.card__tags--container {
+  display: none;
 }
 .card-tag {
   font-size: 0.9rem;
 }
 .accomodation-card {
-  height: 600px;
   padding: 25px;
   border-radius: 10px;
   border: none;
@@ -42,12 +42,16 @@
   padding-right: 5px;
   color: #e6c532;
 }
-.fa-wifi,
-.fa-paw,
-.fa-user-group,
-.fa-snowflake {
-  width: 22px;
+.tag__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  padding-right: 3px;
+  color: #566d73;
+}
+.fa-location-dot {
+  width: 16px;
   padding-right: 5px;
+  padding-bottom: 5px;
   color: #566d73;
 }
 .accomodation-card-img {
@@ -73,4 +77,64 @@
 }
 .inspo__tiles--link:hover {
   text-decoration: none;
+}
+
+@include for-large-mobile {
+  // .accomodation-card {
+  //   height: 550px;
+  // }
+  .card-title {
+    height: 75px;
+  }
+  .card-subtitle {
+    height: 50px;
+  }
+}
+
+@include for-tablet {
+  // .accomodation-card {
+  //   height: 540px;
+  // }
+  .card-title {
+    height: 85px;
+  }
+  .card-subtitle {
+    height: 60px;
+  }
+}
+
+@include for-desktop {
+  .card-title {
+    height: 80px;
+  }
+  .card-subtitle {
+    height: 50px;
+  }
+}
+
+@include for-xl-desktop {
+  .card-title {
+    height: 65px;
+  }
+  .card-subtitle {
+    height: 30px;
+  }
+  .card__tags--container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 90px;
+  }
+}
+
+@include for-xxl-desktop {
+  // .accomodation-card {
+  //   height: 550px;
+  // }
+  .card-title {
+    height: 60px;
+  }
+  .card__tags--container {
+    height: 65px;
+  }
 }
