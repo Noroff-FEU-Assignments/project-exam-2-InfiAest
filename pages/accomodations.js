@@ -66,12 +66,12 @@ export default function Accomodations(props) {
                         tagActive={accomodation.attributes.tags.Airconditioning}
                         content="Aircon"
                       />
-                      <Tags
+                      {/* <Tags
                         tagActive={
                           accomodation.attributes.tags.Breakfast_included
                         }
                         content="Breakfast included"
-                      />
+                      /> */}
                       {/* <Tags
                         tagActive={accomodation.attributes.tags.Free_parking}
                         content="Free parking"
