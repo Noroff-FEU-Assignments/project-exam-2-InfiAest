@@ -28,7 +28,7 @@ export default function SearchForm() {
     console.log(suggestion);
     setText(suggestion.attributes.name);
     setSuggestions([]);
-    setButtonHref(`/accomodations/${suggestion.id}`);
+    setButtonHref(`/accomodation/${suggestion.id}`);
     setSearchDisabled(false);
   };
 

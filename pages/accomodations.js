@@ -56,7 +56,7 @@ export default function Accomodations(props) {
                     <div className="d-grid gap-2">
                       <Button
                         variant="primary"
-                        href={`accomodations/${accomodation.id}`}
+                        href={`accomodation/${accomodation.id}`}
                       >
                         See more
                       </Button>
@@ -133,41 +133,6 @@ export default function Accomodations(props) {
                         tagActive={accomodation.attributes.tags.tumble_dryer}
                         content="Dryer"
                       /> */}
-
-                      {/* {accomodation.attributes.tags.map((tag) => {
-                        let tagIcon = "";
-                        if (tag.label === "Wifi") {
-                          tagIcon = (
-                            <span>
-                              <FontAwesomeIcon icon={faWifi} />
-                            </span>
-                          );
-                        } else if (tag.label === "Dogs Allowed") {
-                          tagIcon = (
-                            <span>
-                              <FontAwesomeIcon icon={faPaw} />
-                            </span>
-                          );
-                        } else if (tag.label === "Suitable for couples") {
-                          tagIcon = (
-                            <span>
-                              <FontAwesomeIcon icon={faUserGroup} />
-                            </span>
-                          );
-                        } else if (tag.label === "Airconditioned") {
-                          tagIcon = (
-                            <span>
-                              <FontAwesomeIcon icon={faSnowflake} />
-                            </span>
-                          );
-                        }
-                        return (
-                          <span key={tag.key} className="card-tag">
-                            {tagIcon}
-                            {tag.label}
-                          </span>
-                        );
-                      })} */}
                     </div>
                   </Card.Body>
                 </Card>

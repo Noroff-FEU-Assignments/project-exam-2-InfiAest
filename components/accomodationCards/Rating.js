@@ -6,7 +6,7 @@ import { faStar as regStar } from "@fortawesome/free-regular-svg-icons";
 function Rating({ ratingValue }) {
   if (ratingValue === "1") {
     return (
-      <div>
+      <div className="details__rating--container">
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={regStar} />
         <FontAwesomeIcon icon={regStar} />
@@ -16,7 +16,7 @@ function Rating({ ratingValue }) {
     );
   } else if (ratingValue === "2") {
     return (
-      <div>
+      <div className="details__rating--container">
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={regStar} />
@@ -26,7 +26,7 @@ function Rating({ ratingValue }) {
     );
   } else if (ratingValue === "3") {
     return (
-      <div>
+      <div className="details__rating--container">
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={solidStar} />
@@ -36,7 +36,7 @@ function Rating({ ratingValue }) {
     );
   } else if (ratingValue === "4") {
     return (
-      <div>
+      <div className="details__rating--container">
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={solidStar} />
@@ -46,7 +46,7 @@ function Rating({ ratingValue }) {
     );
   } else if (ratingValue === "5") {
     return (
-      <div>
+      <div className="details__rating--container">
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={solidStar} />
         <FontAwesomeIcon icon={solidStar} />
