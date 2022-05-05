@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -7,6 +8,7 @@ import { BASE_URL } from "../../../constants/api";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
+import GuestNumberOptions from "./GuestNumberOptions";
 
 const url = BASE_URL + "holidaze-enquiries";
 
@@ -37,7 +39,7 @@ const schema = yup.object().shape({
   message: yup.string().required("Please enter a message"),
 });
 
-export default function EnquiryForm() {
+export default function EnquiryForm({ accomodationName, maximumGuests }) {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(null);
 
@@ -99,6 +101,7 @@ export default function EnquiryForm() {
             <Form.Control
               type="text"
               placeholder="Enter your accomodation name"
+              value={accomodationName}
               {...register("accomodation_name")}
             />
             {errors.accomodation_name && (
@@ -137,17 +140,7 @@ export default function EnquiryForm() {
           <Form.Group className="mb-3">
             <Form.Label>Number of guests</Form.Label>
             <Form.Select defaultValue={null} {...register("guests")}>
-              <option value=""></option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
+              <GuestNumberOptions maximumGuests={maximumGuests} />
             </Form.Select>
             {errors.guests && <span>{errors.guests.message}</span>}
           </Form.Group>
@@ -194,3 +187,8 @@ export default function EnquiryForm() {
     </>
   );
 }
+
+EnquiryForm.propTypes = {
+  accomodationName: PropTypes.string.isRequired,
+  maximumGuests: PropTypes.string.isRequired,
+};

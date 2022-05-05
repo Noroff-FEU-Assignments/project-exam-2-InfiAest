@@ -38,7 +38,9 @@ $input-btn-border-width: 2px;
 $input-border-radius: $border-radius !important;
 $input-box-shadow: none;
 $input-focus-border-color: map-get($colors, dark-blue);
+$form-select-focus-border-color: map-get($colors, dark-blue);
 $input-focus-box-shadow: none;
+$form-select-focus-box-shadow: none;
 
 $btn-focus-box-shadow: none !important;
 $btn-active-box-shadow: none;

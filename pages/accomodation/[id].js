@@ -14,6 +14,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SectionWrapper from "../../components/layout/SectionWrapper";
 import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal";
+import { useState } from "react";
+import EnquiryForm from "../../components/forms/enquiry/EnquiryForm";
 
 export default function Accomodation({ accomodation }) {
   console.log(accomodation);
@@ -23,8 +26,36 @@ export default function Accomodation({ accomodation }) {
   var information = details.information;
   information = information.split(".");
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <Layout>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        animation={true}
+        size="lg"
+        backdrop="static"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Want to make a booking?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <EnquiryForm
+            accomodationName={details.name}
+            maximumGuests={details.maximum_guests}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="dark" onClick={handleClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Head title={details.name} />
       <div className="container">
         <SectionWrapper>
@@ -45,7 +76,9 @@ export default function Accomodation({ accomodation }) {
                   {details.price_per_night},- per night
                 </div>
                 <div className="d-grid gap-2">
-                  <Button variant="primary">Check availability</Button>
+                  <Button variant="primary" onClick={handleShow}>
+                    Check availability
+                  </Button>
                 </div>
               </div>
             </Col>
@@ -193,7 +226,9 @@ export default function Accomodation({ accomodation }) {
                 <Heading size="2" content="Availability" />
                 calendar will go here
                 <div className="d-grid gap-2">
-                  <Button variant="primary">Check availability</Button>
+                  <Button variant="primary" onClick={handleShow}>
+                    Check availability
+                  </Button>
                 </div>
               </SectionWrapper>
             </Col>
