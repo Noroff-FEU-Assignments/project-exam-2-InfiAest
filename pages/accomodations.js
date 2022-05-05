@@ -65,54 +65,65 @@ export default function Accomodations(props) {
                       <Tags
                         tagActive={accomodation.attributes.tags.Airconditioning}
                         content="Aircon"
+                        tagClass="card__tags"
                       />
                       {/* <Tags
                         tagActive={
                           accomodation.attributes.tags.Breakfast_included
                         }
                         content="Breakfast included"
+                         tagClass="card__tags"
                       /> */}
                       {/* <Tags
                         tagActive={accomodation.attributes.tags.Free_parking}
                         content="Free parking"
+                         tagClass="card__tags"
                       /> */}
                       {/* <Tags
                         tagActive={accomodation.attributes.tags.Heating}
                         content="Heating"
+                         tagClass="card__tags"
                       /> */}
                       {/* <Tags
                         tagActive={accomodation.attributes.tags.Kitchen}
                         content="Kitchen"
+                         tagClass="card__tags"
                       /> */}
                       {/* <Tags
                         tagActive={accomodation.attributes.tags.Kitchenette}
                         content="Kitchenette"
+                         tagClass="card__tags"
                       /> */}
                       <Tags
                         tagActive={accomodation.attributes.tags.Pets_allowed}
                         content="Pets allowed"
+                        tagClass="card__tags"
                       />
                       {/* <Tags
                         tagActive={accomodation.attributes.tags.Room_service}
                         content="Room Service"
+                         tagClass="card__tags"
                       /> */}
                       <Tags
                         tagActive={
                           accomodation.attributes.tags.Suitable_for_couples
                         }
                         content="Couples"
+                        tagClass="card__tags"
                       />
                       <Tags
                         tagActive={
                           accomodation.attributes.tags.Suitable_for_families
                         }
                         content="Families"
+                        tagClass="card__tags"
                       />
                       <Tags
                         tagActive={
                           accomodation.attributes.tags.Suitable_for_groups
                         }
                         content="Groups"
+                        tagClass="card__tags"
                       />
                       <Tags
                         tagActive={
@@ -120,18 +131,22 @@ export default function Accomodations(props) {
                             .Suitable_for_single_travellers
                         }
                         content="Single travellers"
+                        tagClass="card__tags"
                       />
                       {/* <Tags
                         tagActive={accomodation.attributes.tags.Washing_machine}
                         content="Washer"
+                         tagClass="card__tags--item"
                       /> */}
                       <Tags
                         tagActive={accomodation.attributes.tags.WiFi}
                         content="WiFi"
+                        tagClass="card__tags"
                       />
                       {/* <Tags
                         tagActive={accomodation.attributes.tags.tumble_dryer}
                         content="Dryer"
+                         tagClass="card__tags"
                       /> */}
                     </div>
                   </Card.Body>

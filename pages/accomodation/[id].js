@@ -42,7 +42,7 @@ export default function Accomodation({ accomodation }) {
             <Col>
               <div className="details__price--container">
                 <div className="details__price--text">
-                  {details.price_per_night},-
+                  {details.price_per_night},- per night
                 </div>
                 <div className="d-grid gap-2">
                   <Button variant="primary">Check availability</Button>
@@ -111,66 +111,95 @@ export default function Accomodation({ accomodation }) {
               </SectionWrapper>
               <SectionWrapper>
                 <Heading size="2" content="Amenities" />
-                <Tags
-                  tagActive={details.tags.Airconditioning}
-                  content="Aircon"
-                />
-                <Tags
-                  tagActive={details.tags.Breakfast_included}
-                  content="Breakfast included"
-                />
-                <Tags
-                  tagActive={details.tags.Free_parking}
-                  content="Free parking"
-                />
-                <Tags tagActive={details.tags.Heating} content="Heating" />
-                <Tags tagActive={details.tags.Kitchen} content="Kitchen" />
-                <Tags
-                  tagActive={details.tags.Kitchenette}
-                  content="Kitchenette"
-                />
-                <Tags
-                  tagActive={details.tags.Pets_allowed}
-                  content="Pets allowed"
-                />
-                <Tags
-                  tagActive={details.tags.Room_service}
-                  content="Room Service"
-                />
-                <Tags
-                  tagActive={details.tags.Suitable_for_couples}
-                  content="Couples"
-                />
-                <Tags
-                  tagActive={details.tags.Suitable_for_families}
-                  content="Families"
-                />
-                <Tags
-                  tagActive={details.tags.Suitable_for_groups}
-                  content="Groups"
-                />
-                <Tags
-                  tagActive={details.tags.Suitable_for_single_travellers}
-                  content="Single travellers"
-                />
-                <Tags
-                  tagActive={details.tags.Washing_machine}
-                  content="Washer"
-                />
-                <Tags tagActive={details.tags.WiFi} content="WiFi" />
-                <Tags tagActive={details.tags.tumble_dryer} content="Dryer" />
+                <div className="details__tags">
+                  <Tags
+                    tagActive={details.tags.Airconditioning}
+                    content="Aircon"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Breakfast_included}
+                    content="Breakfast included"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Free_parking}
+                    content="Free parking"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Heating}
+                    content="Heating"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Kitchen}
+                    content="Kitchen"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Kitchenette}
+                    content="Kitchenette"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Pets_allowed}
+                    content="Pets allowed"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Room_service}
+                    content="Room Service"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Suitable_for_couples}
+                    content="Couples"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Suitable_for_families}
+                    content="Families"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Suitable_for_groups}
+                    content="Groups"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Suitable_for_single_travellers}
+                    content="Single travellers"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.Washing_machine}
+                    content="Washer"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.WiFi}
+                    content="WiFi"
+                    tagClass="details__tags"
+                  />
+                  <Tags
+                    tagActive={details.tags.tumble_dryer}
+                    content="Dryer"
+                    tagClass="details__tags"
+                  />
+                </div>
+              </SectionWrapper>
+              <SectionWrapper>
+                <Heading size="2" content="Availability" />
+                calendar will go here
+                <div className="d-grid gap-2">
+                  <Button variant="primary">Check availability</Button>
+                </div>
               </SectionWrapper>
             </Col>
           </Row>
         </SectionWrapper>
-        <Row xs={1} lg={2} className="g-5">
-          <Col>
-            <Heading size="2" content="Availability" />
-
-            <div className="d-grid gap-2">
-              <Button variant="primary">Check availability</Button>
-            </div>
-          </Col>
+        <Row xs={1} md={2} className="g-5">
           <Col>
             <Heading size="2" content="Extra Information" />
             <ul>
@@ -181,61 +210,36 @@ export default function Accomodation({ accomodation }) {
               })}
             </ul>
           </Col>
+          <Col>
+            <Heading size="2" content="Reviews" />
+            <div className="review__container">
+              <Carousel variant="dark" interval={10000}>
+                {details.reviews.data.map((review) => {
+                  return (
+                    <Carousel.Item key={review.id}>
+                      <Card className="review__card">
+                        <Card.Body className="review__card--body">
+                          <FontAwesomeIcon icon={faUser} />
+                          <Card.Title className="review__card--title">
+                            <div className="review__card--rating">
+                              {review.attributes.username}
+                              <Rating
+                                ratingValue={JSON.stringify(
+                                  review.attributes.rating
+                                )}
+                              />
+                            </div>
+                          </Card.Title>
+                          <Card.Text>{review.attributes.review}</Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </Carousel.Item>
+                  );
+                })}
+              </Carousel>
+            </div>
+          </Col>
         </Row>
-
-        <Heading size="2" content="Reviews" />
-        <div className="review__container--mobile">
-          <Carousel variant="dark" interval={10000}>
-            {details.reviews.data.map((review) => {
-              return (
-                <Carousel.Item key={review.id}>
-                  <Card className="review__card">
-                    <Card.Body className="review__card--body">
-                      <FontAwesomeIcon icon={faUser} />
-                      <Card.Title className="review__card--title">
-                        <div className="review__card--rating">
-                          {review.attributes.username}
-                          <Rating
-                            ratingValue={JSON.stringify(
-                              review.attributes.rating
-                            )}
-                          />
-                        </div>
-                      </Card.Title>
-                      <Card.Text>{review.attributes.review}</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Carousel.Item>
-              );
-            })}
-          </Carousel>
-        </div>
-        <div className="review__container--desktop">
-          <Row lg={4} className="g-5">
-            {details.reviews.data.map((review) => {
-              return (
-                <Col key={review.id}>
-                  <Card className="review__card">
-                    <Card.Body className="review__card--body">
-                      <FontAwesomeIcon icon={faUser} />
-                      <Card.Title className="review__card--title">
-                        <div className="review__card--rating">
-                          {review.attributes.username}
-                          <Rating
-                            ratingValue={JSON.stringify(
-                              review.attributes.rating
-                            )}
-                          />
-                        </div>
-                      </Card.Title>
-                      <Card.Text>{review.attributes.review}</Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              );
-            })}
-          </Row>
-        </div>
       </div>
     </Layout>
   );

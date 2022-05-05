@@ -24,11 +24,10 @@
   display: none;
 }
 .card__tags--item {
+  font-size: 0.9rem;
   margin: 4px;
 }
-.card-tag {
-  font-size: 0.9rem;
-}
+
 .accomodation-card {
   padding: 25px;
   border-radius: 10px;
@@ -45,7 +44,7 @@
   padding-right: 5px;
   color: #e6c532;
 }
-.tag__icon {
+.card__tags--icon {
   width: 1.2rem;
   height: 1.2rem;
   padding-right: 2px;
