@@ -48,6 +48,7 @@ export default function Accomodation({ accomodation }) {
           <EnquiryForm
             accomodationName={details.name}
             maximumGuests={details.maximum_guests}
+            accomodationImage={details.images.data[0].attributes.url}
           />
         </Modal.Body>
         <Modal.Footer>

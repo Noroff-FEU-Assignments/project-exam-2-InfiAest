@@ -10,9 +10,18 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
+import { useEffect, useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 export default function Admin() {
+  const [auth] = useContext(AuthContext);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!auth) {
+      return router.push("/");
+    }
+  }, []);
 
   function handleAddButton() {
     return router.push("/addAccomodation");
@@ -33,6 +42,7 @@ export default function Admin() {
           }}
         >
           <Heading size="1" content="Admin dashboard" />
+
           <Button
             variant="outline-info"
             onClick={handleAddButton}

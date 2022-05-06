@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Image from "next/image";
+import DisplayMessage from "../messages/DisplayMessage";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);
@@ -13,7 +15,7 @@ function Enquiries() {
     async function getEnquiries() {
       try {
         const response = await http.get("holidaze-enquiries");
-        // console.log(response.data.data);
+        console.log(response.data.data);
         setEnquiries(response.data.data);
       } catch (error) {
         console.log(error);
@@ -32,7 +34,13 @@ function Enquiries() {
   }
 
   if (enquiries.length === 0) {
-    return <div>No enquiries to show yet!</div>;
+    return (
+      <DisplayMessage
+        variant="dark"
+        heading="No enquiries to show yet!"
+        message="Looks like you're all up to date with the enquiries. Come back later!"
+      />
+    );
   } else {
     return (
       <>
@@ -47,14 +55,26 @@ function Enquiries() {
 
             return (
               <Col key={item.id}>
-                <Card>
-                  <Card.Body>
-                    <Card.Title>{item.attributes.accomodation_name}</Card.Title>
-                    <Card.Text>
-                      {item.attributes.first_name} {item.attributes.last_name},{" "}
-                      {item.attributes.guests} guests, {checkInDate}-
-                      {checkoutDate}
-                    </Card.Text>
+                <Card className="enquiries__card">
+                  <Card.Body className="enquiries__card--body">
+                    <Card.Title as="h4" className="enquiries__card--title">
+                      {item.attributes.accomodation_name}
+                    </Card.Title>
+                    <div className="enquiries__card--innerContainer">
+                      <Card.Text className="enquiries__card--text">
+                        {item.attributes.first_name} {item.attributes.last_name}
+                        , {item.attributes.guests} guests, {checkInDate}-
+                        {checkoutDate}
+                      </Card.Text>
+                      <Image
+                        className="accomodation-card-img"
+                        src={item.attributes.accomodation_image}
+                        width="80"
+                        height="80"
+                        alt=""
+                      />
+                    </div>
+
                     <div
                       style={{ display: "flex", justifyContent: "flex-end" }}
                     >

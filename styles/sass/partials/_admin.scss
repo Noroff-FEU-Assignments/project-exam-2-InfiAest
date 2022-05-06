@@ -1,0 +1,27 @@
+.enquiries__card {
+  min-height: 200px;
+  &--body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &--title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &--innerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &--text {
+    padding: 0;
+  }
+}
+
+@include for-tablet {
+  .enquiries__card {
+    height: auto;
+  }
+}

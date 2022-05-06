@@ -16,11 +16,15 @@ export default function SearchForm() {
 
   useEffect(() => {
     const url = BASE_URL + "accomodations";
-    const loadResults = async () => {
-      const response = await axios.get(url);
-      // console.log(response.data.data);
-      setResults(response.data.data);
-    };
+    async function loadResults() {
+      try {
+        const response = await axios.get(url);
+        // console.log(response.data.data);
+        setResults(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
     loadResults();
   }, []);
 

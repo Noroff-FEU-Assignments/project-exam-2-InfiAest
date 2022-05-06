@@ -20,6 +20,7 @@ const schema = yup.object().shape({
   accomodation_name: yup
     .string()
     .required("Please enter the accomodation name"),
+  accomodation_image: yup.string().required(),
   first_name: yup.string().required("Please enter your first name"),
   last_name: yup.string().required("Please enter your last name"),
   email_address: yup
@@ -39,7 +40,11 @@ const schema = yup.object().shape({
   message: yup.string().required("Please enter a message"),
 });
 
-export default function EnquiryForm({ accomodationName, maximumGuests }) {
+export default function EnquiryForm({
+  accomodationName,
+  accomodationImage,
+  maximumGuests,
+}) {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(null);
 
@@ -63,6 +68,7 @@ export default function EnquiryForm({ accomodationName, maximumGuests }) {
         {
           data: {
             accomodation_name: data.accomodation_name,
+            accomodation_image: data.accomodation_image,
             first_name: data.first_name,
             last_name: data.last_name,
             email_address: data.email_address,
@@ -100,7 +106,6 @@ export default function EnquiryForm({ accomodationName, maximumGuests }) {
             <Form.Label>Accomodation name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter your accomodation name"
               value={accomodationName}
               {...register("accomodation_name")}
               readOnly
@@ -109,6 +114,14 @@ export default function EnquiryForm({ accomodationName, maximumGuests }) {
               <span>{errors.accomodation_name.message}</span>
             )}
           </Form.Group>
+          <div className="hidden">
+            <Form.Control
+              type="text"
+              value={accomodationImage}
+              {...register("accomodation_image")}
+              readOnly
+            />
+          </div>
           <Form.Group className="mb-3" controlId="formBasicUserName">
             <Form.Label>First name</Form.Label>
             <Form.Control
@@ -191,5 +204,6 @@ export default function EnquiryForm({ accomodationName, maximumGuests }) {
 
 EnquiryForm.propTypes = {
   accomodationName: PropTypes.string.isRequired,
+  accomodationImage: PropTypes.string.isRequired,
   maximumGuests: PropTypes.string.isRequired,
 };

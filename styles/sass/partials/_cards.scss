@@ -85,9 +85,9 @@
   // .accomodation-card {
   //   height: 550px;
   // }
-  .card-title {
-    height: 75px;
-  }
+  // .card-title {
+  //   height: 75px;
+  // }
   .card-subtitle {
     height: 50px;
   }
@@ -97,18 +97,18 @@
   // .accomodation-card {
   //   height: 540px;
   // }
-  .card-title {
-    height: 85px;
-  }
+  // .card-title {
+  //   height: 85px;
+  // }
   .card-subtitle {
     height: 60px;
   }
 }
 
 @include for-desktop {
-  .card-title {
-    height: 80px;
-  }
+  // .card-title {
+  //   height: 80px;
+  // }
   .card-subtitle {
     height: 50px;
   }
@@ -121,9 +121,9 @@
 }
 
 @include for-xl-desktop {
-  .card-title {
-    height: 65px;
-  }
+  // .card-title {
+  //   height: 65px;
+  // }
   .card-subtitle {
     height: 30px;
   }
@@ -136,9 +136,9 @@
   // .accomodation-card {
   //   height: 550px;
   // }
-  .card-title {
-    height: 60px;
-  }
+  // .card-title {
+  //   height: 60px;
+  // }
   .card__tags--container {
     height: 65px;
   }
