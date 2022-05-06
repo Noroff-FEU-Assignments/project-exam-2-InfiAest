@@ -130,7 +130,7 @@ function Tags({ tagActive, content, tagClass }) {
 
 Tags.propTypes = {
   tagActive: PropTypes.bool.isRequired,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string,
   tagClass: PropTypes.string.isRequired,
 };
 

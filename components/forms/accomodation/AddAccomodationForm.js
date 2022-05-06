@@ -6,12 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 
 const schema = yup.object().shape({
   name: yup.string().required("Please enter the accomodation name"),
-  location: yup.string().required("Please enter the address"),
+  street_address: yup.string().required("Please enter street name and number"),
+  zip_code: yup.string().required("Please enter the zip code and city name"),
   price_per_night: yup.number().required("Please enter the price per night"),
   rating: yup
     .number()
@@ -19,19 +18,28 @@ const schema = yup.object().shape({
     .required("Please select the rating"),
   images: yup
     .mixed()
-    .required("Please select up to 3 images")
-    .test("type", "Maximum 3 images allowed", (value) => {
-      return value && value.length <= 3;
+    .required("Please select 3 images")
+    .test("type", "You must select 3 images", (value) => {
+      return value && value.length === 3;
     }),
   description: yup
     .string()
     .required("Please enter a description of the accomodation"),
-  amenities: yup.array(
-    yup.object({ key: yup.number().required(), label: yup.string().required() })
-  ),
-  tags: yup.array(
-    yup.object({ key: yup.number().required(), label: yup.string().required() })
-  ),
+  WiFi: yup.boolean(),
+  Kitchen: yup.boolean(),
+  Kitchenette: yup.boolean(),
+  Free_parking: yup.boolean(),
+  Washing_machine: yup.boolean(),
+  tumble_dryer: yup.boolean(),
+  Airconditioning: yup.boolean(),
+  Heating: yup.boolean(),
+  Pets_allowed: yup.boolean(),
+  Suitable_for_single_travellers: yup.boolean(),
+  Suitable_for_couples: yup.boolean(),
+  Suitable_for_families: yup.boolean(),
+  Suitable_for_groups: yup.boolean(),
+  Breakfast_included: yup.boolean(),
+  Room_service: yup.boolean(),
   information: yup
     .string()
     .required("Please enter information about the accomodation"),
@@ -52,10 +60,6 @@ const AddAccomodationForm = () => {
   const [image1, setImage1] = useState(false);
   const [image2, setimage2] = useState(false);
   const [image3, setimage3] = useState(false);
-  const [tags, setTags] = useState([]);
-  const [tagsInputValue, setTagsInputValue] = useState("");
-  const [amenities, setAmenities] = useState([]);
-  const [amenitiesInputValue, setAmenitiesInputValue] = useState("");
 
   const {
     register,
@@ -71,44 +75,6 @@ const AddAccomodationForm = () => {
     setimage3(event.target.files[2]);
   };
 
-  const handleTagsKeyPress = (event) => {
-    if (event.key === "Enter") {
-      setTags((tags) => [
-        ...tags,
-        { key: tags.length + 1, label: `${event.target.value}` },
-      ]);
-      setTagsInputValue("");
-    }
-  };
-
-  const handleTagsInput = (e) => {
-    setTagsInputValue(e.target.value);
-  };
-
-  const handleTagDelete = (chipsToDelete) => () => {
-    setTags((chips) => chips.filter((chip) => chip.key !== chipsToDelete.key));
-  };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      setAmenities((amenity) => [
-        ...amenities,
-        { key: amenity.length + 1, label: event.target.value },
-      ]);
-      setAmenitiesInputValue("");
-    }
-  };
-
-  const handleUserInput = (e) => {
-    setAmenitiesInputValue(e.target.value);
-  };
-
-  const handleAmenitiyDelete = (chipsToDelete) => () => {
-    setAmenities((chips) =>
-      chips.filter((chip) => chip.key !== chipsToDelete.key)
-    );
-  };
-
   const http = useAxios();
 
   async function onSubmit(data) {
@@ -117,12 +83,30 @@ const AddAccomodationForm = () => {
 
     const postData = {
       name: data.name,
-      location: data.location,
+      location: {
+        street_address: data.street_address,
+        zip_code: data.zip_code,
+      },
       price_per_night: data.price_per_night,
       rating: data.rating,
       description: data.description,
-      amenities: data.amenities,
-      tags: data.tags,
+      tags: {
+        WiFi: data.WiFi,
+        Kitchen: data.Kitchen,
+        Kitchenette: data.Kitchenette,
+        Free_parking: data.Free_parking,
+        Washing_machine: data.Washing_machine,
+        tumble_dryer: data.tumble_dryer,
+        Airconditioning: data.Airconditioning,
+        Heating: data.Heating,
+        Pets_allowed: data.Pets_allowed,
+        Suitable_for_single_travellers: data.Suitable_for_single_travellers,
+        Suitable_for_couples: data.Suitable_for_couples,
+        Suitable_for_families: data.Suitable_for_families,
+        Suitable_for_groups: data.Suitable_for_groups,
+        Breakfast_included: data.Breakfast_included,
+        Room_service: data.Room_service,
+      },
       information: data.information,
       accomodation_type: data.accomodation_type,
       maximum_guests: data.maximum_guests,
@@ -167,15 +151,29 @@ const AddAccomodationForm = () => {
             />
             {errors.name && <span>{errors.name.message}</span>}
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicLocation">
-            <Form.Label>Location</Form.Label>
+            <Form.Label>Street name and number</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter the accomodation address"
-              {...register("location")}
+              placeholder="streetname 22"
+              {...register("street_address")}
             />
-            {errors.location && <span>{errors.location.message}</span>}
+            {errors.street_address && (
+              <span>{errors.street_address.message}</span>
+            )}
           </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicLocation">
+            <Form.Label>Zip code and city</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="5002 Bergen"
+              {...register("zip_code")}
+            />
+            {errors.zip_code && <span>{errors.zip_code.message}</span>}
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicPrice">
             <Form.Label>Price per night</Form.Label>
             <Form.Control
@@ -187,6 +185,7 @@ const AddAccomodationForm = () => {
               <span>{errors.price_per_night.message}</span>
             )}
           </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Label>Rating</Form.Label>
             <Form.Select defaultValue={null} {...register("rating")}>
@@ -199,6 +198,7 @@ const AddAccomodationForm = () => {
             </Form.Select>
             {errors.rating && <span>{errors.rating.message}</span>}
           </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Label>Accomodation type</Form.Label>
             <Form.Select defaultValue={null} {...register("accomodation_type")}>
@@ -213,6 +213,7 @@ const AddAccomodationForm = () => {
               <span>{errors.accomodation_type.message}</span>
             )}
           </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Label>Location type</Form.Label>
             <Form.Select defaultValue={null} {...register("accomodation_area")}>
@@ -226,25 +227,27 @@ const AddAccomodationForm = () => {
               <span>{errors.accomodation_area.message}</span>
             )}
           </Form.Group>
+
           <Form.Group className="mb-3">
             <Form.Label>Maximum number of guests</Form.Label>
             <Form.Select defaultValue={null} {...register("maximum_guests")}>
               <option value=""></option>
-              <option value="one">one</option>
-              <option value="two">two</option>
-              <option value="three">three</option>
-              <option value="four">four</option>
-              <option value="five">five</option>
-              <option value="six">six</option>
-              <option value="seven">seven</option>
-              <option value="eight">eight</option>
-              <option value="nine">nine</option>
-              <option value="ten">ten</option>
+              <option value="one">1</option>
+              <option value="two">2</option>
+              <option value="three">3</option>
+              <option value="four">4</option>
+              <option value="five">5</option>
+              <option value="six">6</option>
+              <option value="seven">7</option>
+              <option value="eight">8</option>
+              <option value="nine">9</option>
+              <option value="ten">10</option>
             </Form.Select>
             {errors.maximum_guests && (
               <span>{errors.maximum_guests.message}</span>
             )}
           </Form.Group>
+
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Images</Form.Label>
             <Form.Control
@@ -255,6 +258,7 @@ const AddAccomodationForm = () => {
             />
             {errors.images && <span>{errors.images.message}</span>}
           </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicTextArea">
             <Form.Label>Description</Form.Label>
             <Form.Control
@@ -265,61 +269,116 @@ const AddAccomodationForm = () => {
             />
             {errors.description && <span>{errors.description.message}</span>}
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicamenities">
-            <Form.Label>amenities</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="press enter to add each amenity"
-              onKeyPress={handleKeyPress}
-              value={amenitiesInputValue}
-              onChange={handleUserInput}
-            />
-            <Form.Control
-              className="hidden"
-              type="text"
-              value={JSON.stringify(amenities)}
-              readOnly
-              {...register("amenities")}
-            />
-            <Stack direction="row" spacing={1}>
-              {amenities.map((amenity) => (
-                <Chip
-                  key={amenity.key}
-                  label={amenity.label}
-                  onDelete={handleAmenitiyDelete(amenity)}
-                />
-              ))}
-            </Stack>
-            {errors.amenities && <span>{errors.amenities.message}</span>}
-          </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicTags">
-            <Form.Label>Tags</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="press enter to add each tag"
-              onKeyPress={handleTagsKeyPress}
-              value={tagsInputValue}
-              onChange={handleTagsInput}
-            />
-
-            <Form.Control
-              className="hidden"
-              type="text"
-              value={JSON.stringify(tags)}
-              readOnly
-              {...register("tags")}
-            />
-            <Stack direction="row" spacing={1}>
-              {tags.map((tag) => (
-                <Chip
-                  key={tag.key}
-                  label={tag.label}
-                  onDelete={handleTagDelete(tag)}
-                />
-              ))}
-            </Stack>
-            {errors.tags && <span>{errors.tags.message}</span>}
+          <Form.Group>
+            <Form.Label>Amenities</Form.Label>
+            <div className="mb-3">
+              <Form.Check
+                inline
+                name="Wifi"
+                label="Wifi"
+                type="checkbox"
+                {...register("WiFi")}
+              />
+              <Form.Check
+                inline
+                label="Kitchen"
+                name="Kitchen"
+                type="checkbox"
+                {...register("Kitchen")}
+              />
+              <Form.Check
+                inline
+                label="Kitchenette"
+                name="Kitchenette"
+                type="checkbox"
+                {...register("Kitchenette")}
+              />
+              <Form.Check
+                inline
+                label="Free Parking"
+                name="Free_parking"
+                type="checkbox"
+                {...register("Free_parking")}
+              />
+              <Form.Check
+                inline
+                label="Washing machine"
+                name="Washing_machine"
+                type="checkbox"
+                {...register("Washing_machine")}
+              />
+              <Form.Check
+                inline
+                label="Tumble dryer"
+                name="tumble_dryer"
+                type="checkbox"
+                {...register("tumble_dryer")}
+              />
+              <Form.Check
+                inline
+                label="Airconditioning"
+                name="Airconditioning"
+                type="checkbox"
+                {...register("Airconditioning")}
+              />
+              <Form.Check
+                inline
+                label="Heating"
+                name="Heating"
+                type="checkbox"
+                {...register("Heating")}
+              />
+              <Form.Check
+                inline
+                label="Pets Allowed"
+                name="Pets_allowed"
+                type="checkbox"
+                {...register("Pets_allowed")}
+              />
+              <Form.Check
+                inline
+                label="Suitable for single travellers"
+                name="Suitable_for_single_travellers"
+                type="checkbox"
+                {...register("Suitable_for_single_travellers")}
+              />
+              <Form.Check
+                inline
+                label="Suitable for couples"
+                name="Suitable_for_couples"
+                type="checkbox"
+                {...register("Suitable_for_couples")}
+              />
+              <Form.Check
+                inline
+                label="Suitable for families"
+                name="Suitable_for_families"
+                type="checkbox"
+                {...register("Suitable_for_families")}
+              />
+              <Form.Check
+                inline
+                label="Suitable_for_groups"
+                name="Suitable_for_groups"
+                type="checkbox"
+                {...register("Suitable_for_groups")}
+              />
+              <Form.Check
+                inline
+                label="Breakfast included"
+                name="Breakfast_included"
+                type="checkbox"
+                {...register("Breakfast_included")}
+              />
+              <Form.Check
+                inline
+                label="Room service"
+                name="Room_service"
+                type="checkbox"
+                {...register("Room_service")}
+              />
+            </div>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicTextArea">

@@ -103,6 +103,7 @@ export default function EnquiryForm({ accomodationName, maximumGuests }) {
               placeholder="Enter your accomodation name"
               value={accomodationName}
               {...register("accomodation_name")}
+              readOnly
             />
             {errors.accomodation_name && (
               <span>{errors.accomodation_name.message}</span>

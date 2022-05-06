@@ -46,14 +46,14 @@ export default function Layout({ children }) {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Link href="/">
-                    <a className={router.pathname === "/" ? "active" : ""}>
+                    <a className={router.pathname === "/" ? "current" : ""}>
                       Home
                     </a>
                   </Link>
                   <Link href="/accomodations">
                     <a
                       className={
-                        router.pathname == "/accomodations" ? "active" : ""
+                        router.pathname == "/accomodations" ? "current" : ""
                       }
                     >
                       Accomodations
@@ -61,22 +61,20 @@ export default function Layout({ children }) {
                   </Link>
                   <Link href="/contact">
                     <a
-                      className={router.pathname == "/contact" ? "active" : ""}
+                      className={router.pathname == "/contact" ? "current" : ""}
                     >
                       Contact us
                     </a>
                   </Link>
                   <Link href="/admin">
-                    <a className={router.pathname == "/admin" ? "active" : ""}>
+                    <a className={router.pathname == "/admin" ? "current" : ""}>
                       Admin
                     </a>
                   </Link>
                 </Nav>
-              </Navbar.Collapse>
-              <Navbar.Collapse className="justify-content-end">
                 <Navbar.Text>
                   <span className="username">{userName}</span>
-                  <Button variant="warning" type="button" onClick={logout}>
+                  <Button variant="primary" onClick={logout}>
                     Logout
                   </Button>
                 </Navbar.Text>
@@ -91,14 +89,14 @@ export default function Layout({ children }) {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Link href="/">
-                    <a className={router.pathname === "/" ? "active" : ""}>
+                    <a className={router.pathname === "/" ? "current" : ""}>
                       Home
                     </a>
                   </Link>
                   <Link href="/accomodations">
                     <a
                       className={
-                        router.pathname == "/accomodations" ? "active" : ""
+                        router.pathname == "/accomodations" ? "current" : ""
                       }
                     >
                       Accomodations
@@ -106,13 +104,13 @@ export default function Layout({ children }) {
                   </Link>
                   <Link href="/contact">
                     <a
-                      className={router.pathname == "/contact" ? "active" : ""}
+                      className={router.pathname == "/contact" ? "current" : ""}
                     >
                       Contact us
                     </a>
                   </Link>
                   <Link href="/login">
-                    <a className={router.pathname == "/login" ? "active" : ""}>
+                    <a className={router.pathname == "/login" ? "current" : ""}>
                       Login
                     </a>
                   </Link>

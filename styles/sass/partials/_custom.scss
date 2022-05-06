@@ -45,6 +45,12 @@ $form-select-focus-box-shadow: none;
 $btn-focus-box-shadow: none !important;
 $btn-active-box-shadow: none;
 
+.nav-link {
+  color: $body-color !important;
+  font-family: $font-headings;
+  font-size: $h3-font-size;
+}
+
 .btn {
   box-shadow: $box-shadow;
 }
