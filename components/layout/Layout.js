@@ -37,23 +37,37 @@ export default function Layout({ children }) {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="md" sticky="top">
+      <Navbar
+        bg="dark"
+        variant="dark"
+        expand="md"
+        sticky="top"
+        className="navbar"
+      >
         {auth ? (
           <>
-            <div className="nav__logo--container">{navLogo}</div>
+            <div className="navbar__logo">{navLogo}</div>
             <Container>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
+              <Navbar.Toggle />
+              <Navbar.Collapse className="navbar__collapse">
+                <Nav className="navbar__nav">
                   <Link href="/">
-                    <a className={router.pathname === "/" ? "current" : ""}>
+                    <a
+                      className={
+                        router.pathname === "/"
+                          ? "navbar__link--current"
+                          : "navbar__link"
+                      }
+                    >
                       Home
                     </a>
                   </Link>
                   <Link href="/accomodations">
                     <a
                       className={
-                        router.pathname == "/accomodations" ? "current" : ""
+                        router.pathname == "/accomodations"
+                          ? "navbar__link--current"
+                          : "navbar__link"
                       }
                     >
                       Accomodations
@@ -61,13 +75,23 @@ export default function Layout({ children }) {
                   </Link>
                   <Link href="/contact">
                     <a
-                      className={router.pathname == "/contact" ? "current" : ""}
+                      className={
+                        router.pathname == "/contact"
+                          ? "navbar__link--current"
+                          : "navbar__link"
+                      }
                     >
                       Contact us
                     </a>
                   </Link>
                   <Link href="/admin">
-                    <a className={router.pathname == "/admin" ? "current" : ""}>
+                    <a
+                      className={
+                        router.pathname == "/admin"
+                          ? "navbar__link--current"
+                          : "navbar__link"
+                      }
+                    >
                       Admin
                     </a>
                   </Link>
@@ -83,20 +107,28 @@ export default function Layout({ children }) {
           </>
         ) : (
           <>
-            <div className="nav__logo--container">{navLogo}</div>
+            <div className="navbar__logo">{navLogo}</div>
             <Container>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
+              <Navbar.Toggle />
+              <Navbar.Collapse className="navbar__collapse">
+                <Nav className="navbar__nav">
                   <Link href="/">
-                    <a className={router.pathname === "/" ? "current" : ""}>
+                    <a
+                      className={
+                        router.pathname === "/"
+                          ? "navbar__link--current"
+                          : "navbar__link"
+                      }
+                    >
                       Home
                     </a>
                   </Link>
                   <Link href="/accomodations">
                     <a
                       className={
-                        router.pathname == "/accomodations" ? "current" : ""
+                        router.pathname == "/accomodations"
+                          ? "navbar__link--current"
+                          : "navbar__link"
                       }
                     >
                       Accomodations
@@ -104,13 +136,23 @@ export default function Layout({ children }) {
                   </Link>
                   <Link href="/contact">
                     <a
-                      className={router.pathname == "/contact" ? "current" : ""}
+                      className={
+                        router.pathname == "/contact"
+                          ? "navbar__link--current"
+                          : "navbar__link"
+                      }
                     >
                       Contact us
                     </a>
                   </Link>
                   <Link href="/login">
-                    <a className={router.pathname == "/login" ? "current" : ""}>
+                    <a
+                      className={
+                        router.pathname == "/login"
+                          ? "navbar__link--current"
+                          : "navbar__link"
+                      }
+                    >
                       Login
                     </a>
                   </Link>

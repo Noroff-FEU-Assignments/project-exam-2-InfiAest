@@ -46,6 +46,7 @@ export default function EnquiryForm({
   maximumGuests,
 }) {
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState(null);
 
   const {
@@ -83,6 +84,7 @@ export default function EnquiryForm({
         }
       );
       console.log("response", response.data);
+      setSubmitted(true);
     } catch (error) {
       console.log("error", error);
       setServerError(error.toString());
@@ -101,102 +103,110 @@ export default function EnquiryForm({
             message={serverError}
           />
         )}
-        <fieldset disabled={submitting}>
-          <Form.Group className="mb-3" controlId="formBasicAccomodationName">
-            <Form.Label>Accomodation name</Form.Label>
-            <Form.Control
-              type="text"
-              value={accomodationName}
-              {...register("accomodation_name")}
-              readOnly
-            />
-            {errors.accomodation_name && (
-              <span>{errors.accomodation_name.message}</span>
-            )}
-          </Form.Group>
-          <div className="hidden">
-            <Form.Control
-              type="text"
-              value={accomodationImage}
-              {...register("accomodation_image")}
-              readOnly
-            />
-          </div>
-          <Form.Group className="mb-3" controlId="formBasicUserName">
-            <Form.Label>First name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your first name"
-              {...register("first_name")}
-            />
-            {errors.first_name && <span>{errors.first_name.message}</span>}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicLastName">
-            <Form.Label>Last name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter last name"
-              {...register("last_name")}
-            />
-            {errors.last_name && <span>{errors.last_name.message}</span>}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Enter email"
-              {...register("email_address")}
-            />
-            {errors.email_address && (
-              <span>{errors.email_address.message}</span>
-            )}
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Label>Number of guests</Form.Label>
-            <Form.Select defaultValue={null} {...register("guests")}>
-              <GuestNumberOptions maximumGuests={maximumGuests} />
-            </Form.Select>
-            {errors.guests && <span>{errors.guests.message}</span>}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckin">
-            <Form.Label>Check-in date</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your desired check-in date yyyy-mm-dd"
-              {...register("check_in_date")}
-            />
-            {errors.check_in_date && (
-              <span>{errors.check_in_date.message}</span>
-            )}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckout">
-            <Form.Label>Checkout date</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter your desired checkout date yyyy-mm-dd"
-              {...register("checkout_date")}
-            />
-            {errors.checkout_date && (
-              <span>{errors.checkout_date.message}</span>
-            )}
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicTextArea">
-            <Form.Label>Message</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={3}
-              placeholder="Please write your message here"
-              {...register("message")}
-            />
-            {errors.message && <span>{errors.message.message}</span>}
-          </Form.Group>
+        {submitted ? (
+          <DisplayMessage
+            variant="success"
+            heading="Yippee!"
+            message={`Your enquiry for a stay at ${accomodationName} has been sent successfully`}
+          />
+        ) : (
+          <fieldset disabled={submitting}>
+            <Form.Group className="mb-3" controlId="formBasicAccomodationName">
+              <Form.Label>Accomodation name</Form.Label>
+              <Form.Control
+                type="text"
+                value={accomodationName}
+                {...register("accomodation_name")}
+                readOnly
+              />
+              {errors.accomodation_name && (
+                <span>{errors.accomodation_name.message}</span>
+              )}
+            </Form.Group>
+            <div className="hidden">
+              <Form.Control
+                type="text"
+                value={accomodationImage}
+                {...register("accomodation_image")}
+                readOnly
+              />
+            </div>
+            <Form.Group className="mb-3" controlId="formBasicUserName">
+              <Form.Label>First name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your first name"
+                {...register("first_name")}
+              />
+              {errors.first_name && <span>{errors.first_name.message}</span>}
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicLastName">
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter last name"
+                {...register("last_name")}
+              />
+              {errors.last_name && <span>{errors.last_name.message}</span>}
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                {...register("email_address")}
+              />
+              {errors.email_address && (
+                <span>{errors.email_address.message}</span>
+              )}
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Number of guests</Form.Label>
+              <Form.Select defaultValue={null} {...register("guests")}>
+                <GuestNumberOptions maximumGuests={maximumGuests} />
+              </Form.Select>
+              {errors.guests && <span>{errors.guests.message}</span>}
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckin">
+              <Form.Label>Check-in date</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your desired check-in date yyyy-mm-dd"
+                {...register("check_in_date")}
+              />
+              {errors.check_in_date && (
+                <span>{errors.check_in_date.message}</span>
+              )}
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckout">
+              <Form.Label>Checkout date</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter your desired checkout date yyyy-mm-dd"
+                {...register("checkout_date")}
+              />
+              {errors.checkout_date && (
+                <span>{errors.checkout_date.message}</span>
+              )}
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicTextArea">
+              <Form.Label>Message</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                placeholder="Please write your message here"
+                {...register("message")}
+              />
+              {errors.message && <span>{errors.message.message}</span>}
+            </Form.Group>
 
-          <div className="d-grid gap-2">
-            <Button variant="primary" type="submit">
-              {submitting ? "Sending message..." : "Send"}
-            </Button>
-          </div>
-        </fieldset>
+            <div className="d-grid gap-2">
+              <Button variant="primary" className="form__button" type="submit">
+                {submitting ? "Sending message..." : "Send"}
+              </Button>
+            </div>
+          </fieldset>
+        )}
       </Form>
     </>
   );

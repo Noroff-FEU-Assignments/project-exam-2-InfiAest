@@ -1,7 +1,7 @@
 import Heading from "../components/layout/Heading";
 import Layout from "../components/layout/Layout";
 import Head from "../components/layout/Head";
-import AddAccomodationForm from "../components/forms/accomodation/AddAccomodationForm";
+import AddAccomodationForm from "../components/forms/accomodations/AddAccomodationForm";
 import { useRouter } from "next/router";
 import { useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";

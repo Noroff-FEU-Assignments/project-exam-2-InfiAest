@@ -1,8 +1,38 @@
-.button {
+// .button {
+//   width: 100%;
+//   max-width: 800px !important;
+//   margin: 0 auto;
+// }
+.btn-primary {
   width: 100%;
-  max-width: 800px !important;
+  margin: 1rem auto;
+}
+.btn-secondary {
+  width: 100%;
+  max-width: 650px !important;
   margin: 0 auto;
 }
-.btn-primary {
-  margin: 1rem 0;
+.form__button {
+  max-width: 650px !important;
+}
+.searchForm__button {
+  position: absolute !important;
+  right: 0;
+  top: 0;
+  height: 100%;
+  z-index: 4 !important;
+  box-shadow: none !important;
+  color: map-get($colors, light-blue) !important;
+  &:hover {
+    box-shadow: none;
+    color: map-get($colors, dark-blue) !important;
+  }
+  &[disabled]:hover {
+    color: map-get($colors, light-blue) !important;
+    box-shadow: none;
+  }
+  &--icon {
+    width: 25px;
+    margin: 4px 0;
+  }
 }

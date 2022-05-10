@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import { BASE_URL } from "../../../constants/api";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +14,7 @@ export default function SearchForm() {
   const [suggestions, setSuggestions] = useState([]);
   const [buttonHref, setButtonHref] = useState("");
   const [searchDisabled, setSearchDisabled] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const url = BASE_URL + "accomodations";
@@ -28,15 +30,16 @@ export default function SearchForm() {
     loadResults();
   }, []);
 
-  const onSelectSuggestion = (suggestion) => {
-    console.log(suggestion);
+  function onSelectSuggestion(suggestion) {
+    // console.log(suggestion);
     setText(suggestion.attributes.name);
     setSuggestions([]);
     setButtonHref(`/accomodation/${suggestion.id}`);
     setSearchDisabled(false);
-  };
+    router.push(`/accomodation/${suggestion.id}`);
+  }
 
-  const onChangeHandler = (text) => {
+  function onChangeHandler(text) {
     setButtonHref("");
     setSearchDisabled(true);
     let matches = [];
@@ -49,12 +52,12 @@ export default function SearchForm() {
     // console.log(matches);
     setSuggestions(matches);
     setText(text);
-  };
+  }
 
   return (
-    <div className="search__form--container">
+    <div className="searchForm">
       <Form>
-        <Form.Group className="mb-3">
+        <Form.Group className="searchForm__group">
           <Form.Control
             size="lg"
             placeholder="Search here"
@@ -69,13 +72,16 @@ export default function SearchForm() {
           <Button
             href={buttonHref}
             variant="link"
-            className="search__form--button"
+            className="searchForm__button"
             disabled={searchDisabled}
           >
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="searchForm__button--icon"
+            />
           </Button>
-          <div className="list-container">
-            <ListGroup variant="flush">
+          <div className="searchForm__list">
+            <ListGroup variant="flush" className="searchForm__listGroup">
               {suggestions &&
                 suggestions.map((suggestion, i) => (
                   <ListGroup.Item

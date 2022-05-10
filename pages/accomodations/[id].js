@@ -17,6 +17,8 @@ import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import EnquiryForm from "../../components/forms/enquiry/EnquiryForm";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function Accomodation({ accomodation }) {
   console.log(accomodation);
@@ -27,6 +29,14 @@ export default function Accomodation({ accomodation }) {
   information = information.split(".");
 
   const [show, setShow] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+  const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+    console.log(dates);
+  };
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -53,7 +63,7 @@ export default function Accomodation({ accomodation }) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" onClick={handleClose}>
-            Cancel
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
@@ -225,7 +235,15 @@ export default function Accomodation({ accomodation }) {
               </SectionWrapper>
               <SectionWrapper>
                 <Heading size="2" content="Availability" />
-                calendar will go here
+                <DatePicker
+                  selected={startDate}
+                  onChange={onChange}
+                  startDate={startDate}
+                  endDate={endDate}
+                  dateFormat="yyyy-mm-dd"
+                  selectsRange
+                  inline
+                />
                 <div className="d-grid gap-2">
                   <Button variant="primary" onClick={handleShow}>
                     Check availability

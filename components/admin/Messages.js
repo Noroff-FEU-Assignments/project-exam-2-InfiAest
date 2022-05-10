@@ -7,8 +7,6 @@ import DisplayMessage from "../messages/DisplayMessage";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Heading from "../layout/Heading";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
@@ -50,35 +48,27 @@ function Messages() {
             const messagePreview = message.attributes.message.slice(0, 80);
 
             return (
-              <>
-                <Col key={message.id}>
-                  <Card className="enquiries__card">
-                    <Card.Body className="enquiries__card--body">
-                      <Card.Title as="h4" className="enquiries__card--title">
-                        {message.attributes.subject}
+              <Col key={message.id}>
+                <Card className="enquiries__card" onClick={handleShow}>
+                  <Card.Body className="enquiries__card--body">
+                    <Card.Title as="h4" className="enquiries__card--title">
+                      {message.attributes.subject}
+                    </Card.Title>
+                    <Card.Subtitle>
+                      {message.attributes.first_name}{" "}
+                      {message.attributes.last_name}
+                    </Card.Subtitle>
+                    <Card.Text className="enquiries__card--text">
+                      {messagePreview}...
+                    </Card.Text>
+                    <div
+                      style={{ display: "flex", justifyContent: "flex-end" }}
+                    >
+                      Recieved at: {createdAt}
+                    </div>
+                  </Card.Body>
+                </Card>
 
-                        <Button variant="danger">
-                          <FontAwesomeIcon icon={faTrash} width="1rem" />
-                        </Button>
-                      </Card.Title>
-                      <Card.Subtitle>
-                        {message.attributes.first_name}{" "}
-                        {message.attributes.last_name}
-                      </Card.Subtitle>
-                      <Card.Text className="enquiries__card--text">
-                        {messagePreview}...
-                      </Card.Text>
-                      <div
-                        style={{ display: "flex", justifyContent: "flex-end" }}
-                      >
-                        Recieved at: {createdAt}
-                      </div>
-                      <Button variant="dark" onClick={handleShow}>
-                        See more
-                      </Button>
-                    </Card.Body>
-                  </Card>
-                </Col>
                 <Modal
                   show={show}
                   onHide={handleClose}
@@ -110,7 +100,7 @@ function Messages() {
                     </Button>
                   </Modal.Footer>
                 </Modal>
-              </>
+              </Col>
             );
           })}
         </Row>

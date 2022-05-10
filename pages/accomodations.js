@@ -56,7 +56,7 @@ export default function Accomodations(props) {
                     <div className="d-grid gap-2">
                       <Button
                         variant="primary"
-                        href={`accomodation/${accomodation.id}`}
+                        href={`accomodations/${accomodation.id}`}
                       >
                         See more
                       </Button>

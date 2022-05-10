@@ -1,18 +1,3 @@
-import headerImg from "../../images/header/bryggen-header-img.jpg";
-
 export default function ImageHead() {
-  return (
-    <div
-      style={{
-        backgroundImage: `url('${headerImg.src}')`,
-        backgroundPosition: "bottom",
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        width: "100%",
-        height: "250px",
-        position: "relative",
-        margin: "0 auto",
-      }}
-    ></div>
-  );
+  return <div className="imageHeader"></div>;
 }

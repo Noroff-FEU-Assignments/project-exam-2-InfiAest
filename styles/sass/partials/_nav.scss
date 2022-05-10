@@ -1,60 +1,53 @@
-nav {
-  background: #1d1f1e;
+.navbar {
   height: 65px;
-}
-
-nav a {
-  color: #ffffff;
-  margin-right: 10px;
-}
-
-.current {
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.navbar-expand-md .navbar-nav {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  justify-content: space-evenly;
+  position: fixed;
+  &__logo {
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    margin: 0 0.5rem;
+  }
+  &__collapse {
+    z-index: 2;
+    background-color: map-get($colors, body);
+    height: 100vh;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    top: 3rem;
+    width: 100%;
+  }
+  &__nav {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+  }
+  &__link {
+    &--current {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  }
 }
 
 .navbar-toggler-icon {
   position: absolute;
   right: 1rem;
-  top: 1rem;
-}
-.navbar {
-  position: fixed;
-}
-.navbar-collapse {
-  z-index: 2;
-  background-color: #1d1f1e;
-  height: 100vh;
-  padding: 0.5rem 1rem;
-  text-align: center;
-  position: fixed;
-  left: 0;
-  top: 3rem;
-  width: 100%;
-}
-
-.nav__logo--container {
-  position: absolute;
   top: 0.5rem;
-  left: 0;
-  margin: 0 0.5rem;
 }
 
 @include for-tablet {
-  .navbar-expand-md .navbar-nav {
-    width: 80%;
-  }
-  .navbar-collapse {
-    height: auto;
-    position: relative;
-    top: 0;
-    background: rgba(76, 175, 80, 0);
+  .navbar {
+    &__collapse {
+      height: auto;
+      position: relative;
+      top: 0;
+      background: rgba(29, 31, 30, 0);
+    }
+    &__nav {
+      width: 80%;
+    }
   }
 }
