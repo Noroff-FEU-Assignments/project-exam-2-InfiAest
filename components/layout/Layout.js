@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useRouter } from "next/router";
 import Button from "react-bootstrap/Button";
@@ -12,11 +12,16 @@ import desktopLogo from "../../images/logo/logo-white.png";
 import mobileIcon from "../../images/logo/Icon-white.png";
 
 export default function Layout({ children }) {
+  const [authorised, setAuthorised] = useState(false);
   const [auth, setAuth] = useContext(AuthContext);
   const router = useRouter();
   const windowSize = useWindowSize();
 
   // console.log(windowSize.width);
+
+  useEffect(() => {
+    auth ? setAuthorised(true) : false;
+  }, []);
 
   let navLogo = <Image src={desktopLogo} width={"150"} height={"50"} alt="" />;
 

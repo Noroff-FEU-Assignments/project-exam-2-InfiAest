@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import DisplayMessage from "../messages/DisplayMessage";
 import Heading from "../layout/Heading";
+import ApproveBookingButton from "./buttons/ApproveBookingButton";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);
@@ -20,8 +21,8 @@ function Enquiries() {
   useEffect(() => {
     async function getEnquiries() {
       try {
-        const response = await http.get("holidaze-enquiries");
-        // console.log(response.data.data);
+        const response = await http.get("holidaze-enquiries?populate=*");
+        console.log(response.data.data);
         setEnquiries(response.data.data);
       } catch (error) {
         console.log(error);
@@ -36,7 +37,7 @@ function Enquiries() {
       month = datePart[1],
       day = datePart[2];
 
-    return day + "/" + month + "/" + year;
+    return year + "-" + month + "-" + day;
   }
 
   if (enquiries.length === 0) {
@@ -121,6 +122,12 @@ function Enquiries() {
                   </Modal.Body>
 
                   <Modal.Footer>
+                    <ApproveBookingButton
+                      accomodationId={enquiry.attributes.accomodation.data.id}
+                      checkinDate={checkInDate}
+                      checkoutDate={checkoutDate}
+                      bookingId={enquiry.id}
+                    />
                     <Button variant="info" onClick={handleClose}>
                       Close
                     </Button>

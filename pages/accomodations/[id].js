@@ -15,7 +15,7 @@ import Col from "react-bootstrap/Col";
 import SectionWrapper from "../../components/layout/SectionWrapper";
 import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EnquiryForm from "../../components/forms/enquiry/EnquiryForm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -29,8 +29,9 @@ export default function Accomodation({ accomodation }) {
   information = information.split(".");
 
   const [show, setShow] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
@@ -59,6 +60,9 @@ export default function Accomodation({ accomodation }) {
             accomodationName={details.name}
             maximumGuests={details.maximum_guests}
             accomodationImage={details.images.data[0].attributes.url}
+            checkinDate={startDate}
+            checkoutDate={endDate}
+            accomodationId={accomodation.data.id}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -234,41 +238,50 @@ export default function Accomodation({ accomodation }) {
                 </div>
               </SectionWrapper>
               <SectionWrapper>
-                <Heading size="2" content="Availability" />
-                <DatePicker
-                  selected={startDate}
-                  onChange={onChange}
-                  startDate={startDate}
-                  endDate={endDate}
-                  dateFormat="yyyy-mm-dd"
-                  selectsRange
-                  inline
-                />
-                <div className="d-grid gap-2">
-                  <Button variant="primary" onClick={handleShow}>
-                    Check availability
-                  </Button>
-                </div>
+                <Heading size="2" content="Extra Information" />
+                <ul>
+                  {information.map((info, i) => {
+                    if (info.length > 0) {
+                      return <li key={i}>{info}</li>;
+                    }
+                  })}
+                </ul>
               </SectionWrapper>
             </Col>
           </Row>
         </SectionWrapper>
         <Row xs={1} md={2} className="g-5">
           <Col>
-            <Heading size="2" content="Extra Information" />
-            <ul>
-              {information.map((info, i) => {
-                if (info.length > 0) {
-                  return <li key={i}>{info}</li>;
-                }
-              })}
-            </ul>
+            <Heading size="2" content="Availability" />
+            <DatePicker
+              selected={startDate}
+              onChange={onChange}
+              startDate={startDate}
+              endDate={endDate}
+              excludeDateIntervals={[
+                {
+                  start: new Date("2022, 5, 11"),
+                  end: new Date("2022, 5, 17"),
+                },
+              ]}
+              dateFormat="yyyy/MM/dd"
+              minDate={new Date()}
+              selectsRange
+              selectsDisabledDaysInRange={false}
+              fixedHeight={true}
+              inline
+            />
+            <div className="d-grid gap-2">
+              <Button variant="primary" onClick={handleShow}>
+                Check availability
+              </Button>
+            </div>
           </Col>
           <Col>
             <Heading size="2" content="Reviews" />
             <div className="review__container">
               <Carousel variant="dark" interval={10000}>
-                {details.reviews.data.map((review) => {
+                {/* {details.reviews.data.map((review) => {
                   return (
                     <Carousel.Item key={review.id}>
                       <Card className="review__card">
@@ -289,7 +302,7 @@ export default function Accomodation({ accomodation }) {
                       </Card>
                     </Carousel.Item>
                   );
-                })}
+                })} */}
               </Carousel>
             </div>
           </Col>

@@ -1,0 +1,87 @@
+.react-datepicker {
+  font-family: $font-primary !important;
+  border-radius: 10px !important;
+  border: none !important;
+  box-shadow: $box-shadow;
+  width: 100%;
+  font-size: 1.1rem !important;
+  &__month-container {
+    width: 100%;
+  }
+  &__header {
+    border-bottom: none !important;
+    background-color: map-get($colors, background) !important;
+    padding: 10px 0 !important;
+  }
+  &__current-month {
+    color: map-get($colors, body) !important;
+    font-family: $font-primary;
+    font-size: 1.1rem !important;
+    font-weight: normal !important;
+    margin-bottom: 1rem;
+  }
+  &__week {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__day {
+    width: 12% !important;
+    height: 3rem !important;
+    line-height: 3rem !important;
+    &--in-range {
+      background-color: map-get($colors, body) !important;
+      border-radius: 10px !important;
+    }
+    &--selected {
+      background-color: map-get($colors, body) !important;
+      border-radius: 10px !important;
+    }
+    &--in-selecting-range {
+      background-color: map-get($colors, body) !important;
+      border-radius: 10px !important;
+    }
+    &--keyboard-selected {
+      background-color: map-get($colors, body) !important;
+      border-radius: 10px !important;
+    }
+    &-name {
+      color: map-get($colors, body) !important;
+      width: 12% !important;
+      height: 3rem !important;
+      line-height: 3rem !important;
+    }
+    &--disabled {
+      background-color: map-get($colors, disabled);
+      color: map-get($colors, background) !important;
+      border-radius: 10px !important;
+      &:hover {
+        background-color: map-get($colors, disabled) !important;
+        border-radius: 10px !important;
+      }
+    }
+  }
+  &__navigation {
+    top: 10px !important;
+    &-icon--next {
+      display: none !important;
+    }
+    &-icon--previous {
+      display: none !important;
+    }
+    &--next {
+      background: url(../../../images/icons/chevron-right-solid.png) no-repeat !important;
+      width: 25px !important;
+      height: 25px !important;
+      border: none !important;
+      background-size: contain !important;
+    }
+    &--previous {
+      background: url(../../../images/icons/chevron-left-solid.png) no-repeat !important;
+      width: 25px !important;
+      height: 25px !important;
+      border: none !important;
+      background-size: contain !important;
+    }
+  }
+}

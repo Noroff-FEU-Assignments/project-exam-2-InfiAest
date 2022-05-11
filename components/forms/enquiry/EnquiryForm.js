@@ -9,18 +9,27 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
 import GuestNumberOptions from "./GuestNumberOptions";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const url = BASE_URL + "holidaze-enquiries";
 
 function formatDate(date) {
-  return new Date(date).toLocaleDateString();
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
 }
 
 const schema = yup.object().shape({
-  accomodation_name: yup
-    .string()
-    .required("Please enter the accomodation name"),
+  accomodation_name: yup.string().required(),
   accomodation_image: yup.string().required(),
+  accomodation: yup.number().required(),
   first_name: yup.string().required("Please enter your first name"),
   last_name: yup.string().required("Please enter your last name"),
   email_address: yup
@@ -29,10 +38,10 @@ const schema = yup.object().shape({
     .email("Please enter a valid email address"),
   check_in_date: yup
     .string()
-    .required("Please enter your desired check-in date yyyy-mm-dd"),
+    .required("Please select your desired check-in date"),
   checkout_date: yup
     .string()
-    .required("Please enter your desired checkout date yyyy-mm-dd"),
+    .required("Please select your desired checkout date"),
   guests: yup
     .number()
     .oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -41,13 +50,25 @@ const schema = yup.object().shape({
 });
 
 export default function EnquiryForm({
+  accomodationId,
   accomodationName,
   accomodationImage,
   maximumGuests,
+  checkinDate,
+  checkoutDate,
 }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState(null);
+  const [startDate, setStartDate] = useState(checkinDate || null);
+  const [endDate, setEndDate] = useState(checkoutDate || null);
+
+  const onChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+    console.log(dates);
+  };
 
   const {
     register,
@@ -77,6 +98,7 @@ export default function EnquiryForm({
             checkout_date: data.checkout_date,
             guests: data.guests,
             message: data.message,
+            accomodation: data.accomodation,
           },
         },
         {
@@ -95,7 +117,7 @@ export default function EnquiryForm({
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)} className="mt-5 mb-5">
+      <Form onSubmit={handleSubmit(onSubmit)}>
         {serverError && (
           <DisplayMessage
             variant="danger"
@@ -123,7 +145,7 @@ export default function EnquiryForm({
                 <span>{errors.accomodation_name.message}</span>
               )}
             </Form.Group>
-            <div className="hidden">
+            <div className="hid">
               <Form.Control
                 type="text"
                 value={accomodationImage}
@@ -131,6 +153,12 @@ export default function EnquiryForm({
                 readOnly
               />
             </div>
+            <Form.Control
+              type="text"
+              value={accomodationId}
+              {...register("accomodation")}
+              readOnly
+            />
             <Form.Group className="mb-3" controlId="formBasicUserName">
               <Form.Label>First name</Form.Label>
               <Form.Control
@@ -161,33 +189,60 @@ export default function EnquiryForm({
               )}
             </Form.Group>
             <Form.Group className="mb-3">
+              <Form.Label>Select check-in and checkout dates</Form.Label>
+              <div className="form__datePicker">
+                <DatePicker
+                  selected={startDate}
+                  onChange={onChange}
+                  startDate={startDate}
+                  endDate={endDate}
+                  excludeDateIntervals={[
+                    {
+                      start: new Date("2022, 5, 11"),
+                      end: new Date("2022, 5, 17"),
+                    },
+                  ]}
+                  dateFormat="yyyy/MM/dd"
+                  minDate={new Date()}
+                  selectsRange
+                  selectsDisabledDaysInRange={false}
+                  fixedHeight={true}
+                  inline
+                />
+              </div>
+              <div className="hid">
+                <Form.Control
+                  type="text"
+                  value={formatDate(startDate)}
+                  placeholder="Enter your desired check-in date yyyy-mm-dd"
+                  {...register("check_in_date")}
+                  readOnly
+                />
+              </div>
+              <div className="hid">
+                <Form.Control
+                  type="text"
+                  value={formatDate(endDate)}
+                  placeholder="Enter your desired checkout date yyyy-mm-dd"
+                  {...register("checkout_date")}
+                  readOnly
+                />
+              </div>
+
+              {errors.check_in_date && (
+                <span>{errors.check_in_date.message}</span>
+              )}
+
+              {errors.checkout_date && (
+                <span>{errors.checkout_date.message}</span>
+              )}
+            </Form.Group>
+            <Form.Group className="mb-3">
               <Form.Label>Number of guests</Form.Label>
               <Form.Select defaultValue={null} {...register("guests")}>
                 <GuestNumberOptions maximumGuests={maximumGuests} />
               </Form.Select>
               {errors.guests && <span>{errors.guests.message}</span>}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckin">
-              <Form.Label>Check-in date</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your desired check-in date yyyy-mm-dd"
-                {...register("check_in_date")}
-              />
-              {errors.check_in_date && (
-                <span>{errors.check_in_date.message}</span>
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckout">
-              <Form.Label>Checkout date</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your desired checkout date yyyy-mm-dd"
-                {...register("checkout_date")}
-              />
-              {errors.checkout_date && (
-                <span>{errors.checkout_date.message}</span>
-              )}
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicTextArea">
               <Form.Label>Message</Form.Label>
@@ -213,7 +268,10 @@ export default function EnquiryForm({
 }
 
 EnquiryForm.propTypes = {
+  accomodationId: PropTypes.number.isRequired,
   accomodationName: PropTypes.string.isRequired,
   accomodationImage: PropTypes.string.isRequired,
   maximumGuests: PropTypes.string.isRequired,
+  checkinDate: PropTypes.instanceOf(Date),
+  checkoutDate: PropTypes.instanceOf(Date),
 };

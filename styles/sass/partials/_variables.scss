@@ -5,10 +5,13 @@ $colors: (
   dark-blue: #566d73,
   body: #1d1f1e,
   background: #ffffff,
+  disabled: rgba(168, 73, 82, 0.2),
 );
 
 $box-shadow: 3px 3px 12px rgba(86, 109, 115, 0.4);
 $box-shadow-hover: 3px 3px 12px rgba(86, 109, 115, 0.9);
+
+$border-radius: 10px;
 
 $font-primary: "montserrat", sans-serif;
 $font-headings: "bebas-neue", sans-serif;
