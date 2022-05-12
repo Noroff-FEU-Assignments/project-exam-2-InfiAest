@@ -1,145 +1,198 @@
-.card__text--container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.card__text--price {
-  font-weight: 500;
-}
-
+//all cards
 .card {
   box-shadow: $box-shadow;
 }
 
-.card-subtitle,
-.card-tags-container span {
-  font-size: 0.9rem;
-}
-.card-subtitle {
-  height: 40px;
-}
-
-.card__tags--container {
-  display: none;
-}
-.card__tags--item {
-  font-size: 0.9rem;
-  margin: 4px;
-}
-
-.accomodation-card {
+//accomodation cards
+.accomodationCard {
   padding: 25px;
   border-radius: 10px;
   border: none;
-}
-.accomodation-card .card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1rem 0 0 0;
-}
-.fa-star {
-  width: 25px;
-  padding-right: 5px;
-  color: #e6c532;
-}
-.card__tags--icon {
-  width: 1.2rem;
-  height: 1.2rem;
-  padding-right: 2px;
-  color: #566d73;
-}
-.fa-location-dot {
-  width: 16px;
-  padding-right: 5px;
-  padding-bottom: 5px;
-  color: #566d73;
-}
-.accomodation-card-img {
-  padding: 1rem;
-  border-radius: 10px;
+  &__subtitle {
+    height: 40px;
+    font-size: 0.9rem;
+    &--icon {
+      width: 20px;
+      padding-right: 5px;
+      padding-bottom: 5px;
+      color: map-get($colors, dark-blue);
+    }
+  }
+  &__img {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  &__rating {
+    display: flex;
+    justify-items: flex-end;
+    align-items: center;
+    &--icon {
+      width: 25px;
+      padding-right: 5px;
+      color: map-get($colors, secondary);
+    }
+  }
+  &__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__text {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    &--price {
+      font-weight: 500;
+    }
+  }
+  &__tags {
+    display: none;
+    &--icon {
+      width: 1.2rem;
+      height: 1.2rem;
+      padding-right: 2px;
+      color: map-get($colors, dark-blue);
+    }
+    &--item {
+      font-size: 0.9rem;
+      margin: 4px;
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
-.inspo__tiles--card {
+//inspiration tiles
+.inspoTile {
   background-color: map-get($colors, light-blue) !important;
   text-align: center;
+  &:hover {
+    box-shadow: $box-shadow-hover;
+  }
+  &__image {
+    border-radius: 10px 10px 0 0;
+  }
 }
-.inspo__tiles--card:hover {
-  box-shadow: $box-shadow-hover;
-}
-
-.inspo__tiles--card img,
-.inspo-card img {
-  border-radius: 10px 10px 0 0;
-}
-
-.inspo__tiles--link {
+.card__link {
   color: map-get($colors, body);
+  &:hover {
+    text-decoration: none;
+  }
 }
-.inspo__tiles--link:hover {
-  text-decoration: none;
+
+//inspiration card
+.inspoCard {
+  &__image {
+    border-radius: 10px 10px 0 0;
+  }
+  &__body {
+    margin: 0 1.5rem;
+  }
+}
+
+//review cards
+.reviewsCard {
+  height: 275px;
+  margin: 0.1rem 0.5rem 1rem 0.2rem;
+  padding: 0.5rem 2.5rem;
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    height: fit-content;
+    padding: 1.5rem 0;
+  }
+  &__userIcon {
+    color: map-get($colors, dark-blue);
+    width: 30px;
+  }
+  &__rating {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    &--icon {
+      width: 25px;
+      padding-right: 5px;
+      color: map-get($colors, secondary);
+    }
+  }
 }
 
 @include for-large-mobile {
-  // .accomodation-card {
-  //   height: 550px;
-  // }
-  // .card-title {
-  //   height: 75px;
-  // }
-  .card-subtitle {
-    height: 50px;
+  .accomodationCard {
+    &__title {
+      height: 60px;
+    }
+    &__subtitle {
+      height: 50px;
+    }
+  }
+
+  .reviewsCard {
+    height: 230px;
+    padding: 0.5rem 3.5rem;
   }
 }
 
 @include for-tablet {
-  // .accomodation-card {
-  //   height: 540px;
-  // }
-  // .card-title {
-  //   height: 85px;
-  // }
-  .card-subtitle {
-    height: 60px;
+  .accomodationCard {
+    &__title {
+      height: 80px;
+    }
+    &__subtitle {
+      height: 55px;
+    }
+  }
+  .reviewsCard {
+    height: 350px;
   }
 }
 
 @include for-desktop {
-  // .card-title {
-  //   height: 80px;
-  // }
-  .card-subtitle {
-    height: 50px;
+  .accomodationCard {
+    &__subtitle {
+      height: 50px;
+    }
+    &__tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      height: 100px;
+    }
   }
-  .card__tags--container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    height: 115px;
+  .reviewsCard {
+    height: 245px;
+    &__rating {
+      &--icon {
+        width: 30px;
+      }
+    }
   }
 }
 
 @include for-xl-desktop {
-  // .card-title {
-  //   height: 65px;
-  // }
-  .card-subtitle {
-    height: 30px;
-  }
-  .card__tags--container {
-    height: 90px;
+  .accomodationCard {
+    &__title {
+      height: 65px;
+    }
+    &__subtitle {
+      height: 40px;
+    }
+    &__tags {
+      height: 65px;
+    }
   }
 }
 
 @include for-xxl-desktop {
-  // .accomodation-card {
-  //   height: 550px;
-  // }
-  // .card-title {
-  //   height: 60px;
-  // }
-  .card__tags--container {
-    height: 65px;
+  .accomodationCard {
+    &__title {
+      height: 60px;
+    }
+    &__tags {
+      height: 55px;
+    }
   }
 }

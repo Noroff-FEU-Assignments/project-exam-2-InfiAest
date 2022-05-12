@@ -8,7 +8,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import DisplayMessage from "../messages/DisplayMessage";
 import Heading from "../layout/Heading";
-import ApproveBookingButton from "./buttons/ApproveBookingButton";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);
@@ -33,11 +32,11 @@ function Enquiries() {
 
   function formatDate(input) {
     var datePart = input.match(/\d+/g),
-      year = datePart[0].substring(2),
+      year = datePart[0],
       month = datePart[1],
       day = datePart[2];
 
-    return year + "-" + month + "-" + day;
+    return day + "/" + month + "/" + year;
   }
 
   if (enquiries.length === 0) {
@@ -122,12 +121,6 @@ function Enquiries() {
                   </Modal.Body>
 
                   <Modal.Footer>
-                    <ApproveBookingButton
-                      accomodationId={enquiry.attributes.accomodation.data.id}
-                      checkinDate={checkInDate}
-                      checkoutDate={checkoutDate}
-                      bookingId={enquiry.id}
-                    />
                     <Button variant="info" onClick={handleClose}>
                       Close
                     </Button>

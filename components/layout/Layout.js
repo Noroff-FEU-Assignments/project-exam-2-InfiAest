@@ -29,12 +29,6 @@ export default function Layout({ children }) {
     navLogo = <Image src={mobileIcon} width={"49"} height={"40"} alt="" />;
   }
 
-  let userName = "";
-
-  if (auth) {
-    userName = `Hello, ${auth.user.username}`;
-  }
-
   function logout() {
     setAuth(null);
     return router.push("/");
@@ -101,12 +95,14 @@ export default function Layout({ children }) {
                     </a>
                   </Link>
                 </Nav>
-                <Navbar.Text>
-                  <span className="username">{userName}</span>
-                  <Button variant="primary" onClick={logout}>
-                    Logout
-                  </Button>
-                </Navbar.Text>
+
+                <Button
+                  variant="info"
+                  onClick={logout}
+                  className="navbar__logout-button"
+                >
+                  Logout
+                </Button>
               </Navbar.Collapse>
             </Container>
           </>

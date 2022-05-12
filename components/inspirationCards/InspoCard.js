@@ -16,18 +16,27 @@ function InspoCard() {
       height="600"
       alt=""
       priority="true"
+      className="inspoCard__image"
     />
   );
 
   if (windowSize.width < 768) {
-    image = <Image src={inspoImg} objectFit="cover" height="1000" alt="" />;
+    image = (
+      <Image
+        src={inspoImg}
+        objectFit="cover"
+        height="1000"
+        alt=""
+        className="inspoCard__image"
+      />
+    );
   }
 
   return (
     <SectionWrapper>
-      <Card className="inspo-card">
+      <Card className="inspoCard">
         {image}
-        <Card.Body>
+        <Card.Body className="inspoCard__body">
           <Heading
             size="3"
             content="Haven't decided what to do in Bergen yet?"

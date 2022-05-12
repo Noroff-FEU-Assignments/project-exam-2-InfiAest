@@ -6,6 +6,7 @@ import Heading from "../components/layout/Heading";
 import InspoTiles from "../components/inspirationCards/InspoTiles";
 import InspoCard from "../components/inspirationCards/InspoCard";
 import Subscribe from "../components/subscribe/Subscribe";
+import PageContainer from "../components/layout/PageContainer";
 
 export default function Home() {
   return (
@@ -13,11 +14,11 @@ export default function Home() {
       <Head title="Holidaze home" />
       <ImageHead />
       <SearchForm />
-      <div className="container">
+      <PageContainer>
         <Heading size="1" content="Need some inspiration?" />
         <InspoTiles />
         <InspoCard />
-      </div>
+      </PageContainer>
       <Subscribe />
     </Layout>
   );

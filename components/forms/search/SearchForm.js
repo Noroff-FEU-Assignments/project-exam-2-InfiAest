@@ -7,6 +7,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import DisplayLoader from "../../loader/DisplayLoader";
 
 export default function SearchForm() {
   const [results, setResults] = useState([]);
@@ -14,6 +15,7 @@ export default function SearchForm() {
   const [suggestions, setSuggestions] = useState([]);
   const [buttonHref, setButtonHref] = useState("");
   const [searchDisabled, setSearchDisabled] = useState(true);
+  const [spinnerVisible, setSpinnerVisible] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -34,9 +36,10 @@ export default function SearchForm() {
     // console.log(suggestion);
     setText(suggestion.attributes.name);
     setSuggestions([]);
-    setButtonHref(`/accomodation/${suggestion.id}`);
+    setSpinnerVisible(true);
+    setButtonHref(`/accomodations/${suggestion.id}`);
     setSearchDisabled(false);
-    router.push(`/accomodation/${suggestion.id}`);
+    router.push(`/accomodations/${suggestion.id}`);
   }
 
   function onChangeHandler(text) {
@@ -80,6 +83,12 @@ export default function SearchForm() {
               className="searchForm__button--icon"
             />
           </Button>
+          <div className="searchForm__loader">
+            <DisplayLoader
+              isVisible={spinnerVisible}
+              spinnerName="searchForm__spinner"
+            />
+          </div>
           <div className="searchForm__list">
             <ListGroup variant="flush" className="searchForm__listGroup">
               {suggestions &&

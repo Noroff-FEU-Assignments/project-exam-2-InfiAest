@@ -19,6 +19,8 @@ import { useState, useEffect } from "react";
 import EnquiryForm from "../../components/forms/enquiry/EnquiryForm";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ReviewsForm from "../../components/forms/reviews/ReviewsForm";
+import PageContainer from "../../components/layout/PageContainer";
 
 export default function Accomodation({ accomodation }) {
   console.log(accomodation);
@@ -26,7 +28,7 @@ export default function Accomodation({ accomodation }) {
 
   //split info paragraph into an array so it can be returned as a list
   var information = details.information;
-  information = information.split(".");
+  information = information.split(/\r?\n/);
 
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(null);
@@ -72,21 +74,27 @@ export default function Accomodation({ accomodation }) {
         </Modal.Footer>
       </Modal>
       <Head title={details.name} />
-      <div className="container">
+      <PageContainer>
         <SectionWrapper>
           <Row xs={1} lg={2} className="g-3">
             <Col>
-              <div className="details__text--container">
+              <div className="details__text">
                 <Heading size="1" content={details.name} />
-                <Rating ratingValue={JSON.stringify(details.rating)} />
+                <Rating
+                  ratingValue={JSON.stringify(details.rating)}
+                  tagClass="details"
+                />
               </div>
-              <div>
-                <FontAwesomeIcon icon={faLocationDot} />
+              <div className="details__location">
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className="details__location--icon"
+                />
                 {details.location.street_address}
               </div>
             </Col>
             <Col>
-              <div className="details__price--container">
+              <div className="details__price">
                 <div className="details__price--text">
                   {details.price_per_night},- per night
                 </div>
@@ -105,7 +113,7 @@ export default function Accomodation({ accomodation }) {
               <Carousel>
                 <Carousel.Item>
                   <Image
-                    className="accomodation-card-img"
+                    className="details__image"
                     src={details.images.data[0].attributes.url}
                     alt={details.images.data[0].attributes.name}
                     width="696"
@@ -114,7 +122,7 @@ export default function Accomodation({ accomodation }) {
                 </Carousel.Item>
                 <Carousel.Item>
                   <Image
-                    className="accomodation-card-img"
+                    className="details__image"
                     src={details.images.data[1].attributes.url}
                     alt={details.images.data[1].attributes.name}
                     width="696"
@@ -123,7 +131,7 @@ export default function Accomodation({ accomodation }) {
                 </Carousel.Item>
                 <Carousel.Item>
                   <Image
-                    className="accomodation-card-img"
+                    className="details__image"
                     src={details.images.data[2].attributes.url}
                     alt={details.images.data[2].attributes.name}
                     width="696"
@@ -134,7 +142,7 @@ export default function Accomodation({ accomodation }) {
               <Row xs={2} className="g-4">
                 <Col>
                   <Image
-                    className="accomodation-card-img"
+                    className="details__image"
                     src={details.images.data[1].attributes.url}
                     alt={details.images.data[1].attributes.name}
                     width="350"
@@ -143,7 +151,7 @@ export default function Accomodation({ accomodation }) {
                 </Col>
                 <Col>
                   <Image
-                    className="accomodation-card-img"
+                    className="details__image"
                     src={details.images.data[2].attributes.url}
                     alt={details.images.data[2].attributes.name}
                     width="350"
@@ -237,6 +245,38 @@ export default function Accomodation({ accomodation }) {
                   />
                 </div>
               </SectionWrapper>
+            </Col>
+          </Row>
+        </SectionWrapper>
+        <SectionWrapper>
+          <Row xs={1} md={2} className="g-5">
+            <Col>
+              <Heading size="2" content="Availability" />
+              <DatePicker
+                selected={startDate}
+                onChange={onChange}
+                startDate={startDate}
+                endDate={endDate}
+                excludeDateIntervals={[
+                  {
+                    start: new Date("2022, 5, 11"),
+                    end: new Date("2022, 5, 17"),
+                  },
+                ]}
+                dateFormat="yyyy/MM/dd"
+                minDate={new Date()}
+                selectsRange
+                selectsDisabledDaysInRange={false}
+                fixedHeight={true}
+                inline
+              />
+              <div className="d-grid gap-2">
+                <Button variant="primary" onClick={handleShow}>
+                  Check availability
+                </Button>
+              </div>
+            </Col>
+            <Col>
               <SectionWrapper>
                 <Heading size="2" content="Extra Information" />
                 <ul>
@@ -250,64 +290,46 @@ export default function Accomodation({ accomodation }) {
             </Col>
           </Row>
         </SectionWrapper>
-        <Row xs={1} md={2} className="g-5">
-          <Col>
-            <Heading size="2" content="Availability" />
-            <DatePicker
-              selected={startDate}
-              onChange={onChange}
-              startDate={startDate}
-              endDate={endDate}
-              excludeDateIntervals={[
-                {
-                  start: new Date("2022, 5, 11"),
-                  end: new Date("2022, 5, 17"),
-                },
-              ]}
-              dateFormat="yyyy/MM/dd"
-              minDate={new Date()}
-              selectsRange
-              selectsDisabledDaysInRange={false}
-              fixedHeight={true}
-              inline
-            />
-            <div className="d-grid gap-2">
-              <Button variant="primary" onClick={handleShow}>
-                Check availability
-              </Button>
-            </div>
-          </Col>
-          <Col>
-            <Heading size="2" content="Reviews" />
-            <div className="review__container">
+        <SectionWrapper>
+          <Row xs={1} md={2} className="g-5">
+            <Col>
+              <Heading size="2" content="Reviews" />
+
               <Carousel variant="dark" interval={10000}>
-                {/* {details.reviews.data.map((review) => {
+                {details.review.data.map((rev) => {
                   return (
-                    <Carousel.Item key={review.id}>
-                      <Card className="review__card">
-                        <Card.Body className="review__card--body">
-                          <FontAwesomeIcon icon={faUser} />
-                          <Card.Title className="review__card--title">
-                            <div className="review__card--rating">
-                              {review.attributes.username}
+                    <Carousel.Item key={rev.id}>
+                      <Card className="reviewsCard">
+                        <Card.Body className="reviewsCard__body">
+                          <FontAwesomeIcon
+                            icon={faUser}
+                            className="reviewsCard__userIcon"
+                          />
+                          <Card.Title className="reviewsCard__title">
+                            {rev.attributes.username}
+                            <div>
                               <Rating
                                 ratingValue={JSON.stringify(
-                                  review.attributes.rating
+                                  rev.attributes.rating
                                 )}
+                                tagClass="reviewsCard"
                               />
                             </div>
                           </Card.Title>
-                          <Card.Text>{review.attributes.review}</Card.Text>
+                          <Card.Text>{rev.attributes.review}</Card.Text>
                         </Card.Body>
                       </Card>
                     </Carousel.Item>
                   );
-                })} */}
+                })}
               </Carousel>
-            </div>
-          </Col>
-        </Row>
-      </div>
+            </Col>
+            <Col>
+              <ReviewsForm accomodationId={accomodation.data.id} />
+            </Col>
+          </Row>
+        </SectionWrapper>
+      </PageContainer>
     </Layout>
   );
 }

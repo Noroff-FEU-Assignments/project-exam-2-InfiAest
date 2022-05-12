@@ -7,6 +7,16 @@ $dark: map-get($colors, body);
 $light: map-get($colors, light-blue);
 $info: map-get($colors, dark-blue);
 
+$container-max-widths: (
+  sm: 620px,
+  md: 750px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1200px,
+);
+
+$grid-gutter-width: 3rem;
+
 $h1-font-size: 2rem;
 $h2-font-size: 2rem;
 $h3-font-size: 1.75rem;
@@ -28,6 +38,7 @@ $navbar-toggler-focus-width: none;
 $border-radius: 10px;
 
 $card-title-spacer-y: 0;
+$card-spacer-x: 0;
 $card-border-width: none;
 $card-box-shadow: $box-shadow;
 $card-bg: map-get($colors, background);
