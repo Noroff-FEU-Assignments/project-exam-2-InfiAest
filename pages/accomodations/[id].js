@@ -5,7 +5,7 @@ import axios from "axios";
 import { BASE_URL } from "../../constants/api";
 import Rating from "../../components/accomodationCards/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
 import Tags from "../../components/accomodationCards/Tags";
@@ -13,17 +13,17 @@ import Image from "next/image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SectionWrapper from "../../components/layout/SectionWrapper";
-import Card from "react-bootstrap/Card";
 import Modal from "react-bootstrap/Modal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import EnquiryForm from "../../components/forms/enquiry/EnquiryForm";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 import ReviewsForm from "../../components/forms/reviews/ReviewsForm";
 import PageContainer from "../../components/layout/PageContainer";
+import ReviewsCarousel from "../../components/carousel/ReviewsCarousel";
+import ImageCarousel from "../../components/carousel/ImageCarousel";
 
 export default function Accomodation({ accomodation }) {
-  console.log(accomodation);
   const details = accomodation.data.attributes;
 
   //split info paragraph into an array so it can be returned as a list
@@ -38,7 +38,6 @@ export default function Accomodation({ accomodation }) {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-    console.log(dates);
   };
 
   const handleClose = () => setShow(false);
@@ -75,96 +74,46 @@ export default function Accomodation({ accomodation }) {
       </Modal>
       <Head title={details.name} />
       <PageContainer>
-        <SectionWrapper>
-          <Row xs={1} lg={2} className="g-3">
-            <Col>
-              <div className="details__text">
-                <Heading size="1" content={details.name} />
-                <Rating
-                  ratingValue={JSON.stringify(details.rating)}
-                  tagClass="details"
-                />
+        <Row xs={1} lg={2} className="g-3">
+          <Col>
+            <div className="details__heading">
+              <Heading size="1" content={details.name} />
+              <Rating
+                ratingValue={JSON.stringify(details.rating)}
+                tagClass="details"
+              />
+            </div>
+            <div className="details__location">
+              <FontAwesomeIcon
+                icon={faLocationDot}
+                className="details__location--icon"
+              />
+              {details.location.street_address}
+            </div>
+          </Col>
+          <Col>
+            <div className="details__price">
+              <div className="details__price--text">
+                {details.price_per_night},- per night
               </div>
-              <div className="details__location">
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  className="details__location--icon"
-                />
-                {details.location.street_address}
+              <div className="d-grid gap-2">
+                <Button variant="primary" onClick={handleShow}>
+                  Check availability
+                </Button>
               </div>
-            </Col>
-            <Col>
-              <div className="details__price">
-                <div className="details__price--text">
-                  {details.price_per_night},- per night
-                </div>
-                <div className="d-grid gap-2">
-                  <Button variant="primary" onClick={handleShow}>
-                    Check availability
-                  </Button>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </SectionWrapper>
+            </div>
+          </Col>
+        </Row>
+
         <SectionWrapper>
           <Row xs={1} lg={2} className="g-5">
             <Col>
-              <Carousel>
-                <Carousel.Item>
-                  <Image
-                    className="details__image"
-                    src={details.images.data[0].attributes.url}
-                    alt={details.images.data[0].attributes.name}
-                    width="696"
-                    height="696"
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <Image
-                    className="details__image"
-                    src={details.images.data[1].attributes.url}
-                    alt={details.images.data[1].attributes.name}
-                    width="696"
-                    height="696"
-                  />
-                </Carousel.Item>
-                <Carousel.Item>
-                  <Image
-                    className="details__image"
-                    src={details.images.data[2].attributes.url}
-                    alt={details.images.data[2].attributes.name}
-                    width="696"
-                    height="696"
-                  />
-                </Carousel.Item>
-              </Carousel>
-              <Row xs={2} className="g-4">
-                <Col>
-                  <Image
-                    className="details__image"
-                    src={details.images.data[1].attributes.url}
-                    alt={details.images.data[1].attributes.name}
-                    width="350"
-                    height="350"
-                  />
-                </Col>
-                <Col>
-                  <Image
-                    className="details__image"
-                    src={details.images.data[2].attributes.url}
-                    alt={details.images.data[2].attributes.name}
-                    width="350"
-                    height="350"
-                  />
-                </Col>
-              </Row>
+              <ImageCarousel accomodationImages={details.images} />
             </Col>
             <Col>
-              <SectionWrapper>
-                <Heading size="2" content="Description" />
-                <p>{details.description}</p>
-              </SectionWrapper>
+              <Heading size="2" content="Description" />
+              <p>{details.description}</p>
+
               <SectionWrapper>
                 <Heading size="2" content="Amenities" />
                 <div className="details__tags">
@@ -248,9 +197,10 @@ export default function Accomodation({ accomodation }) {
             </Col>
           </Row>
         </SectionWrapper>
-        <SectionWrapper>
-          <Row xs={1} md={2} className="g-5">
-            <Col>
+
+        <Row xs={1} md={2} className="g-5">
+          <Col>
+            <SectionWrapper>
               <Heading size="2" content="Availability" />
               <DatePicker
                 selected={startDate}
@@ -259,8 +209,16 @@ export default function Accomodation({ accomodation }) {
                 endDate={endDate}
                 excludeDateIntervals={[
                   {
-                    start: new Date("2022, 5, 11"),
-                    end: new Date("2022, 5, 17"),
+                    start: new Date("2022, 6, 9"),
+                    end: new Date("2022, 6, 13"),
+                  },
+                  {
+                    start: new Date("2022, 6, 17"),
+                    end: new Date("2022, 6, 19"),
+                  },
+                  {
+                    start: new Date("2022, 6, 27"),
+                    end: new Date("2022, 7, 3"),
                   },
                 ]}
                 dateFormat="yyyy/MM/dd"
@@ -275,60 +233,35 @@ export default function Accomodation({ accomodation }) {
                   Check availability
                 </Button>
               </div>
-            </Col>
-            <Col>
-              <SectionWrapper>
-                <Heading size="2" content="Extra Information" />
-                <ul>
-                  {information.map((info, i) => {
-                    if (info.length > 0) {
-                      return <li key={i}>{info}</li>;
-                    }
-                  })}
-                </ul>
-              </SectionWrapper>
-            </Col>
-          </Row>
-        </SectionWrapper>
-        <SectionWrapper>
-          <Row xs={1} md={2} className="g-5">
-            <Col>
-              <Heading size="2" content="Reviews" />
-
-              <Carousel variant="dark" interval={10000}>
-                {details.review.data.map((rev) => {
-                  return (
-                    <Carousel.Item key={rev.id}>
-                      <Card className="reviewsCard">
-                        <Card.Body className="reviewsCard__body">
-                          <FontAwesomeIcon
-                            icon={faUser}
-                            className="reviewsCard__userIcon"
-                          />
-                          <Card.Title className="reviewsCard__title">
-                            {rev.attributes.username}
-                            <div>
-                              <Rating
-                                ratingValue={JSON.stringify(
-                                  rev.attributes.rating
-                                )}
-                                tagClass="reviewsCard"
-                              />
-                            </div>
-                          </Card.Title>
-                          <Card.Text>{rev.attributes.review}</Card.Text>
-                        </Card.Body>
-                      </Card>
-                    </Carousel.Item>
-                  );
+            </SectionWrapper>
+          </Col>
+          <Col>
+            <SectionWrapper>
+              <Heading size="2" content="Extra Information" />
+              <ul>
+                {information.map((info, i) => {
+                  if (info.length > 0) {
+                    return <li key={i}>{info}</li>;
+                  }
                 })}
-              </Carousel>
-            </Col>
-            <Col>
+              </ul>
+            </SectionWrapper>
+          </Col>
+        </Row>
+
+        <Row xs={1} md={2} className="g-5">
+          <Col>
+            <SectionWrapper>
+              <Heading size="2" content="Reviews" />
+              <ReviewsCarousel accomodationDetails={details} />
+            </SectionWrapper>
+          </Col>
+          <Col>
+            <SectionWrapper>
               <ReviewsForm accomodationId={accomodation.data.id} />
-            </Col>
-          </Row>
-        </SectionWrapper>
+            </SectionWrapper>
+          </Col>
+        </Row>
       </PageContainer>
     </Layout>
   );

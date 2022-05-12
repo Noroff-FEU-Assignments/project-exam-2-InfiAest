@@ -82,7 +82,8 @@ function ReviewsForm({ accomodationId }) {
             <DisplayMessage
               variant="success"
               heading="Yippee!"
-              message={`Your review has been sent successfully`}
+              message="Your review has been sent successfully. Thanks a lot, we really appreciate it!"
+              alertClass="review__alert"
             />
           </>
         ) : (
@@ -95,8 +96,8 @@ function ReviewsForm({ accomodationId }) {
                 readOnly
               />
             </div>
-            <Row xs={2} md={1} lg={2} className="g-3">
-              <Col xs={10} lg={9}>
+            <Row xs={2} md={1} lg={2}>
+              <Col xs={8} lg={9}>
                 <Form.Group className="mb-3" controlId="formBasicUserName">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
@@ -107,18 +108,18 @@ function ReviewsForm({ accomodationId }) {
                   {errors.username && <span>{errors.username.message}</span>}
                 </Form.Group>
               </Col>
-              <Col xs={2} lg={3}>
+              <Col xs={4} lg={3}>
                 <Form.Group className="mb-3" controlId="formBasicLastName">
                   <Form.Label>Rating</Form.Label>
-                  <Form.Select defaultValue={null} {...register("rating")}>
-                    <option value="">-</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                  <Form.Select defaultValue={0} {...register("rating")}>
+                    <option value={0}></option>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                    <option value={4}>4</option>
+                    <option value={5}>5</option>
                   </Form.Select>
-                  {errors.last_name && <span>{errors.last_name.message}</span>}
+                  {errors.rating && <span>{errors.rating.message}</span>}
                 </Form.Group>
               </Col>
             </Row>

@@ -1,7 +1,7 @@
 .details {
-  &__text {
+  &__heading {
     display: block;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
   }
   &__price {
     display: flex;
@@ -62,10 +62,11 @@
 
 @include for-tablet {
   .details {
-    &__text {
+    &__heading {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
+      margin-top: 0;
     }
     &__rating {
       margin-left: 10px;
@@ -73,16 +74,14 @@
         width: 30px;
       }
     }
-    &__price {
-      &--text {
-        margin: 2rem 0;
-      }
-    }
   }
 }
 
 @include for-desktop {
   .details {
+    &__location {
+      margin-bottom: 1rem;
+    }
     &__tags {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -97,6 +96,12 @@
         margin-right: 5px;
         width: 2rem;
         height: 2rem;
+      }
+    }
+    &__price {
+      margin-top: 1rem;
+      &--text {
+        margin: 2rem 0;
       }
     }
   }

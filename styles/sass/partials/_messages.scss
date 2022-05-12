@@ -1,0 +1,15 @@
+.review__alert {
+  height: 140px;
+}
+
+@include for-tablet {
+  .review__alert {
+    height: 350px;
+  }
+}
+
+@include for-desktop {
+  .review__alert {
+    height: 245px;
+  }
+}
