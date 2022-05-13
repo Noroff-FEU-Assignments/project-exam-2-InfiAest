@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { BASE_URL } from "../../../constants/api";
+import { BASE_URL, MESSAGES_PATH } from "../../../constants/api";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
 import { useRouter } from "next/router";
 
-const url = BASE_URL + "holidaze-contacts";
+const url = BASE_URL + MESSAGES_PATH;
 
 const schema = yup.object().shape({
   first_name: yup.string().required("Please enter your first name"),

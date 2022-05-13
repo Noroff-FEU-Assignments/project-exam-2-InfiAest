@@ -1,4 +1,4 @@
-import useAxios from "../../hooks/useAxios";
+import useAxios from "../../../hooks/useAxios";
 import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
@@ -6,8 +6,9 @@ import Col from "react-bootstrap/Col";
 import Image from "next/image";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import DisplayMessage from "../messages/DisplayMessage";
-import Heading from "../layout/Heading";
+import DisplayMessage from "../../messages/DisplayMessage";
+import Heading from "../../layout/Heading";
+import { ENQUIRIES_PATH, IMG_POPULATE_PATH } from "../../../constants/api";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);
@@ -20,8 +21,9 @@ function Enquiries() {
   useEffect(() => {
     async function getEnquiries() {
       try {
-        const response = await http.get("holidaze-enquiries?populate=*");
-        console.log(response.data.data);
+        const response = await http.get(
+          `${ENQUIRIES_PATH}${IMG_POPULATE_PATH}`
+        );
         setEnquiries(response.data.data);
       } catch (error) {
         console.log(error);
@@ -61,30 +63,28 @@ function Enquiries() {
 
             return (
               <Col key={enquiry.id}>
-                <Card className="enquiries__card" onClick={handleShow}>
-                  <Card.Body className="enquiries__card--body">
-                    <Card.Title as="h4" className="enquiries__card--title">
+                <Card className="adminCard" onClick={handleShow}>
+                  <Card.Body className="adminCard__body">
+                    <Card.Title as="h4" className="adminCard__title">
                       {enquiry.attributes.accomodation_name}
                     </Card.Title>
-                    <div className="enquiries__card--innerContainer">
-                      <Card.Text className="enquiries__card--text">
+                    <div className="adminCard__inner">
+                      <Card.Text className="adminCard__text">
                         {enquiry.attributes.first_name}{" "}
                         {enquiry.attributes.last_name},{" "}
                         {enquiry.attributes.guests} guests, {checkInDate}-
                         {checkoutDate}
                       </Card.Text>
                       <Image
-                        className="accomodation-card-img"
+                        className="adminCard__image"
                         src={enquiry.attributes.accomodation_image}
                         width="80"
                         height="80"
-                        alt=""
+                        alt={enquiry.attributes.accomodation_name}
                       />
                     </div>
 
-                    <div
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
+                    <div className="adminCard__date">
                       Requested at: {createdAt}
                     </div>
                   </Card.Body>

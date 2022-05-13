@@ -18,7 +18,7 @@
       color: map-get($colors, dark-blue);
     }
   }
-  &__img {
+  &__image {
     padding: 1rem;
     border-radius: 10px;
   }
@@ -69,6 +69,7 @@
   text-align: center;
   &:hover {
     box-shadow: $box-shadow-hover;
+    cursor: pointer;
   }
   &__image {
     border-radius: 10px 10px 0 0;
@@ -117,6 +118,28 @@
       padding-right: 5px;
       color: map-get($colors, secondary);
     }
+  }
+}
+
+//enquiry & message cards
+.adminCard {
+  padding: 0 1rem;
+  &:hover {
+    box-shadow: $box-shadow-hover;
+    cursor: pointer;
+  }
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  &__image {
+    border-radius: 10px;
+  }
+  &__date {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 

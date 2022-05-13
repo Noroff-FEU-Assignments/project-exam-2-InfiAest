@@ -6,6 +6,24 @@
   box-shadow: $box-shadow;
   width: 100%;
   font-size: 1.1rem !important;
+  &__portal .react-datepicker {
+    min-width: 466px;
+  }
+  &__input-container {
+    [type="text"] {
+      width: 100% !important;
+      border-color: map-get($colors, body);
+      border-radius: $border-radius;
+      border-width: 2px;
+      border-style: solid;
+      background-color: map-get($colors, body);
+      color: map-get($colors, background);
+      padding: 0.375rem 0.75rem;
+    }
+    [type="text"]:hover {
+      cursor: pointer;
+    }
+  }
   &__month-container {
     width: 100%;
   }

@@ -7,6 +7,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
 import { useRouter } from "next/router";
+import { ACCOMODATION_PATH } from "../../../constants/api";
 
 const schema = yup.object().shape({
   name: yup.string().required("Please enter the accomodation name"),
@@ -124,7 +125,7 @@ const AddAccomodationForm = () => {
     formData.append("data", JSON.stringify(postData));
 
     try {
-      const response = await http.post("accomodations", formData);
+      const response = await http.post(ACCOMODATION_PATH, formData);
       console.log("Response", response.data);
       setSubmitted(true);
     } catch (error) {

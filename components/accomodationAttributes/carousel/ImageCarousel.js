@@ -1,11 +1,9 @@
 import PropTypes from "prop-types";
 import Carousel from "react-bootstrap/Carousel";
 import Image from "next/image";
-import DisplayMessage from "../messages/DisplayMessage";
+import DisplayMessage from "../../messages/DisplayMessage";
 
 function ImageCarousel({ accomodationImages }) {
-  console.log(accomodationImages);
-
   if (accomodationImages.data.length === 0) {
     return (
       <DisplayMessage
@@ -27,6 +25,7 @@ function ImageCarousel({ accomodationImages }) {
                 alt={image.attributes.name}
                 width="702"
                 height="702"
+                priority={true}
               />
             </Carousel.Item>
           );

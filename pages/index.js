@@ -1,12 +1,12 @@
-import Head from "../components/layout/Head";
-import Layout from "../components/layout/Layout";
+import Head from "../components/layout/general/Head";
+import Layout from "../components/layout/general/Layout";
 import ImageHead from "../components/imageHead/ImageHead";
 import SearchForm from "../components/forms/search/SearchForm";
-import Heading from "../components/layout/Heading";
+import Heading from "../components/layout/headings/Heading";
 import InspoTiles from "../components/inspirationCards/InspoTiles";
 import InspoCard from "../components/inspirationCards/InspoCard";
 import Subscribe from "../components/subscribe/Subscribe";
-import PageContainer from "../components/layout/PageContainer";
+import PageContainer from "../components/layout/general/PageContainer";
 
 export default function Home() {
   return (

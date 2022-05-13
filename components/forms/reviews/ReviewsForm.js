@@ -3,23 +3,24 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { BASE_URL } from "../../../constants/api";
+import {
+  BASE_URL,
+  IMG_POPULATE_PATH,
+  REVIEWS_PATH,
+} from "../../../constants/api";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
-import Heading from "../../layout/Heading";
+import Heading from "../../layout/headings/Heading";
 import PropTypes from "prop-types";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-const url = BASE_URL + "reviews?populate=*";
+const url = BASE_URL + REVIEWS_PATH + IMG_POPULATE_PATH;
 
 const schema = yup.object().shape({
   username: yup.string().required("Please enter your username"),
-  rating: yup
-    .number()
-    .oneOf([1, 2, 3, 4, 5])
-    .required("Please select a rating"),
+  rating: yup.number().required("Please select a rating"),
   review: yup.string().required("Please enter review"),
   reviews: yup.number().required(),
 });
@@ -88,7 +89,7 @@ function ReviewsForm({ accomodationId }) {
           </>
         ) : (
           <fieldset disabled={submitting}>
-            <div className="hidden">
+            <div className="inputHidden">
               <Form.Control
                 type="text"
                 value={accomodationId}
@@ -111,13 +112,12 @@ function ReviewsForm({ accomodationId }) {
               <Col xs={4} lg={3}>
                 <Form.Group className="mb-3" controlId="formBasicLastName">
                   <Form.Label>Rating</Form.Label>
-                  <Form.Select defaultValue={0} {...register("rating")}>
-                    <option value={0}></option>
-                    <option value={1}>1</option>
-                    <option value={2}>2</option>
-                    <option value={3}>3</option>
-                    <option value={4}>4</option>
+                  <Form.Select {...register("rating")}>
                     <option value={5}>5</option>
+                    <option value={4}>4</option>
+                    <option value={3}>3</option>
+                    <option value={2}>2</option>
+                    <option value={1}>1</option>
                   </Form.Select>
                   {errors.rating && <span>{errors.rating.message}</span>}
                 </Form.Group>

@@ -4,14 +4,12 @@ function GuestNumberOptions({ maximumGuests }) {
   if (maximumGuests === "one") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
       </>
     );
   } else if (maximumGuests === "two") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
       </>
@@ -19,7 +17,6 @@ function GuestNumberOptions({ maximumGuests }) {
   } else if (maximumGuests === "three") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -28,7 +25,6 @@ function GuestNumberOptions({ maximumGuests }) {
   } else if (maximumGuests === "four") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -38,7 +34,6 @@ function GuestNumberOptions({ maximumGuests }) {
   } else if (maximumGuests === "five") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -49,7 +44,6 @@ function GuestNumberOptions({ maximumGuests }) {
   } else if (maximumGuests === "six") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -61,7 +55,6 @@ function GuestNumberOptions({ maximumGuests }) {
   } else if (maximumGuests === "seven") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -74,7 +67,6 @@ function GuestNumberOptions({ maximumGuests }) {
   } else if (maximumGuests === "eight") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -88,7 +80,6 @@ function GuestNumberOptions({ maximumGuests }) {
   } else if (maximumGuests === "nine") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -103,7 +94,6 @@ function GuestNumberOptions({ maximumGuests }) {
   } else if (maximumGuests === "ten") {
     return (
       <>
-        <option value=""></option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

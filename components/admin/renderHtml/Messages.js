@@ -1,12 +1,13 @@
-import useAxios from "../../hooks/useAxios";
+import useAxios from "../../../hooks/useAxios";
 import { useEffect, useState } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import DisplayMessage from "../messages/DisplayMessage";
+import DisplayMessage from "../../messages/DisplayMessage";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Heading from "../layout/Heading";
+import Heading from "../../layout/Heading";
+import { MESSAGES_PATH } from "../../../constants/api";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
@@ -19,8 +20,7 @@ function Messages() {
   useEffect(() => {
     async function getMessages() {
       try {
-        const response = await http.get("holidaze-contacts");
-        // console.log(response.data.data);
+        const response = await http.get(MESSAGES_PATH);
         setMessages(response.data.data);
       } catch (error) {
         console.log(error);
@@ -49,21 +49,19 @@ function Messages() {
 
             return (
               <Col key={message.id}>
-                <Card className="enquiries__card" onClick={handleShow}>
-                  <Card.Body className="enquiries__card--body">
-                    <Card.Title as="h4" className="enquiries__card--title">
+                <Card className="adminCard" onClick={handleShow}>
+                  <Card.Body className="adminCard__body">
+                    <Card.Title as="h4" className="adminCard__title">
                       {message.attributes.subject}
                     </Card.Title>
                     <Card.Subtitle>
                       {message.attributes.first_name}{" "}
                       {message.attributes.last_name}
                     </Card.Subtitle>
-                    <Card.Text className="enquiries__card--text">
+                    <Card.Text className="adminCard__text">
                       {messagePreview}...
                     </Card.Text>
-                    <div
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
+                    <div className="adminCard__date">
                       Recieved at: {createdAt}
                     </div>
                   </Card.Body>

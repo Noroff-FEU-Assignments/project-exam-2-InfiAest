@@ -3,11 +3,13 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import inspoImg from "../../images/inspo/utsikt-floien.jpg";
 import useWindowSize from "../../hooks/useWindowSize";
-import Heading from "../layout/Heading";
-import SectionWrapper from "../layout/SectionWrapper";
+import Heading from "../layout/headings/Heading";
+import SectionWrapper from "../layout/general/SectionWrapper";
+import { useRouter } from "next/router";
 
 function InspoCard() {
   const windowSize = useWindowSize();
+  const router = useRouter();
 
   let image = (
     <Image
@@ -45,7 +47,10 @@ function InspoCard() {
             Get comfy in one of these locations and make plans from there!
           </Card.Text>
           <div className="d-grid gap-2">
-            <Button variant="primary" href={`accomodations`}>
+            <Button
+              variant="primary"
+              onClick={() => router.push("/accomodations")}
+            >
               See all locations
             </Button>
           </div>

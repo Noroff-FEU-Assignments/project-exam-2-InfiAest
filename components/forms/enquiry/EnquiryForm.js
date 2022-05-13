@@ -4,27 +4,18 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { BASE_URL } from "../../../constants/api";
+import { BASE_URL, ENQUIRIES_PATH } from "../../../constants/api";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
-import GuestNumberOptions from "./GuestNumberOptions";
+import GuestNumberOptions from "./formOptions/GuestNumberOptions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import formatDate from "../../common/FormatDate";
 
-const url = BASE_URL + "holidaze-enquiries";
-
-function formatDate(date) {
-  var d = new Date(date),
-    month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear();
-
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return [year, month, day].join("-");
-}
+const url = BASE_URL + ENQUIRIES_PATH;
 
 const schema = yup.object().shape({
   accomodation_name: yup.string().required(),
@@ -37,11 +28,13 @@ const schema = yup.object().shape({
     .required("Please enter an email address")
     .email("Please enter a valid email address"),
   check_in_date: yup
-    .string()
-    .required("Please select your desired check-in date"),
+    .date()
+    .default(() => new Date())
+    .required("Please select your chosen dates"),
   checkout_date: yup
-    .string()
-    .required("Please select your desired checkout date"),
+    .date()
+    .min(yup.ref("check_in_date"), "end date can't be before the start date")
+    .required("Please select your chosen dates"),
   guests: yup
     .number()
     .oneOf([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
@@ -67,7 +60,6 @@ export default function EnquiryForm({
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
-    console.log(dates);
   };
 
   const {
@@ -81,8 +73,6 @@ export default function EnquiryForm({
   async function onSubmit(data) {
     setSubmitting(true);
     setServerError(null);
-
-    console.log(data);
 
     try {
       const response = await axios.post(
@@ -105,7 +95,6 @@ export default function EnquiryForm({
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("response", response.data);
       setSubmitted(true);
     } catch (error) {
       console.log("error", error);
@@ -145,7 +134,7 @@ export default function EnquiryForm({
                 <span>{errors.accomodation_name.message}</span>
               )}
             </Form.Group>
-            <div className="hid">
+            <div className="inputHidden">
               <Form.Control
                 type="text"
                 value={accomodationImage}
@@ -153,30 +142,40 @@ export default function EnquiryForm({
                 readOnly
               />
             </div>
-            <Form.Control
-              type="text"
-              value={accomodationId}
-              {...register("accomodation")}
-              readOnly
-            />
-            <Form.Group className="mb-3" controlId="formBasicUserName">
-              <Form.Label>First name</Form.Label>
+            <div className="inputHidden">
               <Form.Control
                 type="text"
-                placeholder="Enter your first name"
-                {...register("first_name")}
+                value={accomodationId}
+                {...register("accomodation")}
+                readOnly
               />
-              {errors.first_name && <span>{errors.first_name.message}</span>}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicLastName">
-              <Form.Label>Last name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter last name"
-                {...register("last_name")}
-              />
-              {errors.last_name && <span>{errors.last_name.message}</span>}
-            </Form.Group>
+            </div>
+            <Row xs={1} lg={2}>
+              <Col lg={6}>
+                <Form.Group className="mb-3" controlId="formBasicUserName">
+                  <Form.Label>First name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your first name"
+                    {...register("first_name")}
+                  />
+                  {errors.first_name && (
+                    <span>{errors.first_name.message}</span>
+                  )}
+                </Form.Group>
+              </Col>
+              <Col lg={6}>
+                <Form.Group className="mb-3" controlId="formBasicLastName">
+                  <Form.Label>Last name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter last name"
+                    {...register("last_name")}
+                  />
+                  {errors.last_name && <span>{errors.last_name.message}</span>}
+                </Form.Group>
+              </Col>
+            </Row>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -188,62 +187,65 @@ export default function EnquiryForm({
                 <span>{errors.email_address.message}</span>
               )}
             </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Select check-in and checkout dates</Form.Label>
-              <div className="form__datePicker">
-                <DatePicker
-                  selected={startDate}
-                  onChange={onChange}
-                  startDate={startDate}
-                  endDate={endDate}
-                  excludeDateIntervals={[
-                    {
-                      start: new Date("2022, 5, 11"),
-                      end: new Date("2022, 5, 17"),
-                    },
-                  ]}
-                  dateFormat="yyyy/MM/dd"
-                  minDate={new Date()}
-                  selectsRange
-                  selectsDisabledDaysInRange={false}
-                  fixedHeight={true}
-                  inline
-                />
-              </div>
-              <div className="hid">
-                <Form.Control
-                  type="text"
-                  value={formatDate(startDate)}
-                  placeholder="Enter your desired check-in date yyyy-mm-dd"
-                  {...register("check_in_date")}
-                  readOnly
-                />
-              </div>
-              <div className="hid">
-                <Form.Control
-                  type="text"
-                  value={formatDate(endDate)}
-                  placeholder="Enter your desired checkout date yyyy-mm-dd"
-                  {...register("checkout_date")}
-                  readOnly
-                />
-              </div>
+            <Row xs={1} lg={2}>
+              <Col lg={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Select check-in and checkout dates</Form.Label>
+                  <div className="form__datePicker">
+                    <DatePicker
+                      selected={startDate}
+                      onChange={onChange}
+                      startDate={startDate}
+                      endDate={endDate}
+                      excludeDateIntervals={[
+                        {
+                          start: new Date("11, 6, 2022"),
+                          end: new Date("11, 6, 2022"),
+                        },
+                      ]}
+                      dateFormat="dd/MM/yyyy"
+                      minDate={new Date()}
+                      selectsRange
+                      selectsDisabledDaysInRange={false}
+                      fixedHeight={true}
+                      withPortal
+                    />
+                  </div>
+                  {errors.check_in_date && (
+                    <span>{errors.check_in_date.message}</span>
+                  )}
+                  {errors.checkout_date && (
+                    <span>{errors.checkout_date.message}</span>
+                  )}
+                  <div className="inputHidden">
+                    <Form.Control
+                      type="text"
+                      value={formatDate(startDate)}
+                      {...register("check_in_date")}
+                      readOnly
+                    />
+                  </div>
+                  <div className="inputHidden">
+                    <Form.Control
+                      type="text"
+                      value={formatDate(endDate)}
+                      {...register("checkout_date")}
+                      readOnly
+                    />
+                  </div>
+                </Form.Group>
+              </Col>
+              <Col lg={6}>
+                <Form.Group className="mb-3">
+                  <Form.Label>Number of guests</Form.Label>
+                  <Form.Select defaultValue={null} {...register("guests")}>
+                    <GuestNumberOptions maximumGuests={maximumGuests} />
+                  </Form.Select>
+                  {errors.guests && <span>{errors.guests.message}</span>}
+                </Form.Group>
+              </Col>
+            </Row>
 
-              {errors.check_in_date && (
-                <span>{errors.check_in_date.message}</span>
-              )}
-
-              {errors.checkout_date && (
-                <span>{errors.checkout_date.message}</span>
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Number of guests</Form.Label>
-              <Form.Select defaultValue={null} {...register("guests")}>
-                <GuestNumberOptions maximumGuests={maximumGuests} />
-              </Form.Select>
-              {errors.guests && <span>{errors.guests.message}</span>}
-            </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicTextArea">
               <Form.Label>Message</Form.Label>
               <Form.Control

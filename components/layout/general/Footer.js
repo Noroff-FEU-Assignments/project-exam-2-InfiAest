@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "../../images/logo/logo-white.png";
+import Logo from "../../../images/logo/logo-white.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";

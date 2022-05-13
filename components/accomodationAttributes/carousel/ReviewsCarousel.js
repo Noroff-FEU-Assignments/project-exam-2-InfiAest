@@ -3,8 +3,8 @@ import Carousel from "react-bootstrap/Carousel";
 import Card from "react-bootstrap/Card";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import DisplayMessage from "../messages/DisplayMessage";
-import Rating from "../accomodationCards/Rating";
+import DisplayMessage from "../../messages/DisplayMessage";
+import Rating from "../../accomodationAttributes/icons/Rating";
 
 function ReviewsCarousel({ accomodationDetails }) {
   if (accomodationDetails.review.data.length === 0) {

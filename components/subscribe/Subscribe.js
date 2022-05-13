@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Heading from "../layout/Heading";
-import SectionWrapper from "../layout/SectionWrapper";
+import Heading from "../layout/headings/Heading";
+import SectionWrapper from "../layout/general/SectionWrapper";
 
 export default function Subscribe() {
   return (

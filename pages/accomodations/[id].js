@@ -1,27 +1,31 @@
-import Layout from "../../components/layout/Layout";
-import Head from "../../components/layout/Head";
-import Heading from "../../components/layout/Heading";
+import Layout from "../../components/layout/general/Layout";
+import Head from "../../components/layout/general/Head";
+import Heading from "../../components/layout/headings/Heading";
 import axios from "axios";
-import { BASE_URL } from "../../constants/api";
-import Rating from "../../components/accomodationCards/Rating";
+import {
+  ACCOMODATION_PATH,
+  BASE_URL,
+  IMG_POPULATE_PATH,
+} from "../../constants/api";
+import Rating from "../../components/accomodationAttributes/icons/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
-import Carousel from "react-bootstrap/Carousel";
-import Tags from "../../components/accomodationCards/Tags";
-import Image from "next/image";
+
+import Tags from "../../components/accomodationAttributes/icons/Tags";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import SectionWrapper from "../../components/layout/SectionWrapper";
+import SectionWrapper from "../../components/layout/general/SectionWrapper";
 import Modal from "react-bootstrap/Modal";
 import { useState } from "react";
 import EnquiryForm from "../../components/forms/enquiry/EnquiryForm";
 import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 import ReviewsForm from "../../components/forms/reviews/ReviewsForm";
-import PageContainer from "../../components/layout/PageContainer";
-import ReviewsCarousel from "../../components/carousel/ReviewsCarousel";
-import ImageCarousel from "../../components/carousel/ImageCarousel";
+import PageContainer from "../../components/layout/general/PageContainer";
+import ReviewsCarousel from "../../components/accomodationAttributes/carousel/ReviewsCarousel";
+import ImageCarousel from "../../components/accomodationAttributes/carousel/ImageCarousel";
 
 export default function Accomodation({ accomodation }) {
   const details = accomodation.data.attributes;
@@ -209,19 +213,11 @@ export default function Accomodation({ accomodation }) {
                 endDate={endDate}
                 excludeDateIntervals={[
                   {
-                    start: new Date("2022, 6, 9"),
-                    end: new Date("2022, 6, 13"),
-                  },
-                  {
-                    start: new Date("2022, 6, 17"),
-                    end: new Date("2022, 6, 19"),
-                  },
-                  {
-                    start: new Date("2022, 6, 27"),
-                    end: new Date("2022, 7, 3"),
+                    start: new Date("11, 6, 2022"),
+                    end: new Date("11, 6, 2022"),
                   },
                 ]}
-                dateFormat="yyyy/MM/dd"
+                dateFormat="dd/MM/yyyy"
                 minDate={new Date()}
                 selectsRange
                 selectsDisabledDaysInRange={false}
@@ -268,7 +264,7 @@ export default function Accomodation({ accomodation }) {
 }
 
 export async function getStaticPaths() {
-  const url = BASE_URL + "accomodations?populate=*";
+  const url = BASE_URL + ACCOMODATION_PATH + IMG_POPULATE_PATH;
 
   try {
     const response = await axios.get(url);
@@ -288,7 +284,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const url = BASE_URL + `accomodations/${params.id}?populate=*`;
+  const url =
+    BASE_URL + `${ACCOMODATION_PATH}/${params.id}${IMG_POPULATE_PATH}`;
 
   let accomodation = null;
 

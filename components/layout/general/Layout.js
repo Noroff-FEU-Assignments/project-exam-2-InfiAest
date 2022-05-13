@@ -2,14 +2,14 @@ import Link from "next/link";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { useContext, useState, useEffect } from "react";
-import AuthContext from "../../context/AuthContext";
+import AuthContext from "../../../context/AuthContext";
 import { useRouter } from "next/router";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import useWindowSize from "../../hooks/useWindowSize";
+import useWindowSize from "../../../hooks/useWindowSize";
 import Image from "next/image";
-import desktopLogo from "../../images/logo/logo-white.png";
-import mobileIcon from "../../images/logo/Icon-white.png";
+import desktopLogo from "../../../images/logo/logo-white.png";
+import mobileIcon from "../../../images/logo/Icon-white.png";
 
 export default function Layout({ children }) {
   const [authorised, setAuthorised] = useState(false);
