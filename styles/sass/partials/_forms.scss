@@ -26,3 +26,46 @@
   width: 100%;
   margin: 0 auto;
 }
+
+//filter form
+.filters {
+  &__header .accordion-button {
+    font-size: 1.3rem !important;
+  }
+  &__innerAccordion {
+    margin: 1rem 0;
+  }
+  &__rating {
+    display: flex;
+    justify-items: flex-end;
+    align-items: center;
+    &--icon {
+      width: 1.6rem;
+      height: 1.6rem;
+      padding: 0 3px;
+    }
+  }
+  &__tags {
+    &--icon {
+      width: 1.6rem;
+      height: 1.6rem;
+      padding-right: 4px;
+    }
+    &--item {
+      font-size: 1rem;
+      display: flex;
+    }
+  }
+  &__form {
+    &__range {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2rem;
+      &--label {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+    }
+  }
+}

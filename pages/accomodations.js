@@ -10,34 +10,16 @@ import {
   IMG_POPULATE_PATH,
 } from "../constants/api";
 import AccomodationCard from "../components/accomodationAttributes/cards/AccomodationCard";
-import Form from "react-bootstrap/Form";
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import FilterAccomodations from "../components/forms/filterAccomodations/FilterAccomodations";
 
 export default function Accomodations(props) {
   const accomodations = props.accomodations.data;
-  const [filtered, setFiltered] = useState([]);
+  const [filtered, setFiltered] = useState(accomodations || []);
   const [queryString, setQueryString] = useState([]);
-
-  // function onChange(event) {
-  //   // console.log(event.target.value);
-  //   let url = "";
-  //   if (event.target.value === "all") {
-  //     setFiltered(accomodations);
-  //   } else {
-  //     url = `https://holidaze-charlotte-lucas.herokuapp.com/api/accomodations?filters[accomodation_type][$eq]=${event.target.value}&populate=*`;
-  //     async function loadAccomodations() {
-  //       try {
-  //         const response = await axios.get(url);
-  //         // console.log(response.data.data);
-  //         setFiltered(response.data.data);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //     loadAccomodations();
-  //   }
-  // }
+  const [minimumPrice, setMinimumPrice] = useState(0);
+  const [maximumPrice, setMaximumPrice] = useState(5500);
+  const [priceQueryString, setPriceQueryString] = useState([]);
 
   function onSelectFilters(event) {
     const { value, checked } = event.target;
@@ -51,11 +33,47 @@ export default function Accomodations(props) {
     }
   }
   // console.log(queryString.join("&"));
+  function setMaxPrice(event) {
+    // console.log(event.target.value);
+    const value = event.target.value;
+    setMaximumPrice(value);
+    setPriceQueryString(
+      `filters[price_per_night][$gte]=${minimumPrice}&filters[price_per_night][$lte]=${value}`
+    );
+  }
+  function setMinPrice(event) {
+    // console.log(event.target.value);
+    const value = event.target.value;
+    setMinimumPrice(value);
+    setPriceQueryString(
+      `filters[price_per_night][$gte]=${value}&filters[price_per_night][$lte]=${maximumPrice}`
+    );
+  }
+  // console.log(priceQueryString);
+
+  function resetFilters() {
+    setQueryString([]);
+    setMinimumPrice(0);
+    setMaximumPrice(5500);
+    setPriceQueryString([]);
+    document
+      .querySelectorAll("input[type=checkbox]")
+      .forEach((el) => (el.checked = false));
+    setFiltered(accomodations);
+  }
 
   function filterOptions() {
-    const url = `https://holidaze-charlotte-lucas.herokuapp.com/api/accomodations?${queryString.join(
-      "&"
-    )}&populate=*`;
+    let url = "";
+    if (priceQueryString.length > 0) {
+      url = `https://holidaze-charlotte-lucas.herokuapp.com/api/accomodations?${queryString.join(
+        "&"
+      )}&${priceQueryString}&populate=*`;
+    } else {
+      url = `https://holidaze-charlotte-lucas.herokuapp.com/api/accomodations?${queryString.join(
+        "&"
+      )}&populate=*`;
+    }
+
     // console.log(url);
     async function loadAccomodations() {
       try {
@@ -74,50 +92,17 @@ export default function Accomodations(props) {
       <Head title="Holidaze Accomodations" />
       <PageContainer>
         <Heading size="1" content="Accomodation" />
-        Filter by:
-        <Form>
-          {/* <Form.Select defaultValue="all" onChange={onChange}>
-            <option value="all">All</option>
-            <option value="hotel">Hotel</option>
-            <option value="apartment">Apartment</option>
-            <option value="bungalow">Bungalow</option>
-            <option value="studio">Studio</option>
-            <option value="house">House</option>
-          </Form.Select> */}
-          <Form.Check
-            type="checkbox"
-            value="filters[accomodation_type][$eq]=house"
-            label="house"
-            onChange={onSelectFilters}
-          />
-          <Form.Check
-            type="checkbox"
-            value="filters[accomodation_type][$eq]=studio"
-            label="studio"
-            onChange={onSelectFilters}
-          />
-          <Form.Check
-            type="checkbox"
-            value="filters[accomodation_type][$eq]=hotel"
-            label="hotel"
-            onChange={onSelectFilters}
-          />
-          <Form.Check
-            type="checkbox"
-            value="filters[accomodation_type][$eq]=bungalow"
-            label="bungalow"
-            onChange={onSelectFilters}
-          />
-          <Form.Check
-            type="checkbox"
-            value="filters[accomodation_type][$eq]=apartment"
-            label="apartment"
-            onChange={onSelectFilters}
-          />
-        </Form>
-        <Button onClick={filterOptions}>Filter</Button>
+        <FilterAccomodations
+          checkboxFilters={onSelectFilters}
+          minPriceRangeFilter={setMinPrice}
+          maxPriceRangeFilter={setMaxPrice}
+          resetFilters={resetFilters}
+          filterFunction={filterOptions}
+          maxPrice={parseInt(maximumPrice)}
+          minPrice={parseInt(minimumPrice)}
+        />
         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-          {filtered.length > 0 ? (
+          {filtered ? (
             <>
               <AccomodationCard attributes={filtered} />
             </>

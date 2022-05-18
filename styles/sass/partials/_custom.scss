@@ -56,6 +56,14 @@ $form-select-focus-box-shadow: none;
 $btn-focus-box-shadow: none !important;
 $btn-active-box-shadow: none;
 
+$accordion-icon-active-color: map-get($colors, body);
+$accordion-padding-x: 0.5rem;
+$accordion-button-active-bg: none;
+$accordion-button-active-color: map-get($colors, body);
+$accordion-border-color: map-get($colors, light-blue);
+
+$component-active-bg: map-get($colors, body);
+
 .nav-link {
   color: $body-color !important;
   font-family: $font-headings;

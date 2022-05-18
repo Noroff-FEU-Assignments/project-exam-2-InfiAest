@@ -36,3 +36,51 @@
     margin: 4px 0;
   }
 }
+
+//filter checkbox buttons
+.filters__checkbox {
+  margin: 4px;
+  background-color: map-get($colors, background);
+  border-radius: 10px;
+  border: 1px solid map-get($colors, dark-blue);
+  overflow: hidden;
+  display: inline-flex;
+  &--label {
+    float: left;
+    color: map-get($colors, dark-blue);
+  }
+  &--input {
+    position: absolute;
+    display: none;
+    color: map-get($colors, dark-blue) !important;
+    &:checked + span {
+      color: map-get($colors, background);
+      background-color: map-get($colors, dark-blue);
+    }
+    &:hover + span {
+      cursor: pointer;
+      color: map-get($colors, background);
+      background-color: map-get($colors, dark-blue);
+    }
+  }
+  &--span {
+    text-align: center;
+    padding: 4px 10px;
+    display: block;
+    color: map-get($colors, dark-blue);
+  }
+}
+
+//filter buttons
+.filterButton {
+  &__tags {
+    &--icon {
+      width: 1.6rem;
+      height: 1.6rem;
+      padding-right: 4px;
+    }
+    &--item {
+      font-size: 1rem;
+    }
+  }
+}

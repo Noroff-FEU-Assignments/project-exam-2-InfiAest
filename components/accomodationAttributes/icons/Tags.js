@@ -14,7 +14,13 @@ import {
   MdRoomService,
   MdFamilyRestroom,
   MdLocalLaundryService,
+  MdApartment,
+  MdOutlineBungalow,
+  MdOutlineBedroomParent,
 } from "react-icons/md";
+import { RiHotelLine, RiFilterLine, RiFilterOffLine } from "react-icons/ri";
+import { BsHouse } from "react-icons/bs";
+
 // import { faWifi } from "@fortawesome/free-regular-svg-icons";
 
 function Tags({ tagActive, content, tagClass }) {
@@ -120,6 +126,55 @@ function Tags({ tagActive, content, tagClass }) {
     return (
       <div className={`${tagClass}--item`}>
         <MdLocalLaundryService className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Hotel") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <RiHotelLine className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "House") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <BsHouse className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Apartment") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <MdApartment className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Bungalow") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <MdOutlineBungalow className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Studio") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <MdOutlineBedroomParent className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Filter accomodations") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <RiFilterLine className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Reset filters") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <RiFilterOffLine className={`${tagClass}--icon`} />
         {content}
       </div>
     );
