@@ -30,6 +30,9 @@ $link-hover-color: none;
 $link-decoration: none;
 $link-hover-decoration: underline;
 
+$breadcrumb-divider-color: map-get($colors, light-blue);
+$breadcrumb-active-color: map-get($colors, body);
+
 $navbar-dark-toggler-border-color: none;
 $navbar-dark-color: map-get($colors, background);
 $navbar-toggler-transition: none;
@@ -75,4 +78,11 @@ $component-active-bg: map-get($colors, body);
 }
 .btn:hover {
   box-shadow: $box-shadow-hover;
+}
+
+.breadcrumb {
+  margin-top: 1rem;
+  &__link a {
+    color: map-get($colors, light-blue);
+  }
 }

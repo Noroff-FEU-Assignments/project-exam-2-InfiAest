@@ -37,9 +37,9 @@ export default function SearchForm() {
     setText(suggestion.attributes.name);
     setSuggestions([]);
     setSpinnerVisible(true);
-    setButtonHref(`/accomodations/${suggestion.id}`);
+    setButtonHref(`/accomodation/${suggestion.id}`);
     setSearchDisabled(false);
-    router.push(`/accomodations/${suggestion.id}`);
+    router.push(`/accomodation/${suggestion.id}`);
   }
 
   function onChangeHandler(text) {

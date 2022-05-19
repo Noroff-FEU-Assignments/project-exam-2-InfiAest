@@ -10,18 +10,36 @@ import useWindowSize from "../../../hooks/useWindowSize";
 import Image from "next/image";
 import desktopLogo from "../../../images/logo/logo-white.png";
 import mobileIcon from "../../../images/logo/Icon-white.png";
+import DisplayLoader from "../../loader/DisplayLoader";
+import PageLoader from "../../loader/PageLoader";
 
 export default function Layout({ children }) {
   const [authorised, setAuthorised] = useState(false);
   const [auth, setAuth] = useContext(AuthContext);
+  const [pageLoading, setPageLoading] = useState(false);
   const router = useRouter();
   const windowSize = useWindowSize();
 
+  useEffect(() => {
+    const handleStart = () => {
+      setPageLoading(true);
+    };
+    const handleComplete = () => {
+      setPageLoading(false);
+    };
+
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeError", handleComplete);
+
+    auth ? setAuthorised(true) : false;
+  }, [router]);
+
   // console.log(windowSize.width);
 
-  useEffect(() => {
-    auth ? setAuthorised(true) : false;
-  }, []);
+  // useEffect(() => {
+  //   auth ? setAuthorised(true) : false;
+  // }, []);
 
   let navLogo = <Image src={desktopLogo} width={"150"} height={"50"} alt="" />;
 
@@ -61,15 +79,15 @@ export default function Layout({ children }) {
                       Home
                     </a>
                   </Link>
-                  <Link href="/accomodations">
+                  <Link href="/accomodation">
                     <a
                       className={
-                        router.pathname == "/accomodations"
+                        router.pathname == "/accomodation"
                           ? "navbar__link--current"
                           : "navbar__link"
                       }
                     >
-                      Accomodations
+                      Accomodation
                     </a>
                   </Link>
                   <Link href="/contact">
@@ -124,15 +142,15 @@ export default function Layout({ children }) {
                       Home
                     </a>
                   </Link>
-                  <Link href="/accomodations">
+                  <Link href="/accomodation">
                     <a
                       className={
-                        router.pathname == "/accomodations"
+                        router.pathname == "/accomodation"
                           ? "navbar__link--current"
                           : "navbar__link"
                       }
                     >
-                      Accomodations
+                      Accomodation
                     </a>
                   </Link>
                   <Link href="/contact">
@@ -164,7 +182,7 @@ export default function Layout({ children }) {
         )}
       </Navbar>
 
-      {children}
+      {pageLoading ? <PageLoader /> : <>{children}</>}
     </>
   );
 }

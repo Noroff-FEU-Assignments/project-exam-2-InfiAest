@@ -7,6 +7,8 @@ import {
   FaUser,
   FaUsers,
   FaUserFriends,
+  FaCity,
+  FaMountain,
 } from "react-icons/fa";
 import { GiKnifeFork, GiHeatHaze, GiWashingMachine } from "react-icons/gi";
 import {
@@ -19,7 +21,8 @@ import {
   MdOutlineBedroomParent,
 } from "react-icons/md";
 import { RiHotelLine, RiFilterLine, RiFilterOffLine } from "react-icons/ri";
-import { BsHouse } from "react-icons/bs";
+import { BsHouse, BsTree } from "react-icons/bs";
+import { BiAnchor } from "react-icons/bi";
 
 // import { faWifi } from "@fortawesome/free-regular-svg-icons";
 
@@ -175,6 +178,34 @@ function Tags({ tagActive, content, tagClass }) {
     return (
       <div className={`${tagClass}--item`}>
         <RiFilterOffLine className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Sea") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <BiAnchor className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Rural") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <BsTree className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "Mountainside") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <FaMountain className={`${tagClass}--icon`} />
+        {content}
+      </div>
+    );
+  } else if (tagActive === true && content === "City") {
+    return (
+      <div className={`${tagClass}--item`}>
+        <FaCity className={`${tagClass}--icon`} />
         {content}
       </div>
     );

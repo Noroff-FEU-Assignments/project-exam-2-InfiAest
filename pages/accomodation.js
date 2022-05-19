@@ -12,53 +12,67 @@ import {
 import AccomodationCard from "../components/accomodationAttributes/cards/AccomodationCard";
 import { useState } from "react";
 import FilterAccomodations from "../components/forms/filterAccomodations/FilterAccomodations";
+import DisplayMessage from "../components/messages/DisplayMessage";
+import { useRouter } from "next/router";
 
-export default function Accomodations(props) {
+export default function Accomodation(props) {
   const accomodations = props.accomodations.data;
   const [filtered, setFiltered] = useState(accomodations || []);
   const [queryString, setQueryString] = useState([]);
   const [minimumPrice, setMinimumPrice] = useState(0);
   const [maximumPrice, setMaximumPrice] = useState(5500);
   const [priceQueryString, setPriceQueryString] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [selectedFiltersVisable, setSelectedFiltersVisable] = useState(false);
+  const [selectedPrice, setSelectedPrice] = useState("");
+
+  const router = useRouter();
+  const query = router.query;
+  const qsFilters = query.filters;
+  // console.log(qsFilters);
 
   function onSelectFilters(event) {
-    const { value, checked } = event.target;
+    const { value, checked, name } = event.target;
 
     if (checked) {
       setQueryString((prev) => [...prev, value]);
-      return queryString;
+      setSelectedFilters((prev) => [...prev, name]);
+      return { queryString, selectedFilters };
     } else {
       setQueryString((prev) => prev.filter((x) => x !== value));
-      return queryString;
+      setSelectedFilters((prev) => prev.filter((x) => x !== name));
+      return { queryString, selectedFilters };
     }
   }
-  // console.log(queryString.join("&"));
+
   function setMaxPrice(event) {
-    // console.log(event.target.value);
     const value = event.target.value;
     setMaximumPrice(value);
+    setSelectedPrice(`from ${minimumPrice},- kr to ${value},- kr`);
     setPriceQueryString(
       `filters[price_per_night][$gte]=${minimumPrice}&filters[price_per_night][$lte]=${value}`
     );
   }
   function setMinPrice(event) {
-    // console.log(event.target.value);
     const value = event.target.value;
     setMinimumPrice(value);
+    setSelectedPrice(`from ${value},- kr to ${maximumPrice},- kr`);
     setPriceQueryString(
       `filters[price_per_night][$gte]=${value}&filters[price_per_night][$lte]=${maximumPrice}`
     );
   }
-  // console.log(priceQueryString);
 
   function resetFilters() {
     setQueryString([]);
+    setSelectedFilters([]);
     setMinimumPrice(0);
     setMaximumPrice(5500);
     setPriceQueryString([]);
     document
       .querySelectorAll("input[type=checkbox]")
       .forEach((el) => (el.checked = false));
+    router.replace("/accomodations");
+    setSelectedFiltersVisable(false);
     setFiltered(accomodations);
   }
 
@@ -78,7 +92,7 @@ export default function Accomodations(props) {
     async function loadAccomodations() {
       try {
         const response = await axios.get(url);
-        // console.log(response.data.data);
+        setSelectedFiltersVisable(true);
         setFiltered(response.data.data);
       } catch (error) {
         console.log(error);
@@ -101,17 +115,49 @@ export default function Accomodations(props) {
           maxPrice={parseInt(maximumPrice)}
           minPrice={parseInt(minimumPrice)}
         />
+        {selectedFiltersVisable ? (
+          <div className="filters__chips">
+            Selected filters:
+            {selectedFilters.map((filter, index) => {
+              return (
+                <span key={index} className="filters__chip">
+                  {filter}
+                </span>
+              );
+            })}
+            {selectedPrice.length > 0 ? (
+              <span className="filters__chip">{selectedPrice}</span>
+            ) : (
+              <></>
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
+
         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
           {filtered ? (
             <>
-              <AccomodationCard attributes={filtered} />
+              {filtered.length === 0 ? (
+                <>
+                  <DisplayMessage
+                    variant="info"
+                    heading="No results!"
+                    message="Looks like you were a bit too specific, reset the filters and try again!"
+                    alertClass="filters__alert"
+                  />
+                </>
+              ) : (
+                <>
+                  <AccomodationCard attributes={filtered} />
+                </>
+              )}
             </>
           ) : (
             <>
               <AccomodationCard attributes={accomodations} />
             </>
           )}
-          {/* <AccomodationCard attributes={props.accomodations.data} /> */}
         </Row>
       </PageContainer>
     </Layout>

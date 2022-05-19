@@ -51,7 +51,7 @@ function AccomodationCard({ attributes }) {
                   <Button
                     variant="primary"
                     onClick={() =>
-                      router.push(`/accomodations/${accomodation.id}`)
+                      router.push(`/accomodation/${accomodation.id}`)
                     }
                   >
                     See more

@@ -23,7 +23,13 @@ function InspoTiles() {
         {images.map((image, index) => {
           return (
             <Col key={index}>
-              <Link href="/accomodations" className="card__link">
+              <Link
+                href={{
+                  pathname: "/accomodation",
+                  query: { filters: `${image.label}` },
+                }}
+                className="card__link"
+              >
                 <Card className="inspoTile">
                   <Image
                     src={image.src}

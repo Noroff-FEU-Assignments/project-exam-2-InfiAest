@@ -44,6 +44,8 @@
     align-items: center;
     &--price {
       font-weight: 500;
+      width: auto;
+      text-align: right;
     }
   }
   &__tags {
@@ -167,6 +169,11 @@
     &__subtitle {
       height: 55px;
     }
+    &__text {
+      &--price {
+        width: 100%;
+      }
+    }
   }
   .reviewsCard {
     height: 350px;
@@ -205,6 +212,11 @@
     }
     &__tags {
       height: 65px;
+    }
+    &__text {
+      &--price {
+        width: auto;
+      }
     }
   }
 }

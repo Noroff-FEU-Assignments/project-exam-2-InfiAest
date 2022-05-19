@@ -7,7 +7,6 @@ export default function Contact() {
   return (
     <Layout>
       <Head title="Holidaze Contact" />
-
       <div className="container">
         <Heading size="1" content="Contact us" />
         <ContactForm />

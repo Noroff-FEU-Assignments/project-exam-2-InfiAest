@@ -49,7 +49,7 @@ function InspoCard() {
           <div className="d-grid gap-2">
             <Button
               variant="primary"
-              onClick={() => router.push("/accomodations")}
+              onClick={() => router.push("/accomodation")}
             >
               See all locations
             </Button>

@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import DisplayMessage from "../../messages/DisplayMessage";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Heading from "../../layout/Heading";
+import Heading from "../../layout/headings/Heading";
 import { MESSAGES_PATH } from "../../../constants/api";
 
 function Messages() {

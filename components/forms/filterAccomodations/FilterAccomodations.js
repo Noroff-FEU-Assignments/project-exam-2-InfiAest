@@ -14,6 +14,15 @@ const accomTypes = [
   { label: "Apartment", value: "filters[accomodation_type][$eq]=apartment" },
   { label: "Bungalow", value: "filters[accomodation_type][$eq]=bungalow" },
 ];
+const accomAreas = [
+  { label: "Sea", value: "filters[accomodation_area][$eq]=sea" },
+  { label: "Rural", value: "filters[accomodation_area][$eq]=rural" },
+  { label: "City", value: "filters[accomodation_area][$eq]=city" },
+  {
+    label: "Mountainside",
+    value: "filters[accomodation_area][$eq]=mountainside",
+  },
+];
 const accomRatings = [
   { label: "1", value: "filters[rating][$eq]=1" },
   { label: "2", value: "filters[rating][$eq]=2" },
@@ -130,7 +139,8 @@ function FilterAccomodations({
                               className="filters__checkbox--input"
                               type="checkbox"
                               value={type.value}
-                              onChange={checkboxFilters}
+                              onChange={(e) => checkboxFilters(e)}
+                              name={type.label}
                             />
                             <span className="filters__checkbox--span">
                               <Tags
@@ -147,6 +157,40 @@ function FilterAccomodations({
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="2">
+                <Accordion.Header
+                  as="h3"
+                  className="filters__innerAccordion__header"
+                >
+                  Location type
+                </Accordion.Header>
+                <Accordion.Body>
+                  {accomAreas.map((area, index) => {
+                    return (
+                      <div className="filters__checkbox" key={index}>
+                        <Form.Check.Label className="filters__checkbox--label">
+                          <Form.Check>
+                            <Form.Check.Input
+                              className="filters__checkbox--input"
+                              type="checkbox"
+                              value={area.value}
+                              onChange={checkboxFilters}
+                              name={area.label}
+                            />
+                            <span className="filters__checkbox--span">
+                              <Tags
+                                tagActive={true}
+                                content={area.label}
+                                tagClass="filters__tags"
+                              />
+                            </span>
+                          </Form.Check>
+                        </Form.Check.Label>
+                      </div>
+                    );
+                  })}
+                </Accordion.Body>
+              </Accordion.Item>
+              <Accordion.Item eventKey="3">
                 <Accordion.Header as="h4">Price per night</Accordion.Header>
                 <Accordion.Body>
                   <div className="filters__form__range">
@@ -179,7 +223,7 @@ function FilterAccomodations({
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="3">
+              <Accordion.Item eventKey="4">
                 <Accordion.Header as="h4">Rating</Accordion.Header>
                 <Accordion.Body>
                   {accomRatings.map((rating, index) => {
@@ -192,6 +236,7 @@ function FilterAccomodations({
                               type="checkbox"
                               value={rating.value}
                               onChange={checkboxFilters}
+                              name={`${rating.label} stars`}
                             />
                             <span className="filters__checkbox--span">
                               <Rating
@@ -206,7 +251,7 @@ function FilterAccomodations({
                   })}
                 </Accordion.Body>
               </Accordion.Item>
-              <Accordion.Item eventKey="4">
+              <Accordion.Item eventKey="5">
                 <Accordion.Header as="h4">Amenities</Accordion.Header>
                 <Accordion.Body>
                   {accomAmenities.map((amenity, index) => {
@@ -219,6 +264,7 @@ function FilterAccomodations({
                               type="checkbox"
                               value={amenity.value}
                               onChange={checkboxFilters}
+                              name={amenity.label}
                             />
                             <span className="filters__checkbox--span">
                               <Tags

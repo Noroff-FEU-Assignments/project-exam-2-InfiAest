@@ -7,7 +7,7 @@ import Image from "next/image";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import DisplayMessage from "../../messages/DisplayMessage";
-import Heading from "../../layout/Heading";
+import Heading from "../../layout/headings/Heading";
 import { ENQUIRIES_PATH, IMG_POPULATE_PATH } from "../../../constants/api";
 
 function Enquiries() {
