@@ -86,3 +86,7 @@ $component-active-bg: map-get($colors, body);
     color: map-get($colors, light-blue);
   }
 }
+
+.card {
+  border: none !important;
+}
