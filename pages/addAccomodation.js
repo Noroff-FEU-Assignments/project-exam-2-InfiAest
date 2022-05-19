@@ -5,7 +5,7 @@ import AddAccomodationForm from "../components/admin/forms/AddAccomodationForm";
 import { useRouter } from "next/router";
 import { useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
-import PageContainer from "../components/layout/PageContainer";
+import PageContainer from "../components/layout/general/PageContainer";
 
 function addAccomodation() {
   const [auth] = useContext(AuthContext);
