@@ -42,7 +42,6 @@
   margin: 4px;
   background-color: map-get($colors, background);
   border-radius: 10px;
-  border: 1px solid map-get($colors, dark-blue);
   overflow: hidden;
   display: inline-flex;
   &--label {
@@ -57,17 +56,20 @@
       color: map-get($colors, background);
       background-color: map-get($colors, dark-blue);
     }
-    &:hover + span {
-      cursor: pointer;
-      color: map-get($colors, background);
-      background-color: map-get($colors, dark-blue);
-    }
   }
   &--span {
     text-align: center;
     padding: 4px 10px;
     display: block;
     color: map-get($colors, dark-blue);
+  }
+}
+
+//solves sticky button hover thing https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/
+@media (hover: none) {
+  .filters__checkbox--input:hover {
+    color: map-get($colors, dark-blue) !important;
+    background-color: map-get($colors, background);
   }
 }
 

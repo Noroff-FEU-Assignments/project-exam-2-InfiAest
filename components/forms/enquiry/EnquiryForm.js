@@ -122,7 +122,7 @@ export default function EnquiryForm({
           />
         ) : (
           <fieldset disabled={submitting}>
-            <Form.Group className="mb-3" controlId="formBasicAccomodationName">
+            <Form.Group className="mb-4" controlId="formBasicAccomodationName">
               <Form.Label>Accomodation name</Form.Label>
               <Form.Control
                 type="text"
@@ -131,7 +131,9 @@ export default function EnquiryForm({
                 readOnly
               />
               {errors.accomodation_name && (
-                <span>{errors.accomodation_name.message}</span>
+                <span className="formError">
+                  {errors.accomodation_name.message}
+                </span>
               )}
             </Form.Group>
             <div className="inputHidden">
@@ -152,7 +154,7 @@ export default function EnquiryForm({
             </div>
             <Row xs={1} lg={2}>
               <Col lg={6}>
-                <Form.Group className="mb-3" controlId="formBasicUserName">
+                <Form.Group className="mb-4" controlId="formBasicUserName">
                   <Form.Label>First name</Form.Label>
                   <Form.Control
                     type="text"
@@ -160,23 +162,29 @@ export default function EnquiryForm({
                     {...register("first_name")}
                   />
                   {errors.first_name && (
-                    <span>{errors.first_name.message}</span>
+                    <span className="formError">
+                      {errors.first_name.message}
+                    </span>
                   )}
                 </Form.Group>
               </Col>
               <Col lg={6}>
-                <Form.Group className="mb-3" controlId="formBasicLastName">
+                <Form.Group className="mb-4" controlId="formBasicLastName">
                   <Form.Label>Last name</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter last name"
                     {...register("last_name")}
                   />
-                  {errors.last_name && <span>{errors.last_name.message}</span>}
+                  {errors.last_name && (
+                    <span className="formError">
+                      {errors.last_name.message}
+                    </span>
+                  )}
                 </Form.Group>
               </Col>
             </Row>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-4" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
@@ -184,12 +192,14 @@ export default function EnquiryForm({
                 {...register("email_address")}
               />
               {errors.email_address && (
-                <span>{errors.email_address.message}</span>
+                <span className="formError">
+                  {errors.email_address.message}
+                </span>
               )}
             </Form.Group>
             <Row xs={1} lg={2}>
               <Col lg={6}>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-4">
                   <Form.Label>Select check-in and checkout dates</Form.Label>
                   <div className="form__datePicker">
                     <DatePicker
@@ -212,15 +222,19 @@ export default function EnquiryForm({
                     />
                   </div>
                   {errors.check_in_date && (
-                    <span>{errors.check_in_date.message}</span>
+                    <span className="formError">
+                      {errors.check_in_date.message}
+                    </span>
                   )}
                   {errors.checkout_date && (
-                    <span>{errors.checkout_date.message}</span>
+                    <span className="formError">
+                      {errors.checkout_date.message}
+                    </span>
                   )}
                   <div className="inputHidden">
                     <Form.Control
                       type="text"
-                      value={formatDate(startDate)}
+                      value={startDate}
                       {...register("check_in_date")}
                       readOnly
                     />
@@ -228,7 +242,7 @@ export default function EnquiryForm({
                   <div className="inputHidden">
                     <Form.Control
                       type="text"
-                      value={formatDate(endDate)}
+                      value={endDate}
                       {...register("checkout_date")}
                       readOnly
                     />
@@ -236,17 +250,19 @@ export default function EnquiryForm({
                 </Form.Group>
               </Col>
               <Col lg={6}>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-4">
                   <Form.Label>Number of guests</Form.Label>
                   <Form.Select defaultValue={null} {...register("guests")}>
                     <GuestNumberOptions maximumGuests={maximumGuests} />
                   </Form.Select>
-                  {errors.guests && <span>{errors.guests.message}</span>}
+                  {errors.guests && (
+                    <span className="formError">{errors.guests.message}</span>
+                  )}
                 </Form.Group>
               </Col>
             </Row>
 
-            <Form.Group className="mb-3" controlId="formBasicTextArea">
+            <Form.Group className="mb-4" controlId="formBasicTextArea">
               <Form.Label>Message</Form.Label>
               <Form.Control
                 as="textarea"
@@ -254,7 +270,9 @@ export default function EnquiryForm({
                 placeholder="Please write your message here"
                 {...register("message")}
               />
-              {errors.message && <span>{errors.message.message}</span>}
+              {errors.message && (
+                <span className="formError">{errors.message.message}</span>
+              )}
             </Form.Group>
 
             <div className="d-grid gap-2">

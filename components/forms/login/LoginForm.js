@@ -67,24 +67,28 @@ export default function LoginForm() {
           />
         )}
         <fieldset disabled={submitting}>
-          <Form.Group className="mb-3" controlId="formBasicUserName">
+          <Form.Group className="mb-4" controlId="formBasicUserName">
             <Form.Label>Username/Email address</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter username/email address"
               {...register("identifier")}
             />
-            {errors.identifier && <span>{errors.identifier.message}</span>}
+            {errors.identifier && (
+              <span className="formError">{errors.identifier.message}</span>
+            )}
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-4" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
               {...register("password")}
             />
-            {errors.password && <span>{errors.password.message}</span>}
+            {errors.password && (
+              <span className="formError">{errors.password.message}</span>
+            )}
           </Form.Group>
 
           <div className="d-grid gap-2">

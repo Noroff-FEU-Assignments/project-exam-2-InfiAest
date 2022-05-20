@@ -1,4 +1,22 @@
 .details {
+  &__info {
+    padding-inline-start: 0;
+    &--item {
+      list-style: none;
+
+      &::before {
+        background-image: url("../../../images/logo/Icon.png");
+        background-position: bottom;
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: inline-block;
+        height: 30px;
+        width: 30px;
+        margin-right: 5px;
+        content: "";
+      }
+    }
+  }
   &__heading {
     display: block;
     margin: 1rem 0;
@@ -26,6 +44,23 @@
   }
   &__location {
     font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    &__tags {
+      &--item {
+        display: block;
+        width: auto;
+        margin: 0;
+      }
+      &--icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 5px;
+        color: map-get($colors, dark-blue);
+      }
+    }
     &--icon {
       width: 25px;
       padding-right: 5px;

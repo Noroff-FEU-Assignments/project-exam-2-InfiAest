@@ -99,18 +99,20 @@ function ReviewsForm({ accomodationId }) {
             </div>
             <Row xs={2} md={1} lg={2}>
               <Col xs={8} lg={9}>
-                <Form.Group className="mb-3" controlId="formBasicUserName">
+                <Form.Group className="mb-4" controlId="formBasicUserName">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Enter your username"
                     {...register("username")}
                   />
-                  {errors.username && <span>{errors.username.message}</span>}
+                  {errors.username && (
+                    <span className="formError">{errors.username.message}</span>
+                  )}
                 </Form.Group>
               </Col>
               <Col xs={4} lg={3}>
-                <Form.Group className="mb-3" controlId="formBasicLastName">
+                <Form.Group className="mb-4" controlId="formBasicLastName">
                   <Form.Label>Rating</Form.Label>
                   <Form.Select {...register("rating")}>
                     <option value={5}>5</option>
@@ -119,12 +121,14 @@ function ReviewsForm({ accomodationId }) {
                     <option value={2}>2</option>
                     <option value={1}>1</option>
                   </Form.Select>
-                  {errors.rating && <span>{errors.rating.message}</span>}
+                  {errors.rating && (
+                    <span className="formError">{errors.rating.message}</span>
+                  )}
                 </Form.Group>
               </Col>
             </Row>
 
-            <Form.Group className="mb-3" controlId="formBasicTextArea">
+            <Form.Group className="mb-4" controlId="formBasicTextArea">
               <Form.Label>Comment</Form.Label>
               <Form.Control
                 as="textarea"
@@ -132,7 +136,9 @@ function ReviewsForm({ accomodationId }) {
                 placeholder="Please write your review here"
                 {...register("review")}
               />
-              {errors.review && <span>{errors.review.message}</span>}
+              {errors.review && (
+                <span className="formError">{errors.review.message}</span>
+              )}
             </Form.Group>
 
             <div className="d-grid gap-2">

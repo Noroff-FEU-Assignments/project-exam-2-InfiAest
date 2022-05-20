@@ -58,11 +58,14 @@
   }
   &__chips {
     margin: 1rem 0 3rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
   }
   &__chip {
     background-color: map-get($colors, light-blue);
     padding: 2px 10px;
-    margin: 0 5px;
+    margin: 5px;
     border-radius: 10px;
   }
   &__form {
@@ -77,4 +80,11 @@
       }
     }
   }
+}
+
+//form errors/validation
+.formError {
+  color: map-get($colors, primary);
+  font-size: 0.9rem;
+  position: absolute;
 }

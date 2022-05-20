@@ -66,14 +66,19 @@ export default function ContactForm() {
     } finally {
       setSubmitting(false);
       setTimeout(() => {
-        router.push("/");
+        setSubmitted(false);
+        document.getElementById("contactForm").reset();
       }, 3000);
     }
   }
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)} className="mt-5 mb-5">
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        id="contactForm"
+        className="mt-5 mb-5"
+      >
         {serverError && (
           <DisplayMessage
             variant="danger"
@@ -81,72 +86,81 @@ export default function ContactForm() {
             message={serverError}
           />
         )}
-        {submitted ? (
-          <>
+
+        <fieldset disabled={submitting}>
+          <Form.Group className="mb-4" controlId="formBasicUserName">
+            <Form.Label>First name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your first name"
+              {...register("first_name")}
+            />
+            {errors.first_name && (
+              <span className="formError">{errors.first_name.message}</span>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="formBasicLastName">
+            <Form.Label>Last name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter last name"
+              {...register("last_name")}
+            />
+            {errors.last_name && (
+              <span className="formError">{errors.last_name.message}</span>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              {...register("email_address")}
+            />
+            {errors.email_address && (
+              <span className="formError">{errors.email_address.message}</span>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="formBasicSubject">
+            <Form.Label>Subject</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter a subject"
+              {...register("subject")}
+            />
+            {errors.subject && (
+              <span className="formError">{errors.subject.message}</span>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-4" controlId="formBasicTextArea">
+            <Form.Label>Message</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Please write your message here"
+              {...register("message")}
+            />
+            {errors.message && (
+              <span className="formError">{errors.message.message}</span>
+            )}
+          </Form.Group>
+
+          {submitted ? (
             <DisplayMessage
               variant="success"
               heading="Yippee!"
               message={`Your message has been sent successfully`}
             />
-          </>
-        ) : (
-          <fieldset disabled={submitting}>
-            <Form.Group className="mb-3" controlId="formBasicUserName">
-              <Form.Label>First name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter your first name"
-                {...register("first_name")}
-              />
-              {errors.first_name && <span>{errors.first_name.message}</span>}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicLastName">
-              <Form.Label>Last name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter last name"
-                {...register("last_name")}
-              />
-              {errors.last_name && <span>{errors.last_name.message}</span>}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                {...register("email_address")}
-              />
-              {errors.email_address && (
-                <span>{errors.email_address.message}</span>
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicSubject">
-              <Form.Label>Subject</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter a subject"
-                {...register("subject")}
-              />
-              {errors.subject && <span>{errors.subject.message}</span>}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicTextArea">
-              <Form.Label>Message</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Please write your message here"
-                {...register("message")}
-              />
-              {errors.message && <span>{errors.message.message}</span>}
-            </Form.Group>
+          ) : (
+            ""
+          )}
 
-            <div className="d-grid gap-2">
-              <Button variant="primary" className="form__button" type="submit">
-                {submitting ? "Sending message..." : "Send"}
-              </Button>
-            </div>
-          </fieldset>
-        )}
+          <div className="d-grid gap-2">
+            <Button variant="primary" className="form__button" type="submit">
+              {submitting ? "Sending message..." : "Send"}
+            </Button>
+          </div>
+        </fieldset>
       </Form>
     </>
   );

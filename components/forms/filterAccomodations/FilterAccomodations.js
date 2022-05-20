@@ -134,22 +134,20 @@ function FilterAccomodations({
                     return (
                       <div className="filters__checkbox" key={index}>
                         <Form.Check.Label className="filters__checkbox--label">
-                          <Form.Check>
-                            <Form.Check.Input
-                              className="filters__checkbox--input"
-                              type="checkbox"
-                              value={type.value}
-                              onChange={(e) => checkboxFilters(e)}
-                              name={type.label}
+                          <Form.Check.Input
+                            className="filters__checkbox--input"
+                            type="checkbox"
+                            value={type.value}
+                            onChange={(e) => checkboxFilters(e)}
+                            name={type.label}
+                          />
+                          <span className="filters__checkbox--span">
+                            <Tags
+                              tagActive={true}
+                              content={type.label}
+                              tagClass="filters__tags"
                             />
-                            <span className="filters__checkbox--span">
-                              <Tags
-                                tagActive={true}
-                                content={type.label}
-                                tagClass="filters__tags"
-                              />
-                            </span>
-                          </Form.Check>
+                          </span>
                         </Form.Check.Label>
                       </div>
                     );
@@ -168,22 +166,20 @@ function FilterAccomodations({
                     return (
                       <div className="filters__checkbox" key={index}>
                         <Form.Check.Label className="filters__checkbox--label">
-                          <Form.Check>
-                            <Form.Check.Input
-                              className="filters__checkbox--input"
-                              type="checkbox"
-                              value={area.value}
-                              onChange={checkboxFilters}
-                              name={area.label}
+                          <Form.Check.Input
+                            className="filters__checkbox--input"
+                            type="checkbox"
+                            value={area.value}
+                            onChange={checkboxFilters}
+                            name={area.label}
+                          />
+                          <span className="filters__checkbox--span">
+                            <Tags
+                              tagActive={true}
+                              content={area.label}
+                              tagClass="filters__tags"
                             />
-                            <span className="filters__checkbox--span">
-                              <Tags
-                                tagActive={true}
-                                content={area.label}
-                                tagClass="filters__tags"
-                              />
-                            </span>
-                          </Form.Check>
+                          </span>
                         </Form.Check.Label>
                       </div>
                     );
@@ -230,21 +226,19 @@ function FilterAccomodations({
                     return (
                       <div className="filters__checkbox" key={index}>
                         <Form.Check.Label className="filters__checkbox--label">
-                          <Form.Check>
-                            <Form.Check.Input
-                              className="filters__checkbox--input"
-                              type="checkbox"
-                              value={rating.value}
-                              onChange={checkboxFilters}
-                              name={`${rating.label} stars`}
+                          <Form.Check.Input
+                            className="filters__checkbox--input"
+                            type="checkbox"
+                            value={rating.value}
+                            onChange={checkboxFilters}
+                            name={`${rating.label} stars`}
+                          />
+                          <span className="filters__checkbox--span">
+                            <Rating
+                              ratingValue={rating.label}
+                              tagClass="filters"
                             />
-                            <span className="filters__checkbox--span">
-                              <Rating
-                                ratingValue={rating.label}
-                                tagClass="filters"
-                              />
-                            </span>
-                          </Form.Check>
+                          </span>
                         </Form.Check.Label>
                       </div>
                     );
@@ -258,22 +252,20 @@ function FilterAccomodations({
                     return (
                       <div className="filters__checkbox" key={index}>
                         <Form.Check.Label className="filters__checkbox--label">
-                          <Form.Check>
-                            <Form.Check.Input
-                              className="filters__checkbox--input"
-                              type="checkbox"
-                              value={amenity.value}
-                              onChange={checkboxFilters}
-                              name={amenity.label}
+                          <Form.Check.Input
+                            className="filters__checkbox--input"
+                            type="checkbox"
+                            value={amenity.value}
+                            onChange={checkboxFilters}
+                            name={amenity.label}
+                          />
+                          <span className="filters__checkbox--span">
+                            <Tags
+                              tagActive={true}
+                              content={amenity.icon}
+                              tagClass="filters__tags"
                             />
-                            <span className="filters__checkbox--span">
-                              <Tags
-                                tagActive={true}
-                                content={amenity.icon}
-                                tagClass="filters__tags"
-                              />
-                            </span>
-                          </Form.Check>
+                          </span>
                         </Form.Check.Label>
                       </div>
                     );

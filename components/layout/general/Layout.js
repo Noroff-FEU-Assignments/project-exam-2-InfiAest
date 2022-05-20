@@ -63,7 +63,9 @@ export default function Layout({ children }) {
       >
         {auth ? (
           <>
-            <div className="navbar__logo">{navLogo}</div>
+            <Link href="/">
+              <div className="navbar__logo">{navLogo}</div>
+            </Link>
             <Container>
               <Navbar.Toggle />
               <Navbar.Collapse className="navbar__collapse">
@@ -126,7 +128,9 @@ export default function Layout({ children }) {
           </>
         ) : (
           <>
-            <div className="navbar__logo">{navLogo}</div>
+            <Link href="/">
+              <div className="navbar__logo">{navLogo}</div>
+            </Link>
             <Container>
               <Navbar.Toggle />
               <Navbar.Collapse className="navbar__collapse">

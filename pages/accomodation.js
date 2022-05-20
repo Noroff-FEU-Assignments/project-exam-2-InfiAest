@@ -71,7 +71,7 @@ export default function Accomodation(props) {
     document
       .querySelectorAll("input[type=checkbox]")
       .forEach((el) => (el.checked = false));
-    router.replace("/accomodations");
+    router.replace("/accomodation");
     setSelectedFiltersVisable(false);
     setFiltered(accomodations);
   }

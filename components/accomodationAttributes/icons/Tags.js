@@ -181,28 +181,34 @@ function Tags({ tagActive, content, tagClass }) {
         {content}
       </div>
     );
-  } else if (tagActive === true && content === "Sea") {
+  } else if ((tagActive === true && content === "Sea") || content === "sea") {
     return (
       <div className={`${tagClass}--item`}>
         <BiAnchor className={`${tagClass}--icon`} />
         {content}
       </div>
     );
-  } else if (tagActive === true && content === "Rural") {
+  } else if (
+    (tagActive === true && content === "Rural") ||
+    content === "rural"
+  ) {
     return (
       <div className={`${tagClass}--item`}>
         <BsTree className={`${tagClass}--icon`} />
         {content}
       </div>
     );
-  } else if (tagActive === true && content === "Mountainside") {
+  } else if (
+    (tagActive === true && content === "Mountainside") ||
+    content === "mountainside"
+  ) {
     return (
       <div className={`${tagClass}--item`}>
         <FaMountain className={`${tagClass}--icon`} />
         {content}
       </div>
     );
-  } else if (tagActive === true && content === "City") {
+  } else if ((tagActive === true && content === "City") || content === "city") {
     return (
       <div className={`${tagClass}--item`}>
         <FaCity className={`${tagClass}--icon`} />

@@ -85,7 +85,7 @@ export default function Accomodation({ accomodation }) {
           </Breadcrumb.Item>
           <Breadcrumb.Item active>{details.name}</Breadcrumb.Item>
         </Breadcrumb>
-        <Row xs={1} lg={2} className="g-3">
+        <Row xs={1} lg={2} className="g-5">
           <Col>
             <div className="details__heading">
               <Heading size="1" content={details.name} />
@@ -95,11 +95,18 @@ export default function Accomodation({ accomodation }) {
               />
             </div>
             <div className="details__location">
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                className="details__location--icon"
+              <div>
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className="details__location--icon"
+                />
+                {details.location.street_address}
+              </div>
+              <Tags
+                tagActive={true}
+                content={details.accomodation_area}
+                tagClass="details__location__tags"
               />
-              {details.location.street_address}
             </div>
           </Col>
           <Col>
@@ -241,10 +248,14 @@ export default function Accomodation({ accomodation }) {
           <Col>
             <SectionWrapper>
               <Heading size="2" content="Extra Information" />
-              <ul>
+              <ul className="details__info">
                 {information.map((info, i) => {
                   if (info.length > 0) {
-                    return <li key={i}>{info}</li>;
+                    return (
+                      <li key={i} className="details__info--item">
+                        <span>{info}</span>
+                      </li>
+                    );
                   }
                 })}
               </ul>

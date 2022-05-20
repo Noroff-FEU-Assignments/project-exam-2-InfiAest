@@ -8,14 +8,24 @@ import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
 import { useRouter } from "next/router";
 import { ACCOMODATION_PATH } from "../../../constants/api";
+import { tagData } from "../../../constants/tagData";
+import Tags from "../../accomodationAttributes/icons/Tags";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 const schema = yup.object().shape({
   name: yup.string().required("Please enter the accomodation name"),
   street_address: yup.string().required("Please enter street name and number"),
   zip_code: yup.string().required("Please enter the zip code and city name"),
-  price_per_night: yup.number().required("Please enter the price per night"),
+  price_per_night: yup
+    .number()
+    .typeError("Price must be a number")
+    .positive("Price must be greater than zero")
+    .required("Please enter the price per night"),
   rating: yup
     .number()
+    .typeError("Please select a number from the list")
     .oneOf([1, 2, 3, 4, 5])
     .required("Please select the rating"),
   images: yup
@@ -64,6 +74,16 @@ const AddAccomodationForm = () => {
   const [image2, setimage2] = useState(false);
   const [image3, setimage3] = useState(false);
   const router = useRouter();
+  const windowSize = useWindowSize();
+
+  let rows = 3;
+
+  if (windowSize.width > 1200) {
+    rows = 8;
+  }
+  if (windowSize.width > 1400) {
+    rows = 6;
+  }
 
   const {
     register,
@@ -134,14 +154,19 @@ const AddAccomodationForm = () => {
     } finally {
       setSubmitting(false);
       setTimeout(() => {
-        router.push("/admin");
+        setSubmitted(false);
+        document.getElementById("addAccomForm").reset();
       }, 3000);
     }
   }
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)} className="mt-5 mb-5">
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        id="addAccomForm"
+        className="mt-5 mb-5"
+      >
         {serverError && (
           <DisplayMessage
             variant="danger"
@@ -149,279 +174,242 @@ const AddAccomodationForm = () => {
             message={serverError}
           />
         )}
-        {submitted ? (
-          <>
+
+        <fieldset disabled={submitting}>
+          <Row xs={1} md={2}>
+            <Col md={6}>
+              <Form.Group className="mb-4" controlId="formBasicName">
+                <Form.Label>Accomodation name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter the accomodation name"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <span className="formError">{errors.name.message}</span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-4">
+                <Form.Label>Rating</Form.Label>
+                <Form.Select defaultValue={null} {...register("rating")}>
+                  <option value=""></option>
+                  <option value="1">1 star</option>
+                  <option value="2">2 stars</option>
+                  <option value="3">3 stars</option>
+                  <option value="4">4 stars</option>
+                  <option value="5">5 stars</option>
+                </Form.Select>
+                {errors.rating && (
+                  <span className="formError">{errors.rating.message}</span>
+                )}
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row xs={1} md={2}>
+            <Col md={6}>
+              <Form.Group className="mb-4" controlId="formBasicLocation">
+                <Form.Label>Street name and number</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="streetname 22"
+                  {...register("street_address")}
+                />
+                {errors.street_address && (
+                  <span className="formError">
+                    {errors.street_address.message}
+                  </span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group className="mb-4" controlId="formBasicLocation">
+                <Form.Label>Zip code and city</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="5002 Bergen"
+                  {...register("zip_code")}
+                />
+                {errors.zip_code && (
+                  <span className="formError">{errors.zip_code.message}</span>
+                )}
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row xs={1} md={2}>
+            <Col md={6} lg={3}>
+              <Form.Group className="mb-4">
+                <Form.Label>Location type</Form.Label>
+                <Form.Select
+                  defaultValue={null}
+                  {...register("accomodation_area")}
+                >
+                  <option value=""></option>
+                  <option value="city">city</option>
+                  <option value="mountainside">mountainside</option>
+                  <option value="sea">sea</option>
+                  <option value="rural">rural</option>
+                </Form.Select>
+                {errors.accomodation_area && (
+                  <span className="formError">
+                    {errors.accomodation_area.message}
+                  </span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col md={6} lg={3}>
+              <Form.Group className="mb-4">
+                <Form.Label>Accomodation type</Form.Label>
+                <Form.Select
+                  defaultValue={null}
+                  {...register("accomodation_type")}
+                >
+                  <option value=""></option>
+                  <option value="hotel">hotel</option>
+                  <option value="apartment">apartment</option>
+                  <option value="studio">studio</option>
+                  <option value="bungalow">bungalow</option>
+                  <option value="house">house</option>
+                </Form.Select>
+                {errors.accomodation_type && (
+                  <span className="formError">
+                    {errors.accomodation_type.message}
+                  </span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col md={6} lg={3}>
+              <Form.Group className="mb-4">
+                <Form.Label>Max. number of guests</Form.Label>
+                <Form.Select
+                  defaultValue={null}
+                  {...register("maximum_guests")}
+                >
+                  <option value=""></option>
+                  <option value="one">1 person</option>
+                  <option value="two">2 people</option>
+                  <option value="three">3 people</option>
+                  <option value="four">4 people</option>
+                  <option value="five">5 people</option>
+                  <option value="six">6 people</option>
+                  <option value="seven">7 people</option>
+                  <option value="eight">8 people</option>
+                  <option value="nine">9 people</option>
+                  <option value="ten">10 people</option>
+                </Form.Select>
+                {errors.maximum_guests && (
+                  <span className="formError">
+                    {errors.maximum_guests.message}
+                  </span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col md={6} lg={3}>
+              <Form.Group className="mb-4" controlId="formBasicPrice">
+                <Form.Label>Price per night</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="123.44"
+                  {...register("price_per_night")}
+                />
+                {errors.price_per_night && (
+                  <span className="formError">
+                    {errors.price_per_night.message}
+                  </span>
+                )}
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Form.Group className="mb-4" controlId="formBasicTextArea">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Please write the description here"
+              {...register("description")}
+            />
+            {errors.description && (
+              <span className="formError">{errors.description.message}</span>
+            )}
+          </Form.Group>
+          <Form.Group controlId="formFile" className="mb-4">
+            <Form.Label>Images</Form.Label>
+            <Form.Control
+              type="file"
+              {...register("images")}
+              onChange={handleInputChange}
+              multiple
+            />
+            {errors.images && (
+              <span className="formError">{errors.images.message}</span>
+            )}
+          </Form.Group>
+          <Row xs={1} xl={2}>
+            <Col xl={6}>
+              <Form.Group className="mb-4" controlId="formBasicTextArea">
+                <Form.Label>Extra information</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={rows}
+                  placeholder="Please write information here"
+                  {...register("information")}
+                />
+                {errors.information && (
+                  <span className="formError">
+                    {errors.information.message}
+                  </span>
+                )}
+              </Form.Group>
+            </Col>
+            <Col xl={6}>
+              <Form.Group>
+                <Form.Label>Amenities</Form.Label>
+                <div className="mb-4">
+                  {tagData.map((tag, index) => {
+                    return (
+                      <div className="filters__checkbox" key={index}>
+                        <Form.Check.Label className="filters__checkbox--label">
+                          <Form.Check.Input
+                            className="filters__checkbox--input"
+                            type="checkbox"
+                            name={tag.tagName}
+                            {...register(`${tag.registerValue}`)}
+                          />
+                          <span className="filters__checkbox--span">
+                            <Tags
+                              tagActive={true}
+                              content={tag.tagLabel}
+                              tagClass="filters__tags"
+                            />
+                          </span>
+                        </Form.Check.Label>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          {submitted ? (
             <DisplayMessage
               variant="success"
               heading="Yippee!"
               message={`Your new accomodation has been created successfully`}
             />
-          </>
-        ) : (
-          <fieldset disabled={submitting}>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Accomodation name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter the accomodation name"
-                {...register("name")}
-              />
-              {errors.name && <span>{errors.name.message}</span>}
-            </Form.Group>
+          ) : (
+            ""
+          )}
 
-            <Form.Group className="mb-3" controlId="formBasicLocation">
-              <Form.Label>Street name and number</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="streetname 22"
-                {...register("street_address")}
-              />
-              {errors.street_address && (
-                <span>{errors.street_address.message}</span>
-              )}
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicLocation">
-              <Form.Label>Zip code and city</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="5002 Bergen"
-                {...register("zip_code")}
-              />
-              {errors.zip_code && <span>{errors.zip_code.message}</span>}
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPrice">
-              <Form.Label>Price per night</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="123.44"
-                {...register("price_per_night")}
-              />
-              {errors.price_per_night && (
-                <span>{errors.price_per_night.message}</span>
-              )}
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Rating</Form.Label>
-              <Form.Select defaultValue={null} {...register("rating")}>
-                <option value=""></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </Form.Select>
-              {errors.rating && <span>{errors.rating.message}</span>}
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Accomodation type</Form.Label>
-              <Form.Select
-                defaultValue={null}
-                {...register("accomodation_type")}
-              >
-                <option value=""></option>
-                <option value="hotel">hotel</option>
-                <option value="apartment">apartment</option>
-                <option value="studio">studio</option>
-                <option value="bungalow">bungalow</option>
-                <option value="house">house</option>
-              </Form.Select>
-              {errors.accomodation_type && (
-                <span>{errors.accomodation_type.message}</span>
-              )}
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Location type</Form.Label>
-              <Form.Select
-                defaultValue={null}
-                {...register("accomodation_area")}
-              >
-                <option value=""></option>
-                <option value="city">city</option>
-                <option value="mountainside">mountainside</option>
-                <option value="sea">sea</option>
-                <option value="rural">rural</option>
-              </Form.Select>
-              {errors.accomodation_area && (
-                <span>{errors.accomodation_area.message}</span>
-              )}
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Maximum number of guests</Form.Label>
-              <Form.Select defaultValue={null} {...register("maximum_guests")}>
-                <option value=""></option>
-                <option value="one">1</option>
-                <option value="two">2</option>
-                <option value="three">3</option>
-                <option value="four">4</option>
-                <option value="five">5</option>
-                <option value="six">6</option>
-                <option value="seven">7</option>
-                <option value="eight">8</option>
-                <option value="nine">9</option>
-                <option value="ten">10</option>
-              </Form.Select>
-              {errors.maximum_guests && (
-                <span>{errors.maximum_guests.message}</span>
-              )}
-            </Form.Group>
-
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Images</Form.Label>
-              <Form.Control
-                type="file"
-                {...register("images")}
-                onChange={handleInputChange}
-                multiple
-              />
-              {errors.images && <span>{errors.images.message}</span>}
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicTextArea">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Please write the description here"
-                {...register("description")}
-              />
-              {errors.description && <span>{errors.description.message}</span>}
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Amenities</Form.Label>
-              <div className="mb-3">
-                <Form.Check
-                  inline
-                  name="Wifi"
-                  label="Wifi"
-                  type="checkbox"
-                  {...register("WiFi")}
-                />
-                <Form.Check
-                  inline
-                  label="Kitchen"
-                  name="Kitchen"
-                  type="checkbox"
-                  {...register("Kitchen")}
-                />
-                <Form.Check
-                  inline
-                  label="Kitchenette"
-                  name="Kitchenette"
-                  type="checkbox"
-                  {...register("Kitchenette")}
-                />
-                <Form.Check
-                  inline
-                  label="Free Parking"
-                  name="Free_parking"
-                  type="checkbox"
-                  {...register("Free_parking")}
-                />
-                <Form.Check
-                  inline
-                  label="Washing machine"
-                  name="Washing_machine"
-                  type="checkbox"
-                  {...register("Washing_machine")}
-                />
-                <Form.Check
-                  inline
-                  label="Tumble dryer"
-                  name="tumble_dryer"
-                  type="checkbox"
-                  {...register("tumble_dryer")}
-                />
-                <Form.Check
-                  inline
-                  label="Airconditioning"
-                  name="Airconditioning"
-                  type="checkbox"
-                  {...register("Airconditioning")}
-                />
-                <Form.Check
-                  inline
-                  label="Heating"
-                  name="Heating"
-                  type="checkbox"
-                  {...register("Heating")}
-                />
-                <Form.Check
-                  inline
-                  label="Pets Allowed"
-                  name="Pets_allowed"
-                  type="checkbox"
-                  {...register("Pets_allowed")}
-                />
-                <Form.Check
-                  inline
-                  label="Suitable for single travellers"
-                  name="Suitable_for_single_travellers"
-                  type="checkbox"
-                  {...register("Suitable_for_single_travellers")}
-                />
-                <Form.Check
-                  inline
-                  label="Suitable for couples"
-                  name="Suitable_for_couples"
-                  type="checkbox"
-                  {...register("Suitable_for_couples")}
-                />
-                <Form.Check
-                  inline
-                  label="Suitable for families"
-                  name="Suitable_for_families"
-                  type="checkbox"
-                  {...register("Suitable_for_families")}
-                />
-                <Form.Check
-                  inline
-                  label="Suitable_for_groups"
-                  name="Suitable_for_groups"
-                  type="checkbox"
-                  {...register("Suitable_for_groups")}
-                />
-                <Form.Check
-                  inline
-                  label="Breakfast included"
-                  name="Breakfast_included"
-                  type="checkbox"
-                  {...register("Breakfast_included")}
-                />
-                <Form.Check
-                  inline
-                  label="Room service"
-                  name="Room_service"
-                  type="checkbox"
-                  {...register("Room_service")}
-                />
-              </div>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicTextArea">
-              <Form.Label>Extra information</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                placeholder="Please write information here"
-                {...register("information")}
-              />
-              {errors.information && <span>{errors.information.message}</span>}
-            </Form.Group>
-
-            <div className="d-grid gap-2">
-              <Button variant="primary" className="form__button" type="submit">
-                {submitting ? "Sending message..." : "Send"}
-              </Button>
-            </div>
-          </fieldset>
-        )}
+          <div className="d-grid gap-2">
+            <Button variant="primary" className="form__button" type="submit">
+              {submitting ? "Sending message..." : "Send"}
+            </Button>
+          </div>
+        </fieldset>
       </Form>
     </>
   );
