@@ -52,6 +52,14 @@
       background: rgba(29, 31, 30, 0);
     }
     &__nav {
+      width: 68%;
+    }
+  }
+}
+
+@include for-desktop {
+  .navbar {
+    &__nav {
       width: 75%;
     }
   }

@@ -58,7 +58,7 @@ export default function LoginForm() {
 
   return (
     <>
-      <Form onSubmit={handleSubmit(onSubmit)} className="mt-5 mb-5">
+      <Form onSubmit={handleSubmit(onSubmit)} className="mt-5 mb-5 loginForm">
         {loginError && (
           <DisplayMessage
             variant="danger"

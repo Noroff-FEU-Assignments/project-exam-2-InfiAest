@@ -7,6 +7,7 @@ import { useEffect, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import PageContainer from "../components/layout/general/PageContainer";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Link from "next/link";
 
 function addAccomodation() {
   const [auth] = useContext(AuthContext);
@@ -23,9 +24,9 @@ function addAccomodation() {
       <Head title="Holidaze Add accomodation" />
       <PageContainer>
         <Breadcrumb>
-          <Breadcrumb.Item href="/admin" className="breadcrumb__link">
-            Admin
-          </Breadcrumb.Item>
+          <span className="breadcrumb__link">
+            <Link href="/admin">Admin/</Link>
+          </span>
           <Breadcrumb.Item active>Add accomodation</Breadcrumb.Item>
         </Breadcrumb>
         <Heading size="1" content="Add new accomodation" />

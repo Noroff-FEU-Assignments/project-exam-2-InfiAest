@@ -27,6 +27,7 @@ import PageContainer from "../../components/layout/general/PageContainer";
 import ReviewsCarousel from "../../components/accomodationAttributes/carousel/ReviewsCarousel";
 import ImageCarousel from "../../components/accomodationAttributes/carousel/ImageCarousel";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Link from "next/link";
 
 export default function Accomodation({ accomodation }) {
   const details = accomodation.data.attributes;
@@ -80,9 +81,9 @@ export default function Accomodation({ accomodation }) {
       <Head title={details.name} />
       <PageContainer>
         <Breadcrumb>
-          <Breadcrumb.Item href="/accomodation" className="breadcrumb__link">
-            Accomodation
-          </Breadcrumb.Item>
+          <span className="breadcrumb__link">
+            <Link href="/accomodation">Accomodation/</Link>
+          </span>
           <Breadcrumb.Item active>{details.name}</Breadcrumb.Item>
         </Breadcrumb>
         <Row xs={1} lg={2} className="g-5">

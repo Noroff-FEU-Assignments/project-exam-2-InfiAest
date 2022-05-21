@@ -1,23 +1,14 @@
 .pageLoader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  padding: 2rem;
+  position: absolute;
+  top: 1rem;
+  left: 0.5rem;
   z-index: 20;
   background-color: map-get($colors, body);
   &__inner {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -40%);
-    margin: 0 auto;
+    width: fit-content;
   }
   &__svg {
-    width: 80px;
-    display: block;
-    margin: 0 auto;
+    width: 49px;
   }
   &__path {
     stroke-dasharray: 320;
@@ -26,9 +17,8 @@
   }
   &__text {
     color: map-get($colors, background);
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: 300;
-    letter-spacing: 1px;
   }
 }
 

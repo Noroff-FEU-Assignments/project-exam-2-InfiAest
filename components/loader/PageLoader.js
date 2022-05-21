@@ -3,21 +3,21 @@ function PageLoader() {
     <div className="pageLoader">
       <div className="pageLoader__inner">
         <svg
-          width="300px"
-          height="65px"
+          width="50px"
+          height="40px"
           version="1.1"
           className="pageLoader__svg"
         >
           <path
             fill="transparent"
             stroke="#ffffff"
-            strokeWidth="4"
-            d="M 46.50,30.75
-           C 46.50,30.75 33.75,8.00 33.75,8.00
-             33.75,8.00 8.75,58.25 8.75,58.25
-             8.75,58.25 71.75,58.75 71.75,58.75
-             71.75,58.75 51.25,23.00 51.25,23.00
-             51.25,23.00 32.25,56.25 32.25,56.25"
+            strokeWidth="2"
+            d="M 27.75,18.25
+            C 27.75,18.25 20.75,5.25 20.75,5.25
+              20.75,5.25 5.25,35.75 5.25,35.75
+              5.25,35.75 44.25,36.00 44.25,36.00
+              44.25,36.00 31.50,14.50 31.50,14.50
+              31.50,14.50 19.50,35.00 19.50,35.00"
             className="pageLoader__path"
           ></path>
         </svg>

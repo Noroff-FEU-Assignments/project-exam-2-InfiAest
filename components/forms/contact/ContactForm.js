@@ -77,7 +77,7 @@ export default function ContactForm() {
       <Form
         onSubmit={handleSubmit(onSubmit)}
         id="contactForm"
-        className="mt-5 mb-5"
+        className="mt-5 mb-5 contactForm"
       >
         {serverError && (
           <DisplayMessage

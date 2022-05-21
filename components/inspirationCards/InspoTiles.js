@@ -37,6 +37,7 @@ function InspoTiles() {
                     height="500"
                     alt={`${image.label} image`}
                     className="inspoTile__image"
+                    placeholder="blur"
                   />
                   <Card.Body>
                     <Card.Title>{image.label}</Card.Title>

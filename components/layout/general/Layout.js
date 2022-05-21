@@ -63,9 +63,13 @@ export default function Layout({ children }) {
       >
         {auth ? (
           <>
-            <Link href="/">
-              <div className="navbar__logo">{navLogo}</div>
-            </Link>
+            {pageLoading ? (
+              <PageLoader />
+            ) : (
+              <Link href="/">
+                <div className="navbar__logo">{navLogo}</div>
+              </Link>
+            )}
             <Container>
               <Navbar.Toggle />
               <Navbar.Collapse className="navbar__collapse">
@@ -128,9 +132,15 @@ export default function Layout({ children }) {
           </>
         ) : (
           <>
-            <Link href="/">
-              <div className="navbar__logo">{navLogo}</div>
-            </Link>
+            {pageLoading ? (
+              <PageLoader />
+            ) : (
+              <Link href="/">
+                <div className="navbar__logo">{navLogo}</div>
+              </Link>
+            )}
+            {/* <PageLoader /> */}
+
             <Container>
               <Navbar.Toggle />
               <Navbar.Collapse className="navbar__collapse">
@@ -186,7 +196,7 @@ export default function Layout({ children }) {
         )}
       </Navbar>
 
-      {pageLoading ? <PageLoader /> : <>{children}</>}
+      {children}
     </>
   );
 }

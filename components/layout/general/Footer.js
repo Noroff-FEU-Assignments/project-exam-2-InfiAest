@@ -20,12 +20,18 @@ export default function Footer() {
         <div className="footer__socials">
           <div className="footer__socials--flex">
             <a href="" className="footer__link">
-              <FontAwesomeIcon icon={faFacebookSquare} />
+              <FontAwesomeIcon
+                className="footer__link--icon"
+                icon={faFacebookSquare}
+              />
               <span className="footer__link--name">Facebook</span>
             </a>
 
             <a href="" className="footer__link">
-              <FontAwesomeIcon icon={faInstagram} />
+              <FontAwesomeIcon
+                className="footer__link--icon"
+                icon={faInstagram}
+              />
               <span className="footer__link--name">Instagram</span>
             </a>
           </div>

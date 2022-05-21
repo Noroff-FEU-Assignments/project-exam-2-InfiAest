@@ -59,52 +59,50 @@ export default function SearchForm() {
 
   return (
     <div className="searchForm">
-      <Form>
-        <Form.Group className="searchForm__group">
-          <Form.Control
-            size="lg"
-            placeholder="Search here"
-            onChange={(e) => onChangeHandler(e.target.value)}
-            value={text}
-            onBlur={() => {
-              setTimeout(() => {
-                setSuggestions([]);
-              }, 100);
-            }}
+      <Form.Group className="searchForm__group">
+        <Form.Control
+          size="lg"
+          placeholder="Search here"
+          onChange={(e) => onChangeHandler(e.target.value)}
+          value={text}
+          onBlur={() => {
+            setTimeout(() => {
+              setSuggestions([]);
+            }, 100);
+          }}
+        />
+        <Button
+          href={buttonHref}
+          variant="link"
+          className="searchForm__button"
+          disabled={searchDisabled}
+        >
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="searchForm__button--icon"
           />
-          <Button
-            href={buttonHref}
-            variant="link"
-            className="searchForm__button"
-            disabled={searchDisabled}
-          >
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              className="searchForm__button--icon"
-            />
-          </Button>
-          <div className="searchForm__loader">
-            <DisplayLoader
-              isVisible={spinnerVisible}
-              spinnerName="searchForm__spinner"
-            />
-          </div>
-          <div className="searchForm__list">
-            <ListGroup variant="flush" className="searchForm__listGroup">
-              {suggestions &&
-                suggestions.map((suggestion, i) => (
-                  <ListGroup.Item
-                    key={i}
-                    action
-                    onClick={() => onSelectSuggestion(suggestion)}
-                  >
-                    {suggestion.attributes.name}
-                  </ListGroup.Item>
-                ))}
-            </ListGroup>
-          </div>
-        </Form.Group>
-      </Form>
+        </Button>
+        <div className="searchForm__loader">
+          <DisplayLoader
+            isVisible={spinnerVisible}
+            spinnerName="searchForm__spinner"
+          />
+        </div>
+        <div className="searchForm__list">
+          <ListGroup variant="flush" className="searchForm__listGroup">
+            {suggestions &&
+              suggestions.map((suggestion, i) => (
+                <ListGroup.Item
+                  key={i}
+                  action
+                  onClick={() => onSelectSuggestion(suggestion)}
+                >
+                  {suggestion.attributes.name}
+                </ListGroup.Item>
+              ))}
+          </ListGroup>
+        </div>
+      </Form.Group>
     </div>
   );
 }

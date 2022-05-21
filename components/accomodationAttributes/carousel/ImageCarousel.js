@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import Carousel from "react-bootstrap/Carousel";
 import Image from "next/image";
 import DisplayMessage from "../../messages/DisplayMessage";
+import { placeholderImg } from "../../../constants/placeholderImg";
 
 function ImageCarousel({ accomodationImages }) {
   if (accomodationImages.data.length === 0) {
@@ -26,6 +27,8 @@ function ImageCarousel({ accomodationImages }) {
                 width="702"
                 height="702"
                 priority={true}
+                placeholder="blur"
+                blurDataURL={placeholderImg}
               />
             </Carousel.Item>
           );

@@ -22,7 +22,7 @@ export default function Subscribe() {
             content="Want us to keep you updated with exciting new deals?"
           />
           <p>Subscribe to the Holidaze newsletter here</p>
-          <Form>
+          <div className="subscribeForm">
             <Form.Group className="mb-3">
               <Form.Control size="md" placeholder="email@emailaddress.com" />
             </Form.Group>
@@ -31,7 +31,7 @@ export default function Subscribe() {
                 Sign up
               </Button>
             </div>
-          </Form>
+          </div>
         </div>
       </div>
     </SectionWrapper>

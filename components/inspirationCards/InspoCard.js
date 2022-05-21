@@ -19,6 +19,7 @@ function InspoCard() {
       alt=""
       priority="true"
       className="inspoCard__image"
+      placeholder="blur"
     />
   );
 
@@ -30,6 +31,7 @@ function InspoCard() {
         height="1000"
         alt=""
         className="inspoCard__image"
+        placeholder="blur"
       />
     );
   }

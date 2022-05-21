@@ -4,12 +4,12 @@
 
 @include for-tablet {
   .review__alert {
-    height: 350px;
+    height: 385px;
   }
 }
 
 @include for-desktop {
   .review__alert {
-    height: 245px;
+    height: 280px;
   }
 }

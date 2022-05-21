@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import AccomodationCardTags from "./AccomodationCardTags";
 import { useRouter } from "next/router";
+import { placeholderImg } from "../../../constants/placeholderImg";
 
 function AccomodationCard({ attributes }) {
   const router = useRouter();
@@ -26,6 +27,8 @@ function AccomodationCard({ attributes }) {
                   accomodation.attributes.images.data[0].attributes
                     .alternativeText
                 }
+                placeholder="blur"
+                blurDataURL={placeholderImg}
               />
               <Card.Body className="accomodationCard__body">
                 <Card.Title className="accomodationCard__title">

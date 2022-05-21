@@ -86,3 +86,32 @@
     }
   }
 }
+
+//contact links
+.contact__link {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  align-items: center;
+  width: max-content;
+  justify-content: center;
+  color: map-get($colors, body);
+  &--name {
+    display: inline-flex;
+  }
+  &--icon {
+    margin-right: 5px;
+    width: 22px;
+    color: map-get($colors, dark-blue);
+  }
+}
+
+.breadcrumb__link {
+  padding-right: 5px;
+}
+
+@include for-tablet {
+  .contact__info {
+    border-right: 2px solid map-get($colors, dark-blue);
+  }
+}
