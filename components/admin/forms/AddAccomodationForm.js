@@ -169,9 +169,10 @@ const AddAccomodationForm = () => {
             <Col md={8}>
               <Row xs={1} md={2}>
                 <Col md={6}>
-                  <Form.Group className="mb-4" controlId="formBasicName">
+                  <Form.Group className="mb-4">
                     <Form.Label>Accomodation name</Form.Label>
                     <Form.Control
+                      autoComplete="nope"
                       type="text"
                       placeholder="Enter the accomodation name"
                       {...register("name")}
@@ -200,9 +201,10 @@ const AddAccomodationForm = () => {
               </Row>
               <Row xs={1} md={2}>
                 <Col md={6}>
-                  <Form.Group className="mb-4" controlId="formBasicLocation">
+                  <Form.Group className="mb-4">
                     <Form.Label>Street name and number</Form.Label>
                     <Form.Control
+                      autoComplete="nope"
                       type="text"
                       placeholder="streetname 22"
                       {...register("street_address")}
@@ -215,9 +217,10 @@ const AddAccomodationForm = () => {
                   </Form.Group>
                 </Col>
                 <Col md={6}>
-                  <Form.Group className="mb-4" controlId="formBasicLocation">
+                  <Form.Group className="mb-4">
                     <Form.Label>Zip code and city</Form.Label>
                     <Form.Control
+                      autoComplete="nope"
                       type="text"
                       placeholder="5002 Bergen"
                       {...register("zip_code")}
@@ -240,10 +243,10 @@ const AddAccomodationForm = () => {
                       {...register("accomodation_area")}
                     >
                       <option value=""></option>
-                      <option value="city">city</option>
-                      <option value="mountainside">mountainside</option>
-                      <option value="sea">sea</option>
-                      <option value="rural">rural</option>
+                      <option value="city">City</option>
+                      <option value="mountainside">Mountainside</option>
+                      <option value="sea">Sea</option>
+                      <option value="rural">Rural</option>
                     </Form.Select>
                     {errors.accomodation_area && (
                       <span className="formError">
@@ -260,11 +263,11 @@ const AddAccomodationForm = () => {
                       {...register("accomodation_type")}
                     >
                       <option value=""></option>
-                      <option value="hotel">hotel</option>
-                      <option value="apartment">apartment</option>
-                      <option value="studio">studio</option>
-                      <option value="bungalow">bungalow</option>
-                      <option value="house">house</option>
+                      <option value="hotel">Hotel</option>
+                      <option value="apartment">Apartment</option>
+                      <option value="studio">Studio</option>
+                      <option value="bungalow">Bungalow</option>
+                      <option value="house">House</option>
                     </Form.Select>
                     {errors.accomodation_type && (
                       <span className="formError">
@@ -300,11 +303,12 @@ const AddAccomodationForm = () => {
                   </Form.Group>
                 </Col>
                 <Col md={6}>
-                  <Form.Group className="mb-4" controlId="formBasicPrice">
+                  <Form.Group className="mb-4">
                     <Form.Label>Price per night</Form.Label>
                     <Form.Control
+                      autoComplete="nope"
                       type="text"
-                      placeholder="123.44"
+                      placeholder="1234"
                       {...register("price_per_night")}
                     />
                     {errors.price_per_night && (
@@ -316,7 +320,7 @@ const AddAccomodationForm = () => {
                 </Col>
               </Row>
 
-              <Form.Group className="mb-4" controlId="formBasicTextArea">
+              <Form.Group className="mb-4">
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -343,7 +347,7 @@ const AddAccomodationForm = () => {
                 )}
               </Form.Group>
 
-              <Form.Group className="mb-4" controlId="formBasicTextArea">
+              <Form.Group className="mb-4">
                 <Form.Label>Extra information</Form.Label>
                 <Form.Control
                   as="textarea"

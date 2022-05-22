@@ -60,7 +60,7 @@ export default function Accomodation({ accomodation }) {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Want to make a booking?</Modal.Title>
+          <Modal.Title>Enquiry for: {details.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <EnquiryForm

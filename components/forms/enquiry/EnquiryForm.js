@@ -122,7 +122,7 @@ export default function EnquiryForm({
           />
         ) : (
           <fieldset disabled={submitting}>
-            <Form.Group className="mb-4" controlId="formBasicAccomodationName">
+            <div className="inputHidden">
               <Form.Label>Accomodation name</Form.Label>
               <Form.Control
                 type="text"
@@ -135,7 +135,7 @@ export default function EnquiryForm({
                   {errors.accomodation_name.message}
                 </span>
               )}
-            </Form.Group>
+            </div>
             <div className="inputHidden">
               <Form.Control
                 type="text"
@@ -184,69 +184,20 @@ export default function EnquiryForm({
                 </Form.Group>
               </Col>
             </Row>
-            <Form.Group className="mb-4" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                {...register("email_address")}
-              />
-              {errors.email_address && (
-                <span className="formError">
-                  {errors.email_address.message}
-                </span>
-              )}
-            </Form.Group>
             <Row xs={1} lg={2}>
               <Col lg={6}>
-                <Form.Group className="mb-4">
-                  <Form.Label>Select check-in and checkout dates</Form.Label>
-                  <div className="form__datePicker">
-                    <DatePicker
-                      selected={startDate}
-                      onChange={onChange}
-                      startDate={startDate}
-                      endDate={endDate}
-                      excludeDateIntervals={[
-                        {
-                          start: new Date("11, 6, 2022"),
-                          end: new Date("11, 6, 2022"),
-                        },
-                      ]}
-                      dateFormat="dd/MM/yyyy"
-                      minDate={new Date()}
-                      selectsRange
-                      selectsDisabledDaysInRange={false}
-                      fixedHeight={true}
-                      withPortal
-                    />
-                  </div>
-                  {errors.check_in_date && (
+                <Form.Group className="mb-4" controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    {...register("email_address")}
+                  />
+                  {errors.email_address && (
                     <span className="formError">
-                      {errors.check_in_date.message}
+                      {errors.email_address.message}
                     </span>
                   )}
-                  {errors.checkout_date && (
-                    <span className="formError">
-                      {errors.checkout_date.message}
-                    </span>
-                  )}
-                  <div className="inputHidden">
-                    <Form.Control
-                      type="text"
-                      value={startDate}
-                      {...register("check_in_date")}
-                      readOnly
-                    />
-                  </div>
-                  <div className="inputHidden">
-                    <Form.Control
-                      type="text"
-                      value={endDate}
-                      {...register("checkout_date")}
-                      readOnly
-                    />
-                  </div>
                 </Form.Group>
               </Col>
               <Col lg={6}>
@@ -261,6 +212,56 @@ export default function EnquiryForm({
                 </Form.Group>
               </Col>
             </Row>
+
+            <Form.Group className="mb-4">
+              <Form.Label>Select check-in and checkout dates</Form.Label>
+              <div className="form__datePicker">
+                <DatePicker
+                  selected={startDate}
+                  onChange={onChange}
+                  startDate={startDate}
+                  endDate={endDate}
+                  excludeDateIntervals={[
+                    {
+                      start: new Date("11, 6, 2022"),
+                      end: new Date("11, 6, 2022"),
+                    },
+                  ]}
+                  dateFormat="dd/MM/yyyy"
+                  minDate={new Date()}
+                  selectsRange
+                  selectsDisabledDaysInRange={false}
+                  fixedHeight={true}
+                  inline
+                />
+              </div>
+              {errors.check_in_date && (
+                <span className="formError">
+                  {errors.check_in_date.message}
+                </span>
+              )}
+              {errors.checkout_date && (
+                <span className="formError">
+                  {errors.checkout_date.message}
+                </span>
+              )}
+              <div className="inputHidden">
+                <Form.Control
+                  type="text"
+                  value={formatDate(startDate)}
+                  {...register("check_in_date")}
+                  readOnly
+                />
+              </div>
+              <div className="inputHidden">
+                <Form.Control
+                  type="text"
+                  value={formatDate(endDate)}
+                  {...register("checkout_date")}
+                  readOnly
+                />
+              </div>
+            </Form.Group>
 
             <Form.Group className="mb-4" controlId="formBasicTextArea">
               <Form.Label>Message</Form.Label>

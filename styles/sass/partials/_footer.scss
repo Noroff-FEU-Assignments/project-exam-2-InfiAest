@@ -11,6 +11,13 @@ Footer {
   align-items: center;
   text-align: center;
 }
+.footer {
+  &__logo {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
 .footer__socials {
   display: flex;
   flex-direction: column;
@@ -41,19 +48,19 @@ Footer {
     flex-direction: row;
     justify-content: center;
   }
-  //   .footer__flex-container {
-  //     display: flex;
-  //     flex-direction: row;
-  //     justify-content: space-between;
-  //     width: 400px;
-  //   }
+
   .footer__socials {
     flex-direction: row;
+    justify-content: space-between;
+    width: 500px;
+  }
+  .footer__socials--flex {
+    width: 250px;
   }
   .footer__logo--container {
     position: absolute;
     left: 0;
-    width: 150px;
+    width: 50px;
     margin: 0 0.5rem;
   }
   .footer__link {
@@ -65,6 +72,9 @@ Footer {
   }
   .footer__link--name {
     display: inline-block;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   .footer__link--icon {
     margin-right: 5px;

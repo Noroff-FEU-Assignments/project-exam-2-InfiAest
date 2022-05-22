@@ -6,6 +6,9 @@
     top: 0.5rem;
     left: 0;
     margin: 0 0.5rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__collapse {
     z-index: 2;

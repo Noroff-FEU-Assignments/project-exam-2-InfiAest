@@ -8,6 +8,10 @@
   padding: 25px;
   border-radius: 10px;
   border: none;
+  &:hover {
+    box-shadow: $box-shadow-hover;
+    cursor: pointer;
+  }
   &__subtitle {
     height: 40px;
     font-size: 0.9rem;

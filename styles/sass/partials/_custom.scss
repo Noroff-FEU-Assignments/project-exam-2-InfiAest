@@ -47,6 +47,8 @@ $navbar-dark-color: map-get($colors, background);
 $navbar-toggler-transition: none;
 $navbar-toggler-focus-width: none;
 
+$transition-collapse: height 0.1s linear;
+
 $border-radius: 10px;
 
 $card-title-spacer-y: 0;
@@ -76,6 +78,8 @@ $accordion-border-color: map-get($colors, light-blue);
 
 $component-active-bg: map-get($colors, body);
 
+$modal-lg: 600px;
+
 .nav-link {
   color: $body-color !important;
   font-family: $font-headings;
@@ -92,7 +96,7 @@ $component-active-bg: map-get($colors, body);
 .breadcrumb {
   margin-top: 1rem;
   &__link a {
-    color: map-get($colors, light-blue);
+    color: map-get($colors, primary);
   }
 }
 
