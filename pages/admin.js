@@ -40,13 +40,21 @@ export default function Admin() {
           <AddNewAccomodationButton />
         </div>
         <SectionWrapper>
-          <Tabs defaultActiveKey="enquiries" className="mb-3">
-            <Tab eventKey="enquiries" title="Enquiries">
+          <Tabs defaultActiveKey="enquiries" className="mb-3 adminTabs">
+            <Tab
+              eventKey="enquiries"
+              title="Enquiries"
+              className="adminTabs__tab"
+            >
               <div>
                 <Enquiries />
               </div>
             </Tab>
-            <Tab eventKey="messages" title="Messages">
+            <Tab
+              eventKey="messages"
+              title="Messages"
+              className="adminTabs__tab"
+            >
               <Messages />
             </Tab>
           </Tabs>

@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Heading from "../../layout/headings/Heading";
 import { MESSAGES_PATH } from "../../../constants/api";
+import { Accordion } from "react-bootstrap";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
@@ -40,68 +41,50 @@ function Messages() {
   } else {
     return (
       <>
-        <Row xs={1} className="g-3">
-          {messages.map((message) => {
+        <Accordion flush className="adminAccordion">
+          {messages.map((message, index) => {
             const createdAt = new Date(
               message.attributes.createdAt
             ).toLocaleString();
-            const messagePreview = message.attributes.message.slice(0, 80);
 
             return (
-              <Col key={message.id}>
-                <Card className="adminCard" onClick={handleShow}>
-                  <Card.Body className="adminCard__body">
-                    <Card.Title as="h4" className="adminCard__title">
+              <Accordion.Item eventKey={index} key={message.id}>
+                <Accordion.Header>
+                  <div className="adminAccordion__header">
+                    <span className="adminAccordion__header--name">
                       {message.attributes.subject}
-                    </Card.Title>
-                    <Card.Subtitle>
-                      {message.attributes.first_name}{" "}
-                      {message.attributes.last_name}
-                    </Card.Subtitle>
-                    <Card.Text className="adminCard__text">
-                      {messagePreview}...
-                    </Card.Text>
-                    <div className="adminCard__date">
-                      Recieved at: {createdAt}
-                    </div>
-                  </Card.Body>
-                </Card>
-
-                <Modal
-                  show={show}
-                  onHide={handleClose}
-                  animation={true}
-                  size="lg"
-                  centered
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      subject: {message.attributes.subject}
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Heading
-                      size="6"
-                      content={`from: ${message.attributes.first_name} ${message.attributes.last_name} (${message.attributes.email_address})`}
-                    />
+                    </span>
+                    <span className="adminAccordion__header--date">
+                      <span className="adminAccordion__header--label">
+                        Recieved:
+                      </span>{" "}
+                      {createdAt}
+                    </span>
+                  </div>
+                </Accordion.Header>
+                <Accordion.Body>
+                  <div>
+                    <span className="adminAccordion__body--label">Name: </span>
+                    {message.attributes.first_name}{" "}
+                    {message.attributes.last_name}
+                  </div>
+                  <div>
+                    <span className="adminAccordion__body--label">
+                      Email address:{" "}
+                    </span>
+                    {message.attributes.email_address}
+                  </div>
+                  <div>
+                    <span className="adminAccordion__body--label">
+                      Message:{" "}
+                    </span>
                     {message.attributes.message}
-                    <div
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      Recieved at: {createdAt}
-                    </div>
-                  </Modal.Body>
-
-                  <Modal.Footer>
-                    <Button variant="info" onClick={handleClose}>
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              </Col>
+                  </div>
+                </Accordion.Body>
+              </Accordion.Item>
             );
           })}
-        </Row>
+        </Accordion>
       </>
     );
   }

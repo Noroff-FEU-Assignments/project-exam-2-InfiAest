@@ -1,27 +1,43 @@
-.enquiries__card {
-  min-height: 200px;
-  &--body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.adminAccordion {
+  .accordion-button::after {
+    width: 0;
   }
-  &--title {
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 50px;
+    &--name {
+      font-size: 1.2rem;
+      font-family: $font-primary;
+    }
+    &--date {
+      font-family: $font-primary;
+      font-size: 0.8rem;
+      text-align: right;
+      width: 100%;
+      padding-top: 10px;
+    }
+    &--label {
+      font-weight: 600;
+    }
   }
-  &--innerContainer {
+  &__body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    &--text {
+      margin-bottom: 10px;
+    }
+    &--label {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
   }
-  &--text {
-    padding: 0;
-  }
-}
-
-@include for-tablet {
-  .enquiries__card {
-    height: auto;
+  &__image {
+    border-radius: 10px;
   }
 }

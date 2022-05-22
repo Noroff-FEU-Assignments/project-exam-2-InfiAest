@@ -11,7 +11,7 @@ function AddNewAccomodationButton() {
 
   return (
     <Button
-      variant="outline-info"
+      variant="outline-primary"
       onClick={handleAddButton}
       style={{ height: "max-content" }}
     >

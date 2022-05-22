@@ -4,17 +4,12 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "next/image";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import DisplayMessage from "../../messages/DisplayMessage";
-import Heading from "../../layout/headings/Heading";
 import { ENQUIRIES_PATH, IMG_POPULATE_PATH } from "../../../constants/api";
+import { Accordion } from "react-bootstrap";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   const http = useAxios();
 
@@ -52,8 +47,8 @@ function Enquiries() {
   } else {
     return (
       <>
-        <Row xs={1} className="g-3">
-          {enquiries.map((enquiry) => {
+        <Accordion flush className="adminAccordion">
+          {enquiries.map((enquiry, index) => {
             let checkInDate = formatDate(enquiry.attributes.check_in_date);
             let checkoutDate = formatDate(enquiry.attributes.checkout_date);
 
@@ -62,74 +57,88 @@ function Enquiries() {
             ).toLocaleString();
 
             return (
-              <Col key={enquiry.id}>
-                <Card className="adminCard" onClick={handleShow}>
-                  <Card.Body className="adminCard__body">
-                    <Card.Title as="h4" className="adminCard__title">
+              <Accordion.Item eventKey={index} key={enquiry.id}>
+                <Accordion.Header>
+                  <div className="adminAccordion__header">
+                    <span className="adminAccordion__header--name">
                       {enquiry.attributes.accomodation_name}
-                    </Card.Title>
-                    <div className="adminCard__inner">
-                      <Card.Text className="adminCard__text">
-                        {enquiry.attributes.first_name}{" "}
-                        {enquiry.attributes.last_name},{" "}
-                        {enquiry.attributes.guests} guests, {checkInDate}-
-                        {checkoutDate}
-                      </Card.Text>
-                      <Image
-                        className="adminCard__image"
-                        src={enquiry.attributes.accomodation_image}
-                        width="80"
-                        height="80"
-                        alt={enquiry.attributes.accomodation_name}
-                      />
-                    </div>
-
-                    <div className="adminCard__date">
-                      Requested at: {createdAt}
-                    </div>
-                  </Card.Body>
-                </Card>
-
-                <Modal
-                  show={show}
-                  onHide={handleClose}
-                  animation={true}
-                  size="lg"
-                  centered
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title>
-                      accomodation: {enquiry.attributes.accomodation_name}
-                    </Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    <Heading
-                      size="6"
-                      content={`customer name: ${enquiry.attributes.first_name} ${enquiry.attributes.last_name} (${enquiry.attributes.email_address})`}
-                    />
-                    <div>total guests: {enquiry.attributes.guests}</div>
+                    </span>
+                    <span className="adminAccordion__header--date">
+                      <span className="adminAccordion__header--label">
+                        Requested:
+                      </span>{" "}
+                      {createdAt}
+                    </span>
+                  </div>
+                </Accordion.Header>
+                <Accordion.Body className="adminAccordion__body">
+                  <div className="adminAccordion__body--text">
                     <div>
-                      dates: {checkInDate} - {checkoutDate}
+                      <span className="adminAccordion__body--label">
+                        Name:{" "}
+                      </span>
+                      {enquiry.attributes.first_name}{" "}
+                      {enquiry.attributes.last_name}
                     </div>
-                    <div>message: {enquiry.attributes.message}</div>
-
-                    <div
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      Requested at: {createdAt}
+                    <div>
+                      <span className="adminAccordion__body--label">
+                        Number of guests:{" "}
+                      </span>
+                      {enquiry.attributes.guests} people
                     </div>
-                  </Modal.Body>
+                    <div>
+                      <span className="adminAccordion__body--label">
+                        Requested dates:{" "}
+                      </span>
+                      {checkInDate}-{checkoutDate}
+                    </div>
+                    <div>
+                      <span className="adminAccordion__body--label">
+                        Message:{" "}
+                      </span>
+                      {enquiry.attributes.message}
+                    </div>
+                  </div>
+                  <Image
+                    className="adminAccordion__image"
+                    src={enquiry.attributes.accomodation_image}
+                    width="80"
+                    height="80"
+                    alt={enquiry.attributes.accomodation_name}
+                  />
+                </Accordion.Body>
+              </Accordion.Item>
+              // <Col key={enquiry.id}>
+              //   <Card className="adminCard">
+              //     <Card.Body className="adminCard__body">
+              //       <Card.Title as="h4" className="adminCard__title">
+              //         {enquiry.attributes.accomodation_name}
+              //       </Card.Title>
+              //       <div className="adminCard__inner">
+              //         <Card.Text className="adminCard__text">
+              //           {enquiry.attributes.first_name}{" "}
+              //           {enquiry.attributes.last_name},{" "}
+              //           {enquiry.attributes.guests} guests, {checkInDate}-
+              //           {checkoutDate}
+              //         </Card.Text>
+              //         <Image
+              //           className="adminCard__image"
+              //           src={enquiry.attributes.accomodation_image}
+              //           width="80"
+              //           height="80"
+              //           alt={enquiry.attributes.accomodation_name}
+              //         />
+              //       </div>
 
-                  <Modal.Footer>
-                    <Button variant="info" onClick={handleClose}>
-                      Close
-                    </Button>
-                  </Modal.Footer>
-                </Modal>
-              </Col>
+              //       <div className="adminCard__date">
+              //         Requested at: {createdAt}
+              //       </div>
+              //     </Card.Body>
+              //   </Card>
+              // </Col>
             );
           })}
-        </Row>
+        </Accordion>
       </>
     );
   }

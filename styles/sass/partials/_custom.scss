@@ -77,13 +77,17 @@ $accordion-button-active-color: map-get($colors, body);
 $accordion-border-color: map-get($colors, light-blue);
 
 $component-active-bg: map-get($colors, body);
+$nav-tabs-link-active-bg: map-get($colors, dark-blue);
+$nav-tabs-border-color: map-get($colors, dark-blue);
+$nav-tabs-link-active-border-color: map-get($colors, dark-blue);
+$nav-tabs-link-active-color: map-get($colors, background);
+$nav-link-color: map-get($colors, body);
 
 $modal-lg: 600px;
 
 .nav-link {
-  color: $body-color !important;
   font-family: $font-headings;
-  font-size: $h3-font-size;
+  font-size: $h5-font-size;
 }
 
 .btn {
