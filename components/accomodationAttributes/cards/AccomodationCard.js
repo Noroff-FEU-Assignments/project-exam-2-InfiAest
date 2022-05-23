@@ -8,11 +8,9 @@ import Rating from "../icons/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import AccomodationCardTags from "./AccomodationCardTags";
-import { useRouter } from "next/router";
 import { placeholderImg } from "../../../constants/placeholderImg";
 
 function AccomodationCard({ attributes }) {
-  const router = useRouter();
   return (
     <>
       {attributes.map((accomodation) => {
@@ -55,14 +53,9 @@ function AccomodationCard({ attributes }) {
                     </div>
                   </div>
                   <div className="d-grid gap-2">
-                    <Button
-                      variant="primary"
-                      onClick={() =>
-                        router.push(`/accomodation/${accomodation.id}`)
-                      }
-                    >
-                      See more
-                    </Button>
+                    <Link href={`/accomodation/${accomodation.id}`}>
+                      <Button variant="primary">See more</Button>
+                    </Link>
                   </div>
 
                   <AccomodationCardTags

@@ -9,21 +9,23 @@ export default function Footer() {
   return (
     <footer>
       <Link href="/">
-        <div className="footer__logo--container">
-          <Image
-            className="footer__logo"
-            src={LogoIcon}
-            width={"49"}
-            height={"40"}
-            alt=""
-          />
-        </div>
+        <a className="footer__link">
+          <div className="footer__logo--container">
+            <Image
+              className="footer__logo"
+              src={LogoIcon}
+              width={"49"}
+              height={"40"}
+              alt=""
+            />
+          </div>
+        </a>
       </Link>
 
       <div className="footer__socials">
         <div className="footer__socials--flex">
-          <Link href="#" className="footer__link">
-            <a>
+          <Link href="#">
+            <a className="footer__link">
               <FontAwesomeIcon
                 className="footer__link--icon"
                 icon={faFacebookSquare}
@@ -32,8 +34,8 @@ export default function Footer() {
             </a>
           </Link>
 
-          <Link href="#" className="footer__link">
-            <a>
+          <Link href="#">
+            <a className="footer__link">
               <FontAwesomeIcon
                 className="footer__link--icon"
                 icon={faInstagram}
@@ -42,12 +44,12 @@ export default function Footer() {
             </a>
           </Link>
         </div>
-        <Link href="/contact" className="footer__link">
-          Contact Us
+        <Link href="/contact">
+          <a className="footer__link">Contact Us</a>
         </Link>
 
-        <Link href="/login" className="footer__link">
-          Login
+        <Link href="/login">
+          <a className="footer__link">Login</a>
         </Link>
       </div>
 

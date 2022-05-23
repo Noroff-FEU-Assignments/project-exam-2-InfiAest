@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { BASE_URL, MESSAGES_PATH } from "../../../constants/api";
@@ -8,19 +7,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
 import { useRouter } from "next/router";
+import { CONTACT_FORM_SCHEMA } from "../../../utils/formSchema/conactFormSchema";
 
 const url = BASE_URL + MESSAGES_PATH;
-
-const schema = yup.object().shape({
-  first_name: yup.string().required("Please enter your first name"),
-  last_name: yup.string().required("Please enter your last name"),
-  email_address: yup
-    .string()
-    .required("Please enter an email address")
-    .email("Please enter a valid email address"),
-  subject: yup.string().required("Please enter a subject"),
-  message: yup.string().required("Please enter a message"),
-});
 
 export default function ContactForm() {
   const [submitting, setSubmitting] = useState(false);
@@ -33,7 +22,7 @@ export default function ContactForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(CONTACT_FORM_SCHEMA),
   });
 
   async function onSubmit(data) {

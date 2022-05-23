@@ -12,10 +12,11 @@ import DisplayLoader from "../../loader/DisplayLoader";
 export default function SearchForm() {
   const [results, setResults] = useState([]);
   const [text, setText] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState(null);
   const [buttonHref, setButtonHref] = useState("");
   const [searchDisabled, setSearchDisabled] = useState(true);
   const [spinnerVisible, setSpinnerVisible] = useState(false);
+  const [noResults, setNoResults] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -49,8 +50,15 @@ export default function SearchForm() {
     if (text.length > 0) {
       matches = results.filter((result) => {
         const regex = new RegExp(`${text}`, "gi");
+        setNoResults("");
         return result.attributes.name.match(regex);
       });
+    }
+    if (!text.length) {
+      setNoResults("");
+    }
+    if (text.length && matches.length < 1) {
+      setNoResults("No results found...");
     }
     // console.log(matches);
     setSuggestions(matches);
@@ -68,6 +76,7 @@ export default function SearchForm() {
           onBlur={() => {
             setTimeout(() => {
               setSuggestions([]);
+              setNoResults("");
             }, 100);
           }}
         />
@@ -89,17 +98,23 @@ export default function SearchForm() {
           />
         </div>
         <div className="searchForm__list">
-          <ListGroup variant="flush" className="searchForm__listGroup">
-            {suggestions &&
-              suggestions.map((suggestion, i) => (
-                <ListGroup.Item
-                  key={i}
-                  action
-                  onClick={() => onSelectSuggestion(suggestion)}
-                >
-                  {suggestion.attributes.name}
-                </ListGroup.Item>
-              ))}
+          <ListGroup className="searchForm__listGroup">
+            {noResults.length ? (
+              <ListGroup.Item action>{noResults}</ListGroup.Item>
+            ) : (
+              <>
+                {suggestions &&
+                  suggestions.map((suggestion, i) => (
+                    <ListGroup.Item
+                      key={i}
+                      action
+                      onClick={() => onSelectSuggestion(suggestion)}
+                    >
+                      {suggestion.attributes.name}
+                    </ListGroup.Item>
+                  ))}
+              </>
+            )}
           </ListGroup>
         </div>
       </Form.Group>

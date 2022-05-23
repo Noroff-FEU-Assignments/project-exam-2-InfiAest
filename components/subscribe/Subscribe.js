@@ -24,7 +24,11 @@ export default function Subscribe() {
           <p>Subscribe to the Holidaze newsletter here</p>
           <div className="subscribeForm">
             <Form.Group className="mb-3">
-              <Form.Control size="md" placeholder="email@emailaddress.com" />
+              <Form.Control
+                size="md"
+                type="email"
+                placeholder="email@emailaddress.com"
+              />
             </Form.Group>
             <div className="d-grid gap-2">
               <Button variant="secondary" size="md" className="button" disabled>

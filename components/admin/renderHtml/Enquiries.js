@@ -1,11 +1,12 @@
 import useAxios from "../../../hooks/useAxios";
 import { useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Image from "next/image";
 import DisplayMessage from "../../messages/DisplayMessage";
-import { ENQUIRIES_PATH, IMG_POPULATE_PATH } from "../../../constants/api";
+import {
+  ENQUIRIES_PATH,
+  IMG_POPULATE_PATH,
+  SORT_PATH,
+} from "../../../constants/api";
 import { Accordion } from "react-bootstrap";
 
 function Enquiries() {
@@ -17,7 +18,7 @@ function Enquiries() {
     async function getEnquiries() {
       try {
         const response = await http.get(
-          `${ENQUIRIES_PATH}${IMG_POPULATE_PATH}`
+          `${ENQUIRIES_PATH}${IMG_POPULATE_PATH}${SORT_PATH}`
         );
         setEnquiries(response.data.data);
       } catch (error) {
@@ -108,34 +109,6 @@ function Enquiries() {
                   />
                 </Accordion.Body>
               </Accordion.Item>
-              // <Col key={enquiry.id}>
-              //   <Card className="adminCard">
-              //     <Card.Body className="adminCard__body">
-              //       <Card.Title as="h4" className="adminCard__title">
-              //         {enquiry.attributes.accomodation_name}
-              //       </Card.Title>
-              //       <div className="adminCard__inner">
-              //         <Card.Text className="adminCard__text">
-              //           {enquiry.attributes.first_name}{" "}
-              //           {enquiry.attributes.last_name},{" "}
-              //           {enquiry.attributes.guests} guests, {checkInDate}-
-              //           {checkoutDate}
-              //         </Card.Text>
-              //         <Image
-              //           className="adminCard__image"
-              //           src={enquiry.attributes.accomodation_image}
-              //           width="80"
-              //           height="80"
-              //           alt={enquiry.attributes.accomodation_name}
-              //         />
-              //       </div>
-
-              //       <div className="adminCard__date">
-              //         Requested at: {createdAt}
-              //       </div>
-              //     </Card.Body>
-              //   </Card>
-              // </Col>
             );
           })}
         </Accordion>

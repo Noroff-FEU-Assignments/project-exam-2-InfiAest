@@ -1,27 +1,18 @@
 import useAxios from "../../../hooks/useAxios";
 import { useEffect, useState } from "react";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import DisplayMessage from "../../messages/DisplayMessage";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Heading from "../../layout/headings/Heading";
-import { MESSAGES_PATH } from "../../../constants/api";
+import { MESSAGES_PATH, SORT_PATH } from "../../../constants/api";
 import { Accordion } from "react-bootstrap";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   const http = useAxios();
 
   useEffect(() => {
     async function getMessages() {
       try {
-        const response = await http.get(MESSAGES_PATH);
+        const response = await http.get(`${MESSAGES_PATH}?${SORT_PATH}`);
         setMessages(response.data.data);
       } catch (error) {
         console.log(error);

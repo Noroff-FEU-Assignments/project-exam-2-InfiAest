@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -15,27 +14,23 @@ import Heading from "../../layout/headings/Heading";
 import PropTypes from "prop-types";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { REVIEW_FORM_SCHEMA } from "../../../utils/formSchema/reviewFormSchema";
+import { useRouter } from "next/router";
 
 const url = BASE_URL + REVIEWS_PATH + IMG_POPULATE_PATH;
-
-const schema = yup.object().shape({
-  username: yup.string().required("Please enter your username"),
-  rating: yup.number().required("Please select a rating"),
-  review: yup.string().required("Please enter review"),
-  reviews: yup.number().required(),
-});
 
 function ReviewsForm({ accomodationId }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState(null);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(REVIEW_FORM_SCHEMA),
   });
   async function onSubmit(data) {
     setSubmitting(true);
@@ -65,6 +60,7 @@ function ReviewsForm({ accomodationId }) {
       setServerError(error.toString());
     } finally {
       setSubmitting(false);
+      router.push(`/accomodation/${accomodationId}`);
     }
   }
   return (
@@ -103,7 +99,7 @@ function ReviewsForm({ accomodationId }) {
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter your username"
+                    placeholder="Enter your name"
                     {...register("username")}
                   />
                   {errors.username && (

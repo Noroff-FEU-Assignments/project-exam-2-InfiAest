@@ -11,10 +11,10 @@ import Link from "next/link";
 
 function InspoTiles() {
   const images = [
-    { src: cityImg, label: "City centre" },
-    { src: ruralImg, label: "Rural" },
-    { src: hotelImg, label: "Hotel" },
-    { src: apartmentImg, label: "Apartments" },
+    { src: cityImg, label: "City centre", qs: "City" },
+    { src: ruralImg, label: "Rural", qs: "Rural" },
+    { src: hotelImg, label: "Hotels", qs: "Hotel" },
+    { src: apartmentImg, label: "Apartments", qs: "Apartment" },
   ];
 
   return (
@@ -26,7 +26,7 @@ function InspoTiles() {
               <Link
                 href={{
                   pathname: "/accomodation",
-                  query: { filters: `${image.label}` },
+                  query: { filters: `${image.qs}` },
                 }}
                 className="card__link"
               >

@@ -9,13 +9,9 @@ import { useRouter } from "next/router";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
+import { LOGIN_FORM_SCHEMA } from "../../../utils/formSchema/loginFormSchema";
 
 const url = BASE_URL + TOKEN_PATH;
-
-const schema = yup.object().shape({
-  identifier: yup.string().required("Please enter your username"),
-  password: yup.string().required("Please enter your password"),
-});
 
 export default function LoginForm() {
   const [submitting, setSubmitting] = useState(false);
@@ -26,7 +22,7 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(LOGIN_FORM_SCHEMA),
   });
 
   const [, setAuth] = useContext(AuthContext);

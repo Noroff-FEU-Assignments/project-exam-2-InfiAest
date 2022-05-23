@@ -29,7 +29,7 @@ Footer {
 }
 .footer__link {
   font-size: 0.9rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem 1rem;
 }
 .footer__link--name {
   display: none;
@@ -52,7 +52,7 @@ Footer {
   .footer__socials {
     flex-direction: row;
     justify-content: space-between;
-    width: 500px;
+    width: 450px;
   }
   .footer__socials--flex {
     width: 250px;

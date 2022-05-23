@@ -1,70 +1,17 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { useForm } from "react-hook-form";
 import useAxios from "../../../hooks/useAxios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
-import { useRouter } from "next/router";
 import { ACCOMODATION_PATH } from "../../../constants/api";
 import { tagData } from "../../../constants/tagData";
 import Tags from "../../accomodationAttributes/icons/Tags";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import useWindowSize from "../../../hooks/useWindowSize";
-
-const schema = yup.object().shape({
-  name: yup.string().required("Please enter the accomodation name"),
-  street_address: yup.string().required("Please enter street name and number"),
-  zip_code: yup.string().required("Please enter the zip code and city name"),
-  price_per_night: yup
-    .number()
-    .typeError("Price must be a number")
-    .positive("Price must be greater than zero")
-    .required("Please enter the price per night"),
-  rating: yup
-    .number()
-    .typeError("Please select a number from the list")
-    .oneOf([1, 2, 3, 4, 5])
-    .required("Please select the rating"),
-  images: yup
-    .mixed()
-    .required("Please select 3 images")
-    .test("type", "You must select 3 images", (value) => {
-      return value && value.length === 3;
-    }),
-  description: yup
-    .string()
-    .required("Please enter a description of the accomodation"),
-  WiFi: yup.boolean(),
-  Kitchen: yup.boolean(),
-  Kitchenette: yup.boolean(),
-  Free_parking: yup.boolean(),
-  Washing_machine: yup.boolean(),
-  tumble_dryer: yup.boolean(),
-  Airconditioning: yup.boolean(),
-  Heating: yup.boolean(),
-  Pets_allowed: yup.boolean(),
-  Suitable_for_single_travellers: yup.boolean(),
-  Suitable_for_couples: yup.boolean(),
-  Suitable_for_families: yup.boolean(),
-  Suitable_for_groups: yup.boolean(),
-  Breakfast_included: yup.boolean(),
-  Room_service: yup.boolean(),
-  information: yup
-    .string()
-    .required("Please enter information about the accomodation"),
-  accomodation_type: yup
-    .string()
-    .required("Please select the accomodation type"),
-  maximum_guests: yup
-    .string()
-    .required("Please select the maximum number of guests"),
-  accomodation_area: yup
-    .string()
-    .required("Please select the accomodation location type"),
-});
+import { ADD_ACCOMODATION_FORM_SCHEMA } from "../../../utils/formSchema/addAccomFormSchema";
 
 const AddAccomodationForm = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -79,7 +26,7 @@ const AddAccomodationForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(ADD_ACCOMODATION_FORM_SCHEMA),
   });
 
   const handleInputChange = (event) => {
@@ -395,6 +342,11 @@ const AddAccomodationForm = () => {
                       );
                     })}
                   </div>
+                  {errors.amenities__checkboxes && (
+                    <span className="formError">
+                      {errors.amenities__checkboxes.message}
+                    </span>
+                  )}
                 </div>
               </Form.Group>
             </Col>

@@ -7,7 +7,7 @@ function FilterButton({ filterFunction, children, eventKey }) {
     filterFunction();
   });
   return (
-    <Button variant="light" onClick={toggleAccordion} id="filterButton">
+    <Button variant="dark" onClick={toggleAccordion} id="filterButton">
       {children}
     </Button>
   );

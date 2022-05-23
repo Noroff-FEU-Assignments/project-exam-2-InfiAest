@@ -10,7 +10,7 @@ import {
   IMG_POPULATE_PATH,
 } from "../constants/api";
 import AccomodationCard from "../components/accomodationAttributes/cards/AccomodationCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterAccomodations from "../components/forms/filterAccomodations/FilterAccomodations";
 import DisplayMessage from "../components/messages/DisplayMessage";
 import { useRouter } from "next/router";
@@ -29,7 +29,53 @@ export default function Accomodation(props) {
   const router = useRouter();
   const query = router.query;
   const qsFilters = query.filters;
-  // console.log(qsFilters);
+  // console.log(query);
+  let urlFilterOptions = "";
+
+  useEffect(() => {
+    const hotelButton = document.getElementsByName("Hotel");
+    const ruralButton = document.getElementsByName("Rural");
+    const apartmentButton = document.getElementsByName("Apartment");
+    const cityButton = document.getElementsByName("City");
+    if (query) {
+      if (qsFilters === "Hotel") {
+        urlFilterOptions = "filters[accomodation_type][$eq]=hotel";
+        setSelectedFilters([...selectedFilters, `${qsFilters}`]);
+        setSelectedFiltersVisable(true);
+        hotelButton[0].checked = true;
+      } else if (qsFilters === "Rural") {
+        urlFilterOptions = "filters[accomodation_area][$eq]=rural";
+        setSelectedFilters([...selectedFilters, `${qsFilters}`]);
+        setSelectedFiltersVisable(true);
+        ruralButton[0].checked = true;
+      } else if (qsFilters === "Apartment") {
+        urlFilterOptions = "filters[accomodation_type][$eq]=apartment";
+        setSelectedFilters([...selectedFilters, `${qsFilters}`]);
+        setSelectedFiltersVisable(true);
+        apartmentButton[0].checked = true;
+      } else if (qsFilters === "City") {
+        urlFilterOptions = "filters[accomodation_area][$eq]=city";
+        setSelectedFilters([...selectedFilters, `${qsFilters}`]);
+        setSelectedFiltersVisable(true);
+        cityButton[0].checked = true;
+      } else {
+        setSelectedFilters([]);
+        setSelectedFiltersVisable(false);
+      }
+      const url = `${BASE_URL}${ACCOMODATION_PATH}?${urlFilterOptions}&populate=*`;
+      async function loadFiltered() {
+        try {
+          const response = await axios.get(url);
+          // console.log(response.data.data);
+          setFiltered(response.data.data);
+          // return { selectedFilters };
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      loadFiltered();
+    }
+  }, []);
 
   function onSelectFilters(event) {
     const { value, checked, name } = event.target;
@@ -115,7 +161,7 @@ export default function Accomodation(props) {
           maxPrice={parseInt(maximumPrice)}
           minPrice={parseInt(minimumPrice)}
         />
-        {selectedFiltersVisable ? (
+        {selectedFiltersVisable && selectedFilters.length > 0 ? (
           <div className="filters__chips">
             Selected filters:
             {selectedFilters.map((filter, index) => {

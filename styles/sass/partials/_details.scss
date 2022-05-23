@@ -129,14 +129,23 @@
       }
       &--icon {
         margin-right: 5px;
-        width: 2rem;
-        height: 2rem;
       }
     }
     &__price {
       margin-top: 1rem;
       &--text {
         margin: 2rem 0;
+      }
+    }
+  }
+}
+
+@include for-xl-desktop {
+  .details {
+    &__tags {
+      &--icon {
+        width: 2rem;
+        height: 2rem;
       }
     }
   }

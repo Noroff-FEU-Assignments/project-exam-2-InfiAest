@@ -7,7 +7,7 @@ function ResetFiltersButton({ resetFiltersFunction, children, eventKey }) {
     resetFiltersFunction();
   });
   return (
-    <Button variant="dark" onClick={toggleAccordion}>
+    <Button variant="light" onClick={toggleAccordion}>
       {children}
     </Button>
   );
