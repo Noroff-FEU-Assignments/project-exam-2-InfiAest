@@ -7,6 +7,12 @@ export const CONTACT_FORM_SCHEMA = yup.object().shape({
     .string()
     .required("Please enter an email address")
     .email("Please enter a valid email address"),
-  subject: yup.string().required("Please enter a subject"),
-  message: yup.string().required("Please enter a message"),
+  subject: yup
+    .string()
+    .required("Please enter a subject")
+    .min(5, "The subject should be at least 5 characters"),
+  message: yup
+    .string()
+    .required("Please enter a message")
+    .min(20, "Your message should be at least 20 characters"),
 });

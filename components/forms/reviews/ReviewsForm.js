@@ -23,6 +23,7 @@ function ReviewsForm({ accomodationId }) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [serverError, setServerError] = useState(null);
+  const [messageCount, setMessageCount] = useState(0);
   const router = useRouter();
 
   const {
@@ -125,10 +126,22 @@ function ReviewsForm({ accomodationId }) {
             </Row>
 
             <Form.Group className="mb-4" controlId="formBasicTextArea">
-              <Form.Label>Comment</Form.Label>
+              <Form.Label>
+                Comment
+                <span
+                  className={
+                    messageCount >= 20 || messageCount === 0
+                      ? "form__text__counter"
+                      : "form__text__counter form__text__counter--error"
+                  }
+                >
+                  {messageCount}/20
+                </span>
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
+                onKeyUp={(e) => setMessageCount(e.target.value.length)}
                 placeholder="Please write your review here"
                 {...register("review")}
               />

@@ -30,6 +30,7 @@ export default function EnquiryForm({
   const [serverError, setServerError] = useState(null);
   const [startDate, setStartDate] = useState(checkinDate || new Date());
   const [endDate, setEndDate] = useState(checkoutDate || new Date());
+  const [messageCount, setMessageCount] = useState(0);
 
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -253,10 +254,22 @@ export default function EnquiryForm({
             </Form.Group>
 
             <Form.Group className="mb-4" controlId="formBasicTextArea">
-              <Form.Label>Message</Form.Label>
+              <Form.Label>
+                Message
+                <span
+                  className={
+                    messageCount >= 20 || messageCount === 0
+                      ? "form__text__counter"
+                      : "form__text__counter form__text__counter--error"
+                  }
+                >
+                  {messageCount}/20
+                </span>
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
+                onKeyUp={(e) => setMessageCount(e.target.value.length)}
                 placeholder="Please write your message here"
                 {...register("message")}
               />

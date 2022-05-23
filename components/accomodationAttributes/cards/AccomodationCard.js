@@ -5,15 +5,17 @@ import Card from "react-bootstrap/Card";
 import Image from "next/image";
 import Button from "react-bootstrap/Button";
 import Rating from "../icons/Rating";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import AccomodationCardTags from "./AccomodationCardTags";
 import { placeholderImg } from "../../../constants/placeholderImg";
+import Tags from "../icons/Tags";
 
 function AccomodationCard({ attributes }) {
   return (
     <>
       {attributes.map((accomodation) => {
+        const area = `${accomodation.attributes.accomodation_area}`;
+        const accomodationArea = area.charAt(0).toUpperCase() + area.slice(1);
+
         return (
           <Col key={accomodation.id}>
             <Link href={`/accomodation/${accomodation.id}`}>
@@ -30,17 +32,15 @@ function AccomodationCard({ attributes }) {
                   placeholder="blur"
                   blurDataURL={placeholderImg}
                 />
+                <Tags
+                  tagActive={true}
+                  content={accomodationArea}
+                  tagClass="accomodationCard__areaTag"
+                />
                 <Card.Body className="accomodationCard__body">
                   <Card.Title className="accomodationCard__title">
                     {accomodation.attributes.name}
                   </Card.Title>
-                  <Card.Subtitle as="p" className="accomodationCard__subtitle">
-                    <FontAwesomeIcon
-                      icon={faLocationDot}
-                      className="accomodationCard__subtitle--icon"
-                    />
-                    {accomodation.attributes.location.street_address}
-                  </Card.Subtitle>
                   <div className="accomodationCard__text">
                     <Rating
                       ratingValue={JSON.stringify(

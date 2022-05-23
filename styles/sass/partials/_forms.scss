@@ -91,5 +91,25 @@
 .formError {
   color: map-get($colors, primary);
   font-size: 0.9rem;
+}
+.form__text__counter {
+  display: none;
   position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 0.9rem;
+  color: map-get($colors, dark-blue);
+  &--error {
+    display: block;
+    color: map-get($colors, primary);
+  }
+}
+
+@include for-desktop {
+  .addForm {
+    &__amenities {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }

@@ -20,6 +20,8 @@ const AddAccomodationForm = () => {
   const [image1, setImage1] = useState(false);
   const [image2, setimage2] = useState(false);
   const [image3, setimage3] = useState(false);
+  const [descriptionCount, setDescriptionCount] = useState(0);
+  const [infoCount, setInfoCount] = useState(0);
 
   const {
     register,
@@ -112,8 +114,8 @@ const AddAccomodationForm = () => {
         )}
 
         <fieldset disabled={submitting}>
-          <Row xs={1} md={2}>
-            <Col md={8}>
+          <Row xs={1} lg={2}>
+            <Col lg={9}>
               <Row xs={1} md={2}>
                 <Col md={6}>
                   <Form.Group className="mb-4">
@@ -153,7 +155,7 @@ const AddAccomodationForm = () => {
                     <Form.Control
                       autoComplete="nope"
                       type="text"
-                      placeholder="streetname 22"
+                      placeholder="Streetname 22"
                       {...register("street_address")}
                     />
                     {errors.street_address && (
@@ -268,13 +270,26 @@ const AddAccomodationForm = () => {
               </Row>
 
               <Form.Group className="mb-4">
-                <Form.Label>Description</Form.Label>
+                <Form.Label>
+                  Description
+                  <span
+                    className={
+                      descriptionCount >= 20 || descriptionCount === 0
+                        ? "form__text__counter"
+                        : "form__text__counter form__text__counter--error"
+                    }
+                  >
+                    {descriptionCount}/20
+                  </span>
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={4}
-                  placeholder="Please write the description here"
+                  onKeyUp={(e) => setDescriptionCount(e.target.value.length)}
+                  placeholder="General description of the accomodation"
                   {...register("description")}
                 />
+
                 {errors.description && (
                   <span className="formError">
                     {errors.description.message}
@@ -295,11 +310,23 @@ const AddAccomodationForm = () => {
               </Form.Group>
 
               <Form.Group className="mb-4">
-                <Form.Label>Extra information</Form.Label>
+                <Form.Label>
+                  Extra information
+                  <span
+                    className={
+                      infoCount >= 20 || infoCount === 0
+                        ? "form__text__counter"
+                        : "form__text__counter form__text__counter--error"
+                    }
+                  >
+                    {infoCount}/20
+                  </span>
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={4}
-                  placeholder="Please write information here"
+                  onKeyUp={(e) => setInfoCount(e.target.value.length)}
+                  placeholder="Information about house rules, check-in/out etc. Separate the information with '.'"
                   {...register("information")}
                 />
                 {errors.information && (
@@ -309,14 +336,11 @@ const AddAccomodationForm = () => {
                 )}
               </Form.Group>
             </Col>
-            <Col md={4}>
+            <Col lg={3}>
               <Form.Group>
                 <Form.Label>Amenities</Form.Label>
                 <div className="mb-4">
-                  <div
-                    className="addForm__amenities"
-                    style={{ display: "flex", flexDirection: "column" }}
-                  >
+                  <div className="addForm__amenities">
                     {tagData.map((tag, index) => {
                       return (
                         <div className="filters__checkbox" key={index}>

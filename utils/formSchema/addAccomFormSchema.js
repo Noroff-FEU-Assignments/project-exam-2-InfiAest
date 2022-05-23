@@ -22,7 +22,8 @@ let ADD_FORM_SCHEMA = yup.object().shape({
     }),
   description: yup
     .string()
-    .required("Please enter a description of the accomodation"),
+    .required("Please enter a description of the accomodation")
+    .min(20, "Description should be at least 20 characters"),
   WiFi: yup.boolean(),
   Kitchen: yup.boolean(),
   Kitchenette: yup.boolean(),
@@ -40,7 +41,10 @@ let ADD_FORM_SCHEMA = yup.object().shape({
   Room_service: yup.boolean(),
   information: yup
     .string()
-    .required("Please enter information about the accomodation"),
+    .required(
+      "Please enter extra information such as check-in/out times, house rules etc"
+    )
+    .min(20, "Information should be at least 20 characters"),
   accomodation_type: yup
     .string()
     .required("Please select the accomodation type"),
