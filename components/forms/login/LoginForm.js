@@ -1,15 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useState, useContext } from "react";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
 import AuthContext from "../../../context/AuthContext";
 import { BASE_URL, TOKEN_PATH } from "../../../constants/api";
 import { useRouter } from "next/router";
+import { LOGIN_FORM_SCHEMA } from "../../../utils/formSchema/loginFormSchema";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
-import { LOGIN_FORM_SCHEMA } from "../../../utils/formSchema/loginFormSchema";
 
 const url = BASE_URL + TOKEN_PATH;
 
@@ -32,15 +31,11 @@ export default function LoginForm() {
     setSubmitting(true);
     setLoginError(null);
 
-    console.log(data);
-
     try {
       const response = await axios.post(url, data, {
         headers: { "Content-Type": "application/json" },
       });
-      console.log("response", response.data);
       setAuth(response.data);
-      console.log("Success");
       return router.push("/admin");
     } catch (error) {
       console.log("error", error);
@@ -63,7 +58,7 @@ export default function LoginForm() {
           />
         )}
         <fieldset disabled={submitting}>
-          <Form.Group className="mb-4" controlId="formBasicUserName">
+          <Form.Group className="mb-4">
             <Form.Label>Username/Email address</Form.Label>
             <Form.Control
               type="text"
@@ -75,7 +70,7 @@ export default function LoginForm() {
             )}
           </Form.Group>
 
-          <Form.Group className="mb-4" controlId="formBasicPassword">
+          <Form.Group className="mb-4">
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"

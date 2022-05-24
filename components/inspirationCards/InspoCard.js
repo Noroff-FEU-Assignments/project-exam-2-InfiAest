@@ -5,18 +5,17 @@ import inspoImg from "../../images/inspo/utsikt-floien.jpg";
 import useWindowSize from "../../hooks/useWindowSize";
 import Heading from "../layout/headings/Heading";
 import SectionWrapper from "../layout/general/SectionWrapper";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 function InspoCard() {
   const windowSize = useWindowSize();
-  const router = useRouter();
 
   let image = (
     <Image
       src={inspoImg}
       objectFit="cover"
       height="600"
-      alt=""
+      alt="Late night image taken from part way up mount Floien looking down at the fish market"
       priority="true"
       className="inspoCard__image"
       placeholder="blur"
@@ -29,7 +28,7 @@ function InspoCard() {
         src={inspoImg}
         objectFit="cover"
         height="1000"
-        alt=""
+        alt="Late night image taken from part way up mount Floien looking down at the fish market"
         className="inspoCard__image"
         placeholder="blur"
       />
@@ -49,12 +48,9 @@ function InspoCard() {
             Get comfy in one of these locations and make plans from there!
           </Card.Text>
           <div className="d-grid gap-2">
-            <Button
-              variant="primary"
-              onClick={() => router.push("/accomodation")}
-            >
-              See all locations
-            </Button>
+            <Link href="/accomodation">
+              <Button variant="primary">See all locations</Button>
+            </Link>
           </div>
         </Card.Body>
       </Card>

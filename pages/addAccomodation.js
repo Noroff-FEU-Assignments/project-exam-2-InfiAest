@@ -21,7 +21,10 @@ function addAccomodation() {
 
   return (
     <Layout>
-      <Head title="Holidaze Add accomodation" />
+      <Head
+        title="Holidaze Add accomodation"
+        description="Book a hotel, apartment or house in Bergen for your Holidaze."
+      />
       <PageContainer>
         <Breadcrumb>
           <span className="breadcrumb__link">

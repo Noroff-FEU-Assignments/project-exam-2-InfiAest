@@ -5,7 +5,10 @@ import LoginForm from "../components/forms/login/LoginForm";
 export default function Login() {
   return (
     <Layout>
-      <Head title="Holidaze Login" />
+      <Head
+        title="Holidaze Login"
+        description="Book a hotel, apartment or house in Bergen for your Holidaze."
+      />
 
       <div className="container">
         <h1>Login page</h1>

@@ -1,12 +1,11 @@
 import useAxios from "../../../hooks/useAxios";
 import { useEffect, useState } from "react";
-import DisplayMessage from "../../messages/DisplayMessage";
 import { MESSAGES_PATH, SORT_PATH } from "../../../constants/api";
-import { Accordion } from "react-bootstrap";
+import Accordion from "react-bootstrap/Accordion";
+import DisplayMessage from "../../messages/DisplayMessage";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
-
   const http = useAxios();
 
   useEffect(() => {

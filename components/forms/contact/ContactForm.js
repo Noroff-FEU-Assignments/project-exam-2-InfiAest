@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { CONTACT_FORM_SCHEMA } from "../../../utils/formSchema/conactFormSchema";
 import { BASE_URL, MESSAGES_PATH } from "../../../constants/api";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
-import { CONTACT_FORM_SCHEMA } from "../../../utils/formSchema/conactFormSchema";
 
 const url = BASE_URL + MESSAGES_PATH;
 
@@ -77,7 +77,7 @@ export default function ContactForm() {
         )}
 
         <fieldset disabled={submitting}>
-          <Form.Group className="mb-4" controlId="formBasicUserName">
+          <Form.Group className="mb-4">
             <Form.Label>First name</Form.Label>
             <Form.Control
               type="text"
@@ -88,7 +88,7 @@ export default function ContactForm() {
               <span className="formError">{errors.first_name.message}</span>
             )}
           </Form.Group>
-          <Form.Group className="mb-4" controlId="formBasicLastName">
+          <Form.Group className="mb-4">
             <Form.Label>Last name</Form.Label>
             <Form.Control
               type="text"
@@ -99,7 +99,7 @@ export default function ContactForm() {
               <span className="formError">{errors.last_name.message}</span>
             )}
           </Form.Group>
-          <Form.Group className="mb-4" controlId="formBasicEmail">
+          <Form.Group className="mb-4">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
@@ -110,7 +110,7 @@ export default function ContactForm() {
               <span className="formError">{errors.email_address.message}</span>
             )}
           </Form.Group>
-          <Form.Group className="mb-4" controlId="formBasicSubject">
+          <Form.Group className="mb-4">
             <Form.Label>
               Subject
               <span
@@ -134,7 +134,7 @@ export default function ContactForm() {
               <span className="formError">{errors.subject.message}</span>
             )}
           </Form.Group>
-          <Form.Group className="mb-4" controlId="formBasicTextArea">
+          <Form.Group className="mb-4">
             <Form.Label>
               Message
               <span

@@ -23,7 +23,10 @@ export default function Admin() {
 
   return (
     <Layout>
-      <Head title="Holidaze Admin" />
+      <Head
+        title="Holidaze Admin"
+        description="Book a hotel, apartment or house in Bergen for your Holidaze."
+      />
 
       <div className="container">
         <div

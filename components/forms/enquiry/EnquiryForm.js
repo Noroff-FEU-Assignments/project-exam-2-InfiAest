@@ -3,17 +3,16 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ENQUIRY_FORM_SCHEMA } from "../../../utils/formSchema/enquiryFormSchema";
 import { BASE_URL, ENQUIRIES_PATH } from "../../../constants/api";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
 import GuestNumberOptions from "./formOptions/GuestNumberOptions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import formatDate from "../../common/FormatDate";
-import { ENQUIRY_FORM_SCHEMA } from "../../../utils/formSchema/enquiryFormSchema";
 
 const url = BASE_URL + ENQUIRIES_PATH;
 
@@ -130,7 +129,7 @@ export default function EnquiryForm({
             </div>
             <Row xs={1} lg={2}>
               <Col lg={6}>
-                <Form.Group className="mb-4" controlId="formBasicUserName">
+                <Form.Group className="mb-4">
                   <Form.Label>First name</Form.Label>
                   <Form.Control
                     type="text"
@@ -145,7 +144,7 @@ export default function EnquiryForm({
                 </Form.Group>
               </Col>
               <Col lg={6}>
-                <Form.Group className="mb-4" controlId="formBasicLastName">
+                <Form.Group className="mb-4">
                   <Form.Label>Last name</Form.Label>
                   <Form.Control
                     type="text"
@@ -162,7 +161,7 @@ export default function EnquiryForm({
             </Row>
             <Row xs={1} lg={2}>
               <Col lg={6}>
-                <Form.Group className="mb-4" controlId="formBasicEmail">
+                <Form.Group className="mb-4">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
                     type="email"
@@ -253,7 +252,7 @@ export default function EnquiryForm({
               </div>
             </Form.Group>
 
-            <Form.Group className="mb-4" controlId="formBasicTextArea">
+            <Form.Group className="mb-4">
               <Form.Label>
                 Message
                 <span

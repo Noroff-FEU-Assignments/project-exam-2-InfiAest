@@ -11,7 +11,10 @@ import PageContainer from "../components/layout/general/PageContainer";
 export default function Home() {
   return (
     <Layout>
-      <Head title="Holidaze home" />
+      <Head
+        title="Holidaze home"
+        description="Book a hotel, apartment or house in Bergen for your Holidaze."
+      />
       <ImageHead />
       <SearchForm />
       <PageContainer>

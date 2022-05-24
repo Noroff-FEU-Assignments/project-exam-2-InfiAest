@@ -7,19 +7,15 @@ import {
   BASE_URL,
   IMG_POPULATE_PATH,
 } from "../../constants/api";
-import Rating from "../../components/accomodationAttributes/icons/Rating";
+import Rating from "../../utils/icons/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
-
-import Tags from "../../components/accomodationAttributes/icons/Tags";
-
+import Tags from "../../utils/icons/Tags";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import SectionWrapper from "../../components/layout/general/SectionWrapper";
-import Modal from "react-bootstrap/Modal";
-import { useState } from "react";
-import EnquiryForm from "../../components/forms/enquiry/EnquiryForm";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 import ReviewsForm from "../../components/forms/reviews/ReviewsForm";
@@ -28,6 +24,7 @@ import ReviewsCarousel from "../../components/accomodationAttributes/carousel/Re
 import ImageCarousel from "../../components/accomodationAttributes/carousel/ImageCarousel";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Link from "next/link";
+import { EnquiryModal } from "../../components/forms/enquiry/EnquiryModal";
 
 export default function Accomodation({ accomodation }) {
   const details = accomodation.data.attributes;
@@ -36,9 +33,37 @@ export default function Accomodation({ accomodation }) {
   var information = details.information;
   information = information.split(/\r?\n/);
 
-  const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [tags, setTags] = useState([]);
+
+  function hideModal() {
+    setShowModal(false);
+  }
+
+  useEffect(() => {
+    setTags([
+      { name: "Aircon", value: details.tags.Airconditioning },
+      { name: "Breakfast included", value: details.tags.Breakfast_included },
+      { name: "Free parking", value: details.tags.Free_parking },
+      { name: "Heating", value: details.tags.Heating },
+      { name: "Kitchen", value: details.tags.Kitchen },
+      { name: "Kitchenette", value: details.tags.Kitchenette },
+      { name: "Pets allowed", value: details.tags.Pets_allowed },
+      { name: "Room service", value: details.tags.Room_service },
+      { name: "Couples", value: details.tags.Suitable_for_couples },
+      { name: "Families", value: details.tags.Suitable_for_families },
+      { name: "Groups", value: details.tags.Suitable_for_groups },
+      {
+        name: "Single travellers",
+        value: details.tags.Suitable_for_single_travellers,
+      },
+      { name: "Washer", value: details.tags.Washing_machine },
+      { name: "WiFi", value: details.tags.WiFi },
+      { name: "Dryer", value: details.tags.tumble_dryer },
+    ]);
+  }, []);
 
   const onChange = (dates) => {
     const [start, end] = dates;
@@ -46,39 +71,19 @@ export default function Accomodation({ accomodation }) {
     setEndDate(end);
   };
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   return (
     <Layout>
-      <Modal
-        show={show}
-        onHide={handleClose}
-        animation={true}
-        size="lg"
-        backdrop="static"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Enquiry for: {details.name}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <EnquiryForm
-            accomodationName={details.name}
-            maximumGuests={details.maximum_guests}
-            accomodationImage={details.images.data[0].attributes.url}
-            checkinDate={startDate}
-            checkoutDate={endDate}
-            accomodationId={accomodation.data.id}
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="dark" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Head title={details.name} />
+      <EnquiryModal
+        showModal={showModal}
+        cancel={hideModal}
+        accomDetails={accomodation}
+        checkinDate={startDate}
+        checkoutDate={endDate}
+      />
+      <Head
+        title={`Holidaze | ${details.name}`}
+        description="Book a hotel, apartment or house in Bergen for your Holidaze."
+      />
       <PageContainer>
         <Breadcrumb>
           <span className="breadcrumb__link">
@@ -116,7 +121,7 @@ export default function Accomodation({ accomodation }) {
                 {details.price_per_night},- per night
               </div>
               <div className="d-grid gap-2">
-                <Button variant="primary" onClick={handleShow}>
+                <Button variant="primary" onClick={() => setShowModal(true)}>
                   Check availability
                 </Button>
               </div>
@@ -136,81 +141,19 @@ export default function Accomodation({ accomodation }) {
               <SectionWrapper>
                 <Heading size="2" content="Amenities" />
                 <div className="details__tags">
-                  <Tags
-                    tagActive={details.tags.Airconditioning}
-                    content="Aircon"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Breakfast_included}
-                    content="Breakfast included"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Free_parking}
-                    content="Free parking"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Heating}
-                    content="Heating"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Kitchen}
-                    content="Kitchen"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Kitchenette}
-                    content="Kitchenette"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Pets_allowed}
-                    content="Pets allowed"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Room_service}
-                    content="Room Service"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Suitable_for_couples}
-                    content="Couples"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Suitable_for_families}
-                    content="Families"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Suitable_for_groups}
-                    content="Groups"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Suitable_for_single_travellers}
-                    content="Single travellers"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.Washing_machine}
-                    content="Washer"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.WiFi}
-                    content="WiFi"
-                    tagClass="details__tags"
-                  />
-                  <Tags
-                    tagActive={details.tags.tumble_dryer}
-                    content="Dryer"
-                    tagClass="details__tags"
-                  />
+                  {tags.map((tag, index) => {
+                    if (tag.value === true) {
+                      return (
+                        <span key={index}>
+                          <Tags
+                            tagActive={tag.value}
+                            content={tag.name}
+                            tagClass="details__tags"
+                          />
+                        </span>
+                      );
+                    }
+                  })}
                 </div>
               </SectionWrapper>
             </Col>
@@ -240,7 +183,7 @@ export default function Accomodation({ accomodation }) {
                 inline
               />
               <div className="d-grid gap-2">
-                <Button variant="primary" onClick={handleShow}>
+                <Button variant="primary" onClick={() => setShowModal(true)}>
                   Check availability
                 </Button>
               </div>

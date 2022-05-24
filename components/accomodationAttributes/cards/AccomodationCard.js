@@ -4,10 +4,10 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Image from "next/image";
 import Button from "react-bootstrap/Button";
-import Rating from "../icons/Rating";
-import AccomodationCardTags from "./AccomodationCardTags";
+import Rating from "../../../utils/icons/Rating";
+import AccomodationCardTags from "./cardTags/AccomodationCardTags";
 import { placeholderImg } from "../../../constants/placeholderImg";
-import Tags from "../icons/Tags";
+import Tags from "../../../utils/icons/Tags";
 
 function AccomodationCard({ attributes }) {
   return (

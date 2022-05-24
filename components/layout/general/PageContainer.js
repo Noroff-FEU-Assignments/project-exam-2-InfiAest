@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 
-function PageContainer(props) {
-  return <Container>{props.children}</Container>;
+function PageContainer({ children }) {
+  return <Container>{children}</Container>;
 }
 
 export default PageContainer;

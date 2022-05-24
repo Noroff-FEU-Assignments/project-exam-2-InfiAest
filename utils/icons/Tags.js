@@ -24,8 +24,6 @@ import { RiHotelLine, RiFilterLine, RiFilterOffLine } from "react-icons/ri";
 import { BsHouse, BsTree } from "react-icons/bs";
 import { BiAnchor } from "react-icons/bi";
 
-// import { faWifi } from "@fortawesome/free-regular-svg-icons";
-
 function Tags({ tagActive, content, tagClass }) {
   if (tagActive === true && content === "WiFi") {
     return (

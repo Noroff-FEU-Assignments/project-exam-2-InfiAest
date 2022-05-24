@@ -12,7 +12,10 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 export default function Contact() {
   return (
     <Layout>
-      <Head title="Holidaze Contact" />
+      <Head
+        title="Holidaze Contact"
+        description="Book a hotel, apartment or house in Bergen for your Holidaze."
+      />
       <div className="container">
         <Heading size="1" content="Contact us" />
         <Row xs={1} md={2} className="g-5">

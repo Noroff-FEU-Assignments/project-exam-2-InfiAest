@@ -4,8 +4,8 @@ import Form from "react-bootstrap/Form";
 import Accordion from "react-bootstrap/Accordion";
 import FilterButton from "./buttons/FilterButton";
 import ResetFiltersButton from "./buttons/ResetFiltersButton";
-import Tags from "../../accomodationAttributes/icons/Tags";
-import Rating from "../../accomodationAttributes/icons/Rating";
+import Tags from "../../../utils/icons/Tags";
+import Rating from "../../../utils/icons/Rating";
 import {
   accomAmenities,
   accomAreas,
@@ -190,7 +190,10 @@ function FilterAccomodations({
                   tagClass="filterButton__tags"
                 />
               </FilterButton>
-              <ResetFiltersButton resetFiltersFunction={resetFilters}>
+              <ResetFiltersButton
+                resetFiltersFunction={resetFilters}
+                variant="light"
+              >
                 <Tags
                   tagActive={true}
                   content="Reset filters"

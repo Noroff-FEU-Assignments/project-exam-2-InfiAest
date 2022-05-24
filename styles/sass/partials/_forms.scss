@@ -66,12 +66,16 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    &--chip {
+      background-color: map-get($colors, light-blue);
+      padding: 2px 10px;
+      margin: 5px;
+      border-radius: 10px;
+    }
   }
-  &__chip {
-    background-color: map-get($colors, light-blue);
-    padding: 2px 10px;
-    margin: 5px;
-    border-radius: 10px;
+  &__resetButton {
+    display: flex;
+    justify-content: flex-end;
   }
   &__form {
     &__range {

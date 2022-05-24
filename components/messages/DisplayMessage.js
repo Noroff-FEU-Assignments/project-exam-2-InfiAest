@@ -1,10 +1,15 @@
 import Alert from "react-bootstrap/Alert";
 
-export default function DisplayMessage(props) {
+export default function DisplayMessage({
+  variant,
+  alertClass,
+  heading,
+  message,
+}) {
   return (
-    <Alert variant={props.variant} className={props.alertClass}>
-      <Alert.Heading>{props.heading}</Alert.Heading>
-      <p>{props.message}</p>
+    <Alert variant={variant} className={alertClass}>
+      <Alert.Heading>{heading}</Alert.Heading>
+      <p>{message}</p>
     </Alert>
   );
 }

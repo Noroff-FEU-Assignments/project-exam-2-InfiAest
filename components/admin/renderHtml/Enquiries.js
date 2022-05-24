@@ -1,13 +1,13 @@
 import useAxios from "../../../hooks/useAxios";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import DisplayMessage from "../../messages/DisplayMessage";
 import {
   ENQUIRIES_PATH,
   IMG_POPULATE_PATH,
   SORT_PATH,
 } from "../../../constants/api";
-import { Accordion } from "react-bootstrap";
+import Accordion from "react-bootstrap/Accordion";
+import Image from "next/image";
+import DisplayMessage from "../../messages/DisplayMessage";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);

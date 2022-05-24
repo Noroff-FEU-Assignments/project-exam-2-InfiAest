@@ -1,35 +1,37 @@
-import Layout from "../components/layout/general/Layout";
-import Head from "../components/layout/general/Head";
-import PageContainer from "../components/layout/general/PageContainer";
-import Heading from "../components/layout/headings/Heading";
-import Row from "react-bootstrap/Row";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   ACCOMODATION_PATH,
   BASE_URL,
   IMG_POPULATE_PATH,
 } from "../constants/api";
+import { useRouter } from "next/router";
+import Layout from "../components/layout/general/Layout";
+import Head from "../components/layout/general/Head";
+import PageContainer from "../components/layout/general/PageContainer";
+import Heading from "../components/layout/headings/Heading";
+import Row from "react-bootstrap/Row";
 import AccomodationCard from "../components/accomodationAttributes/cards/AccomodationCard";
-import { useEffect, useState } from "react";
 import FilterAccomodations from "../components/forms/filterAccomodations/FilterAccomodations";
 import DisplayMessage from "../components/messages/DisplayMessage";
-import { useRouter } from "next/router";
+import ResetFiltersButton from "../components/forms/filterAccomodations/buttons/ResetFiltersButton";
+import Tags from "../utils/icons/Tags";
 
-export default function Accomodation(props) {
-  const accomodations = props.accomodations.data;
-  const [filtered, setFiltered] = useState(accomodations || []);
+export default function Accomodation({ accomodations }) {
+  const accoms = accomodations.data;
+  const [filtered, setFiltered] = useState(accoms || []);
   const [queryString, setQueryString] = useState([]);
   const [minimumPrice, setMinimumPrice] = useState(0);
   const [maximumPrice, setMaximumPrice] = useState(5500);
   const [priceQueryString, setPriceQueryString] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [selectedFiltersVisable, setSelectedFiltersVisable] = useState(false);
-  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState([]);
 
   const router = useRouter();
   const query = router.query;
   const qsFilters = query.filters;
-  // console.log(query);
   let urlFilterOptions = "";
 
   useEffect(() => {
@@ -66,9 +68,7 @@ export default function Accomodation(props) {
       async function loadFiltered() {
         try {
           const response = await axios.get(url);
-          // console.log(response.data.data);
           setFiltered(response.data.data);
-          // return { selectedFilters };
         } catch (error) {
           console.log(error);
         }
@@ -94,7 +94,7 @@ export default function Accomodation(props) {
   function setMaxPrice(event) {
     const value = event.target.value;
     setMaximumPrice(value);
-    setSelectedPrice(`from ${minimumPrice},- kr to ${value},- kr`);
+    setSelectedPrice([{ min: minimumPrice, max: value }]);
     setPriceQueryString(
       `filters[price_per_night][$gte]=${minimumPrice}&filters[price_per_night][$lte]=${value}`
     );
@@ -102,7 +102,7 @@ export default function Accomodation(props) {
   function setMinPrice(event) {
     const value = event.target.value;
     setMinimumPrice(value);
-    setSelectedPrice(`from ${value},- kr to ${maximumPrice},- kr`);
+    setSelectedPrice([{ min: value, max: maximumPrice }]);
     setPriceQueryString(
       `filters[price_per_night][$gte]=${value}&filters[price_per_night][$lte]=${maximumPrice}`
     );
@@ -119,7 +119,8 @@ export default function Accomodation(props) {
       .forEach((el) => (el.checked = false));
     router.replace("/accomodation");
     setSelectedFiltersVisable(false);
-    setFiltered(accomodations);
+    setFiltered(accoms);
+    setSelectedPrice([]);
   }
 
   function filterOptions() {
@@ -134,7 +135,6 @@ export default function Accomodation(props) {
       )}&populate=*`;
     }
 
-    // console.log(url);
     async function loadAccomodations() {
       try {
         const response = await axios.get(url);
@@ -149,7 +149,10 @@ export default function Accomodation(props) {
 
   return (
     <Layout>
-      <Head title="Holidaze Accomodations" />
+      <Head
+        title="Holidaze Accomodations"
+        description="Book a hotel, apartment or house in Bergen for your Holidaze."
+      />
       <PageContainer>
         <Heading size="1" content="Accomodation" />
         <FilterAccomodations
@@ -161,21 +164,38 @@ export default function Accomodation(props) {
           maxPrice={parseInt(maximumPrice)}
           minPrice={parseInt(minimumPrice)}
         />
-        {selectedFiltersVisable && selectedFilters.length > 0 ? (
-          <div className="filters__chips">
-            Selected filters:
-            {selectedFilters.map((filter, index) => {
-              return (
-                <span key={index} className="filters__chip">
-                  {filter}
-                </span>
-              );
-            })}
-            {selectedPrice.length > 0 ? (
-              <span className="filters__chip">{selectedPrice}</span>
-            ) : (
-              <></>
-            )}
+        {(selectedFiltersVisable && selectedFilters.length > 0) ||
+        (selectedFiltersVisable && selectedPrice.length > 0) ? (
+          <div className="filters">
+            <div className="filters__resetButton">
+              <ResetFiltersButton
+                resetFiltersFunction={resetFilters}
+                variant="dark"
+              >
+                <Tags
+                  tagActive={true}
+                  content="Reset filters"
+                  tagClass="filterButton__tags"
+                />
+              </ResetFiltersButton>
+            </div>
+            <div className="filters__chips">
+              Selected filters:
+              {selectedFilters.map((filter, index) => {
+                return (
+                  <span key={index} className="filters__chips--chip">
+                    {filter}
+                  </span>
+                );
+              })}
+              {selectedPrice.map((price, index) => {
+                return (
+                  <span key={index} className="filters__chips--chip">
+                    from {price.min},- kr to {price.max},- kr
+                  </span>
+                );
+              })}
+            </div>
           </div>
         ) : (
           <></>
@@ -201,7 +221,7 @@ export default function Accomodation(props) {
             </>
           ) : (
             <>
-              <AccomodationCard attributes={accomodations} />
+              <AccomodationCard attributes={accoms} />
             </>
           )}
         </Row>
@@ -228,3 +248,7 @@ export async function getStaticProps() {
     },
   };
 }
+
+Accomodation.propTypes = {
+  accomodations: PropTypes.object.isRequired,
+};

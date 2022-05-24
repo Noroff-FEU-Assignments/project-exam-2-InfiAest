@@ -2,21 +2,11 @@ import Image from "next/image";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import cityImg from "../../images/inspo/city-centre.jpg";
-import ruralImg from "../../images/inspo/rural.jpg";
-import hotelImg from "../../images/inspo/hotel.jpg";
-import apartmentImg from "../../images/inspo/apartment.jpg";
+import { images } from "../../utils/tileImages/tileImages";
 import SectionWrapper from "../layout/general/SectionWrapper";
 import Link from "next/link";
 
 function InspoTiles() {
-  const images = [
-    { src: cityImg, label: "City centre", qs: "City" },
-    { src: ruralImg, label: "Rural", qs: "Rural" },
-    { src: hotelImg, label: "Hotels", qs: "Hotel" },
-    { src: apartmentImg, label: "Apartments", qs: "Apartment" },
-  ];
-
   return (
     <SectionWrapper>
       <Row xs={1} sm={2} md={4} className="g-4">

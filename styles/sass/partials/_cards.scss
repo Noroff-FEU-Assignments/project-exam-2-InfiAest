@@ -214,8 +214,8 @@
     &__tags {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      height: 100px;
+      justify-content: space-around;
+      height: 90px;
     }
   }
   .reviewsCard {
@@ -236,13 +236,13 @@
     &__subtitle {
       height: 40px;
     }
-    &__tags {
-      height: 65px;
-    }
     &__text {
       &--price {
         width: auto;
       }
+    }
+    &__tags {
+      height: 55px;
     }
   }
 }
@@ -251,9 +251,6 @@
   .accomodationCard {
     &__title {
       height: 60px;
-    }
-    &__tags {
-      height: 55px;
     }
   }
 }

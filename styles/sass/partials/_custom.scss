@@ -111,3 +111,14 @@ $modal-lg: 600px;
 .mb-4 {
   position: relative;
 }
+
+.modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  &__button {
+    margin: 1rem;
+    width: 100%;
+  }
+}

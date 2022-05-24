@@ -1,5 +1,4 @@
 import { useState } from "react";
-import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import useAxios from "../../../hooks/useAxios";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -105,14 +104,6 @@ const AddAccomodationForm = () => {
         id="addAccomForm"
         className="mt-5 mb-5"
       >
-        {serverError && (
-          <DisplayMessage
-            variant="danger"
-            heading="Oh something is wrong!"
-            message={serverError}
-          />
-        )}
-
         <fieldset disabled={submitting}>
           <Row xs={1} lg={2}>
             <Col lg={9}>
@@ -376,6 +367,14 @@ const AddAccomodationForm = () => {
             </Col>
           </Row>
 
+          {serverError && (
+            <DisplayMessage
+              variant="danger"
+              heading="Oh something is wrong!"
+              message={serverError}
+            />
+          )}
+
           {submitted ? (
             <DisplayMessage
               variant="success"
@@ -388,7 +387,7 @@ const AddAccomodationForm = () => {
 
           <div className="d-grid gap-2">
             <Button variant="primary" className="form__button" type="submit">
-              {submitting ? "Sending message..." : "Send"}
+              {submitting ? "Adding..." : "Add accomodation"}
             </Button>
           </div>
         </fieldset>

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Tags from "../icons/Tags";
+import Tags from "../../../../utils/icons/Tags";
 
 function AccomodationCardTags({
   aircon,
@@ -37,12 +37,12 @@ function AccomodationCardTags({
         content="Groups"
         tagClass="accomodationCard__tags"
       />
+      <Tags tagActive={wifi} content="WiFi" tagClass="accomodationCard__tags" />
       <Tags
         tagActive={single}
         content="Single travellers"
         tagClass="accomodationCard__tags"
       />
-      <Tags tagActive={wifi} content="WiFi" tagClass="accomodationCard__tags" />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -7,15 +8,14 @@ import {
   IMG_POPULATE_PATH,
   REVIEWS_PATH,
 } from "../../../constants/api";
+import { REVIEW_FORM_SCHEMA } from "../../../utils/formSchema/reviewFormSchema";
+import { useRouter } from "next/router";
+import Heading from "../../layout/headings/Heading";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
-import Heading from "../../layout/headings/Heading";
-import PropTypes from "prop-types";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import { REVIEW_FORM_SCHEMA } from "../../../utils/formSchema/reviewFormSchema";
-import { useRouter } from "next/router";
 
 const url = BASE_URL + REVIEWS_PATH + IMG_POPULATE_PATH;
 
@@ -96,7 +96,7 @@ function ReviewsForm({ accomodationId }) {
             </div>
             <Row xs={2} md={1} lg={2}>
               <Col xs={8} lg={9}>
-                <Form.Group className="mb-4" controlId="formBasicUserName">
+                <Form.Group className="mb-4">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type="text"
@@ -109,7 +109,7 @@ function ReviewsForm({ accomodationId }) {
                 </Form.Group>
               </Col>
               <Col xs={4} lg={3}>
-                <Form.Group className="mb-4" controlId="formBasicLastName">
+                <Form.Group className="mb-4">
                   <Form.Label>Rating</Form.Label>
                   <Form.Select {...register("rating")}>
                     <option value={5}>5</option>
@@ -125,7 +125,7 @@ function ReviewsForm({ accomodationId }) {
               </Col>
             </Row>
 
-            <Form.Group className="mb-4" controlId="formBasicTextArea">
+            <Form.Group className="mb-4">
               <Form.Label>
                 Comment
                 <span
