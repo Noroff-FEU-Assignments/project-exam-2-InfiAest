@@ -1,9 +1,27 @@
-//search form
+//form datepicker
+.form__datePicker {
+  width: 100%;
+  margin: 0 auto;
+}
+
+//form buttons
+.form__button {
+  max-width: 650px;
+}
+
+//hidden form inputs
+.inputHidden {
+  display: none;
+}
+
+//contact & login form
 .loginForm,
 .contactForm {
   max-width: 600px;
   margin: 0 auto;
 }
+
+//search form
 .searchForm {
   max-width: 1000px;
   margin: 0 auto;
@@ -22,14 +40,6 @@
     width: 100%;
     z-index: 2;
   }
-}
-
-.inputHidden {
-  display: none;
-}
-.form__datePicker {
-  width: 100%;
-  margin: 0 auto;
 }
 
 //filter form
@@ -72,10 +82,6 @@
       margin: 5px;
       border-radius: 10px;
     }
-  }
-  &__resetButton {
-    display: flex;
-    justify-content: flex-end;
   }
   &__form {
     &__range {

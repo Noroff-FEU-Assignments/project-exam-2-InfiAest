@@ -11,23 +11,29 @@ export const DisplayModal = ({
   size,
 }) => {
   return (
-    <Modal show={showModal} onHide={cancel} size={size} centered>
+    <Modal
+      show={showModal}
+      onHide={cancel}
+      size={size}
+      className="adminModal"
+      centered
+    >
       <Modal.Header closeButton>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{content}</Modal.Body>
-      <div className="modal__footer">
+      <div className="adminModal__footer">
         <Button
           variant="primary"
           onClick={cancel}
-          className="modal__footer__button"
+          className="adminModal__footer__button"
         >
           Cancel
         </Button>
         <Button
           variant="dark"
           onClick={confirmed}
-          className="modal__footer__button"
+          className="adminModal__footer__button"
         >
           Confirm
         </Button>

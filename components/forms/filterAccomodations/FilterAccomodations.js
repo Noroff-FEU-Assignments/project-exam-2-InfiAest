@@ -187,7 +187,7 @@ function FilterAccomodations({
                 <Tags
                   tagActive={true}
                   content="Filter accomodations"
-                  tagClass="filterButton__tags"
+                  tagClass="filters__button__tags"
                 />
               </FilterButton>
               <ResetFiltersButton
@@ -197,7 +197,7 @@ function FilterAccomodations({
                 <Tags
                   tagActive={true}
                   content="Reset filters"
-                  tagClass="filterButton__tags"
+                  tagClass="filters__button__tags"
                 />
               </ResetFiltersButton>
             </div>

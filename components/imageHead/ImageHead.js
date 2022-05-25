@@ -19,7 +19,6 @@ export default function ImageHead() {
         height={imgHeight}
         alt="Colourful wooden houses, called Bryggen, along the waterfront in Bergen city center."
         priority="true"
-        className="header__image"
         placeholder="blur"
       />
     </div>

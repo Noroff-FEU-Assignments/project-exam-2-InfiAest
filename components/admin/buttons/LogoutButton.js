@@ -24,7 +24,7 @@ function LogoutButton() {
       <Button
         variant="info"
         onClick={() => setShowModal(true)}
-        className="navbar__logout-button"
+        className="navbar__logout--button"
       >
         Logout
       </Button>

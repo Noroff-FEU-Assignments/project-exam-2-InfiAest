@@ -235,8 +235,6 @@ export async function getStaticProps() {
   let accomodations = [];
   try {
     const response = await axios.get(url);
-
-    console.log(response.data);
     accomodations = response.data;
   } catch (error) {
     console.log(error);

@@ -10,12 +10,8 @@ function AddNewAccomodationButton() {
   }
 
   return (
-    <Button
-      variant="outline-primary"
-      onClick={handleAddButton}
-      style={{ height: "max-content" }}
-    >
-      <FontAwesomeIcon icon={faPlus} height="20px" /> New accomodation
+    <Button variant="outline-primary" onClick={handleAddButton}>
+      <FontAwesomeIcon icon={faPlus} height="1.2rem" /> New accomodation
     </Button>
   );
 }

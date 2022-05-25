@@ -36,11 +36,7 @@ export const EnquiryModal = ({
         />
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          variant="dark"
-          onClick={cancel}
-          className="modal__footer__button"
-        >
+        <Button variant="dark" onClick={cancel}>
           Close
         </Button>
       </Modal.Footer>

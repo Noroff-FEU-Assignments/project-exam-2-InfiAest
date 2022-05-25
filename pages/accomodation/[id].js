@@ -17,7 +17,6 @@ import Col from "react-bootstrap/Col";
 import SectionWrapper from "../../components/layout/general/SectionWrapper";
 import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
 import ReviewsForm from "../../components/forms/reviews/ReviewsForm";
 import PageContainer from "../../components/layout/general/PageContainer";
 import ReviewsCarousel from "../../components/accomodationAttributes/carousel/ReviewsCarousel";
@@ -28,15 +27,14 @@ import { EnquiryModal } from "../../components/forms/enquiry/EnquiryModal";
 
 export default function Accomodation({ accomodation }) {
   const details = accomodation.data.attributes;
-  console.log(details);
 
   //split info paragraph into an array so it can be returned as a list
   var information = details.information;
   information = information.split(/\r?\n/);
 
   const [showModal, setShowModal] = useState(false);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [startDate, setStartDate] = useState(undefined);
+  const [endDate, setEndDate] = useState(undefined);
   const [tags, setTags] = useState([]);
 
   function hideModal() {

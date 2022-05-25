@@ -6,8 +6,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
 import { ACCOMODATION_PATH } from "../../../constants/api";
-import { tagData } from "../../../constants/tagData";
-import Tags from "../../accomodationAttributes/icons/Tags";
+import { tagData } from "../../../utils/tagData/tagData";
+import Tags from "../../../utils/icons/Tags";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { ADD_ACCOMODATION_FORM_SCHEMA } from "../../../utils/formSchema/addAccomFormSchema";
@@ -103,7 +103,7 @@ const AddAccomodationForm = () => {
       <Form
         onSubmit={handleSubmit(onSubmit)}
         id="addAccomForm"
-        className="mt-5 mb-5"
+        className="mt-5 mb-5 addForm"
       >
         <fieldset disabled={submitting}>
           <Row xs={1} lg={2}>

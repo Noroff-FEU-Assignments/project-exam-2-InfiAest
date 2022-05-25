@@ -38,8 +38,6 @@ function ReviewsForm({ accomodationId }) {
     setSubmitting(true);
     setServerError(null);
 
-    console.log(data);
-
     try {
       const response = await axios.post(
         url,
@@ -55,7 +53,6 @@ function ReviewsForm({ accomodationId }) {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("response", response.data);
       setSubmitted(true);
     } catch (error) {
       console.log("error", error);

@@ -1,0 +1,13 @@
+//admin modal
+.adminModal {
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    &__button {
+      margin: 1rem;
+      width: 100%;
+    }
+  }
+}

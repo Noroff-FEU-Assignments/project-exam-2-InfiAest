@@ -13,7 +13,6 @@ import DeleteEnquiryButton from "../buttons/DeleteEnquiryButton";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);
-
   const http = useAxios();
 
   const getEnquiries = async function () {
@@ -22,7 +21,6 @@ function Enquiries() {
         `${ENQUIRIES_PATH}${IMG_POPULATE_PATH}${SORT_PATH}`
       );
       setEnquiries(response.data.data);
-      console.log(response.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -95,17 +93,19 @@ function Enquiries() {
                       {enquiry.attributes.message}
                     </div>
                   </div>
-                  <Image
-                    className="adminAccordion__image"
-                    src={enquiry.attributes.accomodation_image}
-                    width="80"
-                    height="80"
-                    alt={enquiry.attributes.accomodation_name}
-                  />
-                  <DeleteEnquiryButton
-                    id={enquiry.id}
-                    getEnquiries={getEnquiries}
-                  />
+                  <div className="adminAccordion__image">
+                    <DeleteEnquiryButton
+                      id={enquiry.id}
+                      getEnquiries={getEnquiries}
+                    />
+                    <Image
+                      className="adminAccordion__img"
+                      src={enquiry.attributes.accomodation_image}
+                      width="80"
+                      height="80"
+                      alt={enquiry.attributes.accomodation_name}
+                    />
+                  </div>
                 </Accordion.Body>
               </Accordion.Item>
             );

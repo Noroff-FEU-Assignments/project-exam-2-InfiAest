@@ -93,20 +93,22 @@
 
 //inspiration tiles
 .inspoTile {
-  background-color: map-get($colors, light-blue) !important;
-  text-align: center;
-  &:hover {
-    box-shadow: $box-shadow-hover;
-    cursor: pointer;
+  &__card {
+    background-color: map-get($colors, light-blue) !important;
+    text-align: center;
+    &:hover {
+      box-shadow: $box-shadow-hover;
+      cursor: pointer;
+    }
+    &__image {
+      border-radius: 10px 10px 0 0;
+    }
   }
-  &__image {
-    border-radius: 10px 10px 0 0;
-  }
-}
-.card__link {
-  color: map-get($colors, body);
-  &:hover {
-    text-decoration: none;
+  &__link {
+    color: map-get($colors, body);
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 

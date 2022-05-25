@@ -7,7 +7,7 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="footer">
       <Link href="/">
         <a className="footer__link">
           <div className="footer__logo--container">

@@ -43,7 +43,7 @@
 
 @include for-tablet {
   .navbar {
-    &__logout-button {
+    &__logout--button {
       position: absolute;
       top: 0rem;
       right: 0rem;

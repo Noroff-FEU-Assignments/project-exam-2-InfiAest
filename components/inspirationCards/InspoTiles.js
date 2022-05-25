@@ -18,15 +18,15 @@ function InspoTiles() {
                   pathname: "/accomodation",
                   query: { filters: `${image.qs}` },
                 }}
-                className="card__link"
+                className="inspoTile__link"
               >
-                <Card className="inspoTile">
+                <Card className="inspoTile__card">
                   <Image
                     src={image.src}
                     objectFit="cover"
                     height="500"
                     alt={`${image.label} image`}
-                    className="inspoTile__image"
+                    className="inspoTile__card__image"
                     placeholder="blur"
                   />
                   <Card.Body>

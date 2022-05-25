@@ -21,9 +21,10 @@ function DeleteEnquiryButton({ id, getEnquiries }) {
     try {
       await http.delete(url);
       setShowModal(false);
-      getEnquiries();
     } catch (error) {
       setError(error);
+    } finally {
+      getEnquiries();
     }
   }
 
