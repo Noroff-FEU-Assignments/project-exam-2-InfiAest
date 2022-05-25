@@ -13,6 +13,7 @@ import DisplayMessage from "../../messages/DisplayMessage";
 import GuestNumberOptions from "./formOptions/GuestNumberOptions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import FormError from "../../messages/FormError";
 
 const url = BASE_URL + ENQUIRIES_PATH;
 
@@ -106,9 +107,7 @@ export default function EnquiryForm({
                 readOnly
               />
               {errors.accomodation_name && (
-                <span className="formError">
-                  {errors.accomodation_name.message}
-                </span>
+                <FormError message={errors.accomodation_name.message} />
               )}
             </div>
             <div className="inputHidden">
@@ -137,9 +136,7 @@ export default function EnquiryForm({
                     {...register("first_name")}
                   />
                   {errors.first_name && (
-                    <span className="formError">
-                      {errors.first_name.message}
-                    </span>
+                    <FormError message={errors.first_name.message} />
                   )}
                 </Form.Group>
               </Col>
@@ -152,9 +149,7 @@ export default function EnquiryForm({
                     {...register("last_name")}
                   />
                   {errors.last_name && (
-                    <span className="formError">
-                      {errors.last_name.message}
-                    </span>
+                    <FormError message={errors.last_name.message} />
                   )}
                 </Form.Group>
               </Col>
@@ -169,9 +164,7 @@ export default function EnquiryForm({
                     {...register("email_address")}
                   />
                   {errors.email_address && (
-                    <span className="formError">
-                      {errors.email_address.message}
-                    </span>
+                    <FormError message={errors.email_address.message} />
                   )}
                 </Form.Group>
               </Col>
@@ -182,7 +175,7 @@ export default function EnquiryForm({
                     <GuestNumberOptions maximumGuests={maximumGuests} />
                   </Form.Select>
                   {errors.guests && (
-                    <span className="formError">{errors.guests.message}</span>
+                    <FormError message={errors.guests.message} />
                   )}
                 </Form.Group>
               </Col>
@@ -211,16 +204,12 @@ export default function EnquiryForm({
                 />
                 <div>
                   {errors.check_in_date && (
-                    <span className="formError">
-                      {errors.check_in_date.message}
-                    </span>
+                    <FormError message={errors.check_in_date.message} />
                   )}
                 </div>
                 <div>
                   {errors.checkout_date && (
-                    <span className="formError">
-                      {errors.checkout_date.message}
-                    </span>
+                    <FormError message={errors.checkoutDate.message} />
                   )}
                 </div>
               </div>
@@ -231,11 +220,6 @@ export default function EnquiryForm({
                   {...register("check_in_date")}
                   readOnly
                 />
-                {errors.check_in_date && (
-                  <span className="formError">
-                    {errors.check_in_date.message}
-                  </span>
-                )}
               </div>
               <div className="inputHidden">
                 <Form.Control
@@ -244,11 +228,6 @@ export default function EnquiryForm({
                   {...register("checkout_date")}
                   readOnly
                 />
-                {errors.checkout_date && (
-                  <span className="formError">
-                    {errors.checkout_date.message}
-                  </span>
-                )}
               </div>
             </Form.Group>
 
@@ -272,9 +251,7 @@ export default function EnquiryForm({
                 placeholder="Please write your message here"
                 {...register("message")}
               />
-              {errors.message && (
-                <span className="formError">{errors.message.message}</span>
-              )}
+              {errors.message && <FormError message={errors.message.message} />}
             </Form.Group>
 
             <div className="d-grid gap-2">

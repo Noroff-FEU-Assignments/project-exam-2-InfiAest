@@ -9,6 +9,7 @@ import { LOGIN_FORM_SCHEMA } from "../../../utils/formSchema/loginFormSchema";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
+import FormError from "../../messages/FormError";
 
 const url = BASE_URL + TOKEN_PATH;
 
@@ -66,7 +67,7 @@ export default function LoginForm() {
               {...register("identifier")}
             />
             {errors.identifier && (
-              <span className="formError">{errors.identifier.message}</span>
+              <FormError message={errors.identifier.message} />
             )}
           </Form.Group>
 
@@ -77,9 +78,7 @@ export default function LoginForm() {
               placeholder="Password"
               {...register("password")}
             />
-            {errors.password && (
-              <span className="formError">{errors.password.message}</span>
-            )}
+            {errors.password && <FormError message={errors.password.message} />}
           </Form.Group>
 
           <div className="d-grid gap-2">

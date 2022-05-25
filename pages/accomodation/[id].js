@@ -28,6 +28,7 @@ import { EnquiryModal } from "../../components/forms/enquiry/EnquiryModal";
 
 export default function Accomodation({ accomodation }) {
   const details = accomodation.data.attributes;
+  console.log(details);
 
   //split info paragraph into an array so it can be returned as a list
   var information = details.information;

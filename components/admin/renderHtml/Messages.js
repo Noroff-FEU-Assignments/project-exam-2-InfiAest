@@ -3,20 +3,22 @@ import { useEffect, useState } from "react";
 import { MESSAGES_PATH, SORT_PATH } from "../../../constants/api";
 import Accordion from "react-bootstrap/Accordion";
 import DisplayMessage from "../../messages/DisplayMessage";
+import DeleteMessageButton from "../buttons/DeleteMessageButton";
 
 function Messages() {
   const [messages, setMessages] = useState([]);
   const http = useAxios();
 
-  useEffect(() => {
-    async function getMessages() {
-      try {
-        const response = await http.get(`${MESSAGES_PATH}?${SORT_PATH}`);
-        setMessages(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
+  const getMessages = async function () {
+    try {
+      const response = await http.get(`${MESSAGES_PATH}?${SORT_PATH}`);
+      setMessages(response.data.data);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  useEffect(() => {
     getMessages();
   }, []);
 
@@ -70,6 +72,10 @@ function Messages() {
                     </span>
                     {message.attributes.message}
                   </div>
+                  <DeleteMessageButton
+                    id={message.id}
+                    getMessages={getMessages}
+                  />
                 </Accordion.Body>
               </Accordion.Item>
             );

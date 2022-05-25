@@ -8,34 +8,29 @@ import {
 import Accordion from "react-bootstrap/Accordion";
 import Image from "next/image";
 import DisplayMessage from "../../messages/DisplayMessage";
+import { formatDate } from "../../common/FormatDate";
+import DeleteEnquiryButton from "../buttons/DeleteEnquiryButton";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);
 
   const http = useAxios();
 
-  useEffect(() => {
-    async function getEnquiries() {
-      try {
-        const response = await http.get(
-          `${ENQUIRIES_PATH}${IMG_POPULATE_PATH}${SORT_PATH}`
-        );
-        setEnquiries(response.data.data);
-      } catch (error) {
-        console.log(error);
-      }
+  const getEnquiries = async function () {
+    try {
+      const response = await http.get(
+        `${ENQUIRIES_PATH}${IMG_POPULATE_PATH}${SORT_PATH}`
+      );
+      setEnquiries(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  useEffect(() => {
     getEnquiries();
   }, []);
-
-  function formatDate(input) {
-    var datePart = input.match(/\d+/g),
-      year = datePart[0],
-      month = datePart[1],
-      day = datePart[2];
-
-    return day + "/" + month + "/" + year;
-  }
 
   if (enquiries.length === 0) {
     return (
@@ -106,6 +101,10 @@ function Enquiries() {
                     width="80"
                     height="80"
                     alt={enquiry.attributes.accomodation_name}
+                  />
+                  <DeleteEnquiryButton
+                    id={enquiry.id}
+                    getEnquiries={getEnquiries}
                   />
                 </Accordion.Body>
               </Accordion.Item>

@@ -110,6 +110,19 @@
   padding-right: 5px;
 }
 
+//admin buttons
+.admin {
+  &__delete {
+    display: flex;
+    justify-content: flex-end;
+    &--icon {
+      color: map-get($colors, background);
+      width: 1rem;
+      height: 1.2rem;
+    }
+  }
+}
+
 @include for-tablet {
   .contact__info {
     border-right: 2px solid map-get($colors, dark-blue);

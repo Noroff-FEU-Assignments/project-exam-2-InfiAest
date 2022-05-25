@@ -7,6 +7,7 @@ import { BASE_URL, MESSAGES_PATH } from "../../../constants/api";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
+import FormError from "../../messages/FormError";
 
 const url = BASE_URL + MESSAGES_PATH;
 
@@ -85,7 +86,7 @@ export default function ContactForm() {
               {...register("first_name")}
             />
             {errors.first_name && (
-              <span className="formError">{errors.first_name.message}</span>
+              <FormError message={errors.first_name.message} />
             )}
           </Form.Group>
           <Form.Group className="mb-4">
@@ -96,7 +97,7 @@ export default function ContactForm() {
               {...register("last_name")}
             />
             {errors.last_name && (
-              <span className="formError">{errors.last_name.message}</span>
+              <FormError message={errors.last_name.message} />
             )}
           </Form.Group>
           <Form.Group className="mb-4">
@@ -107,7 +108,7 @@ export default function ContactForm() {
               {...register("email_address")}
             />
             {errors.email_address && (
-              <span className="formError">{errors.email_address.message}</span>
+              <FormError message={errors.email_address.message} />
             )}
           </Form.Group>
           <Form.Group className="mb-4">
@@ -130,9 +131,7 @@ export default function ContactForm() {
               placeholder="Enter a subject"
               {...register("subject")}
             />
-            {errors.subject && (
-              <span className="formError">{errors.subject.message}</span>
-            )}
+            {errors.subject && <FormError message={errors.subject.message} />}
           </Form.Group>
           <Form.Group className="mb-4">
             <Form.Label>
@@ -154,9 +153,7 @@ export default function ContactForm() {
               placeholder="Please write your message here"
               {...register("message")}
             />
-            {errors.message && (
-              <span className="formError">{errors.message.message}</span>
-            )}
+            {errors.message && <FormError message={errors.message.message} />}
           </Form.Group>
 
           {submitted ? (

@@ -11,6 +11,7 @@ import Tags from "../../accomodationAttributes/icons/Tags";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { ADD_ACCOMODATION_FORM_SCHEMA } from "../../../utils/formSchema/addAccomFormSchema";
+import FormError from "../../messages/FormError";
 
 const AddAccomodationForm = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -117,9 +118,7 @@ const AddAccomodationForm = () => {
                       placeholder="Enter the accomodation name"
                       {...register("name")}
                     />
-                    {errors.name && (
-                      <span className="formError">{errors.name.message}</span>
-                    )}
+                    {errors.name && <FormError message={errors.name.message} />}
                   </Form.Group>
                 </Col>
                 <Col md={6}>
@@ -134,7 +133,7 @@ const AddAccomodationForm = () => {
                       <option value="5">5 stars</option>
                     </Form.Select>
                     {errors.rating && (
-                      <span className="formError">{errors.rating.message}</span>
+                      <FormError message={errors.rating.message} />
                     )}
                   </Form.Group>
                 </Col>
@@ -150,9 +149,7 @@ const AddAccomodationForm = () => {
                       {...register("street_address")}
                     />
                     {errors.street_address && (
-                      <span className="formError">
-                        {errors.street_address.message}
-                      </span>
+                      <FormError message={errors.street_address.message} />
                     )}
                   </Form.Group>
                 </Col>
@@ -166,9 +163,7 @@ const AddAccomodationForm = () => {
                       {...register("zip_code")}
                     />
                     {errors.zip_code && (
-                      <span className="formError">
-                        {errors.zip_code.message}
-                      </span>
+                      <FormError message={errors.zip_code.message} />
                     )}
                   </Form.Group>
                 </Col>
@@ -189,9 +184,7 @@ const AddAccomodationForm = () => {
                       <option value="rural">Rural</option>
                     </Form.Select>
                     {errors.accomodation_area && (
-                      <span className="formError">
-                        {errors.accomodation_area.message}
-                      </span>
+                      <FormError message={errors.accomodation_area.message} />
                     )}
                   </Form.Group>
                 </Col>
@@ -210,9 +203,7 @@ const AddAccomodationForm = () => {
                       <option value="house">House</option>
                     </Form.Select>
                     {errors.accomodation_type && (
-                      <span className="formError">
-                        {errors.accomodation_type.message}
-                      </span>
+                      <FormError message={errors.accomodation_type.message} />
                     )}
                   </Form.Group>
                 </Col>
@@ -236,9 +227,7 @@ const AddAccomodationForm = () => {
                       <option value="ten">10 people</option>
                     </Form.Select>
                     {errors.maximum_guests && (
-                      <span className="formError">
-                        {errors.maximum_guests.message}
-                      </span>
+                      <FormError message={errors.maximum_guests.message} />
                     )}
                   </Form.Group>
                 </Col>
@@ -252,9 +241,7 @@ const AddAccomodationForm = () => {
                       {...register("price_per_night")}
                     />
                     {errors.price_per_night && (
-                      <span className="formError">
-                        {errors.price_per_night.message}
-                      </span>
+                      <FormError message={errors.price_per_night.message} />
                     )}
                   </Form.Group>
                 </Col>
@@ -282,9 +269,7 @@ const AddAccomodationForm = () => {
                 />
 
                 {errors.description && (
-                  <span className="formError">
-                    {errors.description.message}
-                  </span>
+                  <FormError message={errors.description.message} />
                 )}
               </Form.Group>
               <Form.Group controlId="formFile" className="mb-4">
@@ -295,9 +280,7 @@ const AddAccomodationForm = () => {
                   onChange={handleInputChange}
                   multiple
                 />
-                {errors.images && (
-                  <span className="formError">{errors.images.message}</span>
-                )}
+                {errors.images && <FormError message={errors.images.message} />}
               </Form.Group>
 
               <Form.Group className="mb-4">
@@ -321,9 +304,7 @@ const AddAccomodationForm = () => {
                   {...register("information")}
                 />
                 {errors.information && (
-                  <span className="formError">
-                    {errors.information.message}
-                  </span>
+                  <FormError message={errors.information.message} />
                 )}
               </Form.Group>
             </Col>
@@ -358,9 +339,7 @@ const AddAccomodationForm = () => {
                     })}
                   </div>
                   {errors.amenities__checkboxes && (
-                    <span className="formError">
-                      {errors.amenities__checkboxes.message}
-                    </span>
+                    <FormError message={errors.amenities__checkboxes.message} />
                   )}
                 </div>
               </Form.Group>

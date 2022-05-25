@@ -1,11 +1,8 @@
-export default function formatDate(date) {
-  var d = new Date(date),
-    month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear();
+export function formatDate(input) {
+  var datePart = input.match(/\d+/g),
+    year = datePart[0],
+    month = datePart[1],
+    day = datePart[2];
 
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return [day, month, year].join("/");
+  return day + "/" + month + "/" + year;
 }

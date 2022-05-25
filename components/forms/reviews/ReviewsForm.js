@@ -16,6 +16,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import DisplayMessage from "../../messages/DisplayMessage";
+import FormError from "../../messages/FormError";
 
 const url = BASE_URL + REVIEWS_PATH + IMG_POPULATE_PATH;
 
@@ -104,7 +105,7 @@ function ReviewsForm({ accomodationId }) {
                     {...register("username")}
                   />
                   {errors.username && (
-                    <span className="formError">{errors.username.message}</span>
+                    <FormError message={errors.username.message} />
                   )}
                 </Form.Group>
               </Col>
@@ -119,7 +120,7 @@ function ReviewsForm({ accomodationId }) {
                     <option value={1}>1</option>
                   </Form.Select>
                   {errors.rating && (
-                    <span className="formError">{errors.rating.message}</span>
+                    <FormError message={errors.rating.message} />
                   )}
                 </Form.Group>
               </Col>
@@ -145,9 +146,7 @@ function ReviewsForm({ accomodationId }) {
                 placeholder="Please write your review here"
                 {...register("review")}
               />
-              {errors.review && (
-                <span className="formError">{errors.review.message}</span>
-              )}
+              {errors.review && <FormError message={errors.review.message} />}
             </Form.Group>
 
             <div className="d-grid gap-2">
