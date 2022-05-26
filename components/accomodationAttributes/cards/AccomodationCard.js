@@ -15,6 +15,17 @@ function AccomodationCard({ attributes }) {
       {attributes.map((accomodation) => {
         const area = `${accomodation.attributes.accomodation_area}`;
         const accomodationArea = area.charAt(0).toUpperCase() + area.slice(1);
+        let imgSrc = "";
+        let imgAlt = "";
+
+        if (accomodation.attributes.images.data === null) {
+          imgSrc = placeholderImg;
+          imgAlt = "";
+        } else {
+          imgSrc = accomodation.attributes.images.data[0].attributes.url;
+          imgAlt =
+            accomodation.attributes.images.data[0].attributes.alternativeText;
+        }
 
         return (
           <Col key={accomodation.id}>
@@ -22,13 +33,10 @@ function AccomodationCard({ attributes }) {
               <Card className="accomodationCard">
                 <Image
                   className="accomodationCard__image"
-                  src={accomodation.attributes.images.data[0].attributes.url}
+                  src={imgSrc}
                   width="384"
                   height="384"
-                  alt={
-                    accomodation.attributes.images.data[0].attributes
-                      .alternativeText
-                  }
+                  alt={imgAlt}
                   placeholder="blur"
                   blurDataURL={placeholderImg}
                 />

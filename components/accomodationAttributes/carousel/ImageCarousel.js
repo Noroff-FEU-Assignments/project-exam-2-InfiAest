@@ -5,7 +5,7 @@ import DisplayMessage from "../../messages/DisplayMessage";
 import { placeholderImg } from "../../../constants/placeholderImg";
 
 function ImageCarousel({ accomodationImages }) {
-  if (accomodationImages.data.length === 0) {
+  if (accomodationImages.data === null) {
     return (
       <DisplayMessage
         variant="info"

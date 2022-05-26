@@ -38,9 +38,20 @@
     }
   }
   &__image {
-    margin: 0 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
   }
   &__img {
     border-radius: 10px;
+  }
+}
+
+@include for-large-mobile {
+  .adminAccordion {
+    &__image {
+      width: auto;
+    }
   }
 }

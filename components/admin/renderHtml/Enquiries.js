@@ -94,16 +94,16 @@ function Enquiries() {
                     </div>
                   </div>
                   <div className="adminAccordion__image">
-                    <DeleteEnquiryButton
-                      id={enquiry.id}
-                      getEnquiries={getEnquiries}
-                    />
                     <Image
                       className="adminAccordion__img"
                       src={enquiry.attributes.accomodation_image}
-                      width="80"
-                      height="80"
+                      width="115"
+                      height="115"
                       alt={enquiry.attributes.accomodation_name}
+                    />
+                    <DeleteEnquiryButton
+                      id={enquiry.id}
+                      getEnquiries={getEnquiries}
                     />
                   </div>
                 </Accordion.Body>

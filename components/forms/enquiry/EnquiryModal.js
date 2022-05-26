@@ -10,6 +10,12 @@ export const EnquiryModal = ({
   checkinDate,
   checkoutDate,
 }) => {
+  let accomImg = "";
+  if (accomDetails.data.attributes.images.data === null) {
+    accomImg = "";
+  } else {
+    accomImg = accomDetails.data.attributes.images.data[0].attributes.url;
+  }
   return (
     <Modal
       show={showModal}
@@ -27,9 +33,7 @@ export const EnquiryModal = ({
         <EnquiryForm
           accomodationName={accomDetails.data.attributes.name}
           maximumGuests={accomDetails.data.attributes.maximum_guests}
-          accomodationImage={
-            accomDetails.data.attributes.images.data[0].attributes.url
-          }
+          accomodationImage={accomImg}
           accomodationId={accomDetails.data.id}
           checkinDate={checkinDate ? checkinDate : undefined}
           checkoutDate={checkoutDate ? checkoutDate : undefined}
