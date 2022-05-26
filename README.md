@@ -1,3 +1,8 @@
+# Login details:
+
+username: admin@admin.com (or) admin
+password: Pass1234
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
