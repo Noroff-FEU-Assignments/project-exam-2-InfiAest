@@ -1,6 +1,7 @@
 import Head from "../components/layout/general/Head";
 import Layout from "../components/layout/general/Layout";
 import Heading from "../components/layout/headings/Heading";
+import Container from "react-bootstrap/Container";
 import ContactForm from "../components/forms/contact/ContactForm";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,15 +14,19 @@ export default function Contact() {
   return (
     <Layout>
       <Head
-        title="Holidaze Contact"
+        title="Holidaze | Contact"
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
-      <div className="container">
+      <Container>
         <Heading size="1" content="Contact us" />
         <Row xs={1} md={2} className="g-5">
           <Col>
             <div className="contact__info">
-              <Heading size="5" content="Find us here..." />
+              <Heading
+                size="2"
+                customClass="contact__header"
+                content="Find us here..."
+              />
               <div className="contact__link">
                 <FontAwesomeIcon
                   className="contact__link--icon"
@@ -63,13 +68,14 @@ export default function Contact() {
           </Col>
           <Col>
             <Heading
-              size="5"
+              size="2"
+              customClass="contact__header"
               content="Or send us a message and we'll get back to you as soon as we can!"
             />
             <ContactForm />
           </Col>
         </Row>
-      </div>
+      </Container>
     </Layout>
   );
 }

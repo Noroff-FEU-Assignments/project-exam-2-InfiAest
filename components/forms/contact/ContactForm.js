@@ -30,8 +30,6 @@ export default function ContactForm() {
     setSubmitting(true);
     setServerError(null);
 
-    console.log(data);
-
     try {
       const response = await axios.post(
         url,
@@ -48,7 +46,6 @@ export default function ContactForm() {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("response", response.data);
       setSubmitted(true);
     } catch (error) {
       console.log("error", error);

@@ -65,7 +65,7 @@ function ReviewsForm({ accomodationId }) {
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)} className="mb-5">
-        <Heading size="6" content="Leave a review:" />
+        <Heading size="3" content="Leave a review:" />
         {serverError && (
           <DisplayMessage
             variant="danger"

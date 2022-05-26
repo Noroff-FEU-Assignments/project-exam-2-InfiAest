@@ -33,7 +33,7 @@ function FilterAccomodations({
             <Accordion flush className="filters__innerAccordion">
               <Accordion.Item eventKey="1">
                 <Accordion.Header
-                  as="h3"
+                  as="h4"
                   className="filters__innerAccordion__header"
                 >
                   Accomodation type
@@ -65,7 +65,7 @@ function FilterAccomodations({
               </Accordion.Item>
               <Accordion.Item eventKey="2">
                 <Accordion.Header
-                  as="h3"
+                  as="h4"
                   className="filters__innerAccordion__header"
                 >
                   Location type

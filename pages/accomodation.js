@@ -150,7 +150,7 @@ export default function Accomodation({ accomodations }) {
   return (
     <Layout>
       <Head
-        title="Holidaze Accomodations"
+        title="Holidaze | Accomodations"
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
       <PageContainer>
@@ -175,7 +175,7 @@ export default function Accomodation({ accomodations }) {
                 <Tags
                   tagActive={true}
                   content="Reset filters"
-                  tagClass="filterButton__tags"
+                  tagClass="filters__button__tags"
                 />
               </ResetFiltersButton>
             </div>

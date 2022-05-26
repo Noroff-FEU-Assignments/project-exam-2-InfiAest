@@ -3,7 +3,6 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import inspoImg from "../../images/inspo/utsikt-floien.jpg";
 import useWindowSize from "../../hooks/useWindowSize";
-import Heading from "../layout/headings/Heading";
 import SectionWrapper from "../layout/general/SectionWrapper";
 import Link from "next/link";
 
@@ -39,11 +38,11 @@ function InspoCard() {
     <SectionWrapper>
       <Card className="inspoCard">
         {image}
+
         <Card.Body className="inspoCard__body">
-          <Heading
-            size="3"
-            content="Haven't decided what to do in Bergen yet?"
-          />
+          <Card.Title as="h2">
+            Haven't decided what to do in Bergen yet?
+          </Card.Title>
           <Card.Text>
             Get comfy in one of these locations and make plans from there!
           </Card.Text>

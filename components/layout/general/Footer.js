@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <Link href="/">
-        <a className="footer__link">
+        <a className="footer__link" aria-label="Holidaze Icon link to homepage">
           <div className="footer__logo--container">
             <Image
               className="footer__logo"
@@ -25,7 +25,10 @@ export default function Footer() {
       <div className="footer__socials">
         <div className="footer__socials--flex">
           <Link href="#">
-            <a className="footer__link">
+            <a
+              className="footer__link"
+              aria-label="link to Holidaze facebook page"
+            >
               <FontAwesomeIcon
                 className="footer__link--icon"
                 icon={faFacebookSquare}
@@ -35,7 +38,10 @@ export default function Footer() {
           </Link>
 
           <Link href="#">
-            <a className="footer__link">
+            <a
+              className="footer__link"
+              aria-label="link to Holidaze instagram page"
+            >
               <FontAwesomeIcon
                 className="footer__link--icon"
                 icon={faInstagram}
@@ -45,11 +51,18 @@ export default function Footer() {
           </Link>
         </div>
         <Link href="/contact">
-          <a className="footer__link">Contact Us</a>
+          <a
+            className="footer__link"
+            aria-label="link to Holidaze contact page"
+          >
+            Contact Us
+          </a>
         </Link>
 
         <Link href="/login">
-          <a className="footer__link">Login</a>
+          <a className="footer__link" aria-label="link to Holidaze login page">
+            Login
+          </a>
         </Link>
       </div>
 

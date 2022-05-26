@@ -75,7 +75,6 @@ const AddAccomodationForm = () => {
       accomodation_area: data.accomodation_area,
     };
 
-    console.log(postData);
     let formData = new FormData();
     formData.append("files.images", image1);
     formData.append("files.images", image2);
@@ -84,7 +83,6 @@ const AddAccomodationForm = () => {
 
     try {
       const response = await http.post(ACCOMODATION_PATH, formData);
-      console.log("Response", response.data);
       setSubmitted(true);
     } catch (error) {
       console.log("error", error);

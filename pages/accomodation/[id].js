@@ -85,9 +85,9 @@ export default function Accomodation({ accomodation }) {
       />
       <PageContainer>
         <Breadcrumb>
-          <span className="breadcrumb__link">
+          <li className="breadcrumb__link">
             <Link href="/accomodation">Accomodation/</Link>
-          </span>
+          </li>
           <Breadcrumb.Item active>{details.name}</Breadcrumb.Item>
         </Breadcrumb>
         <Row xs={1} lg={2} className="g-5">

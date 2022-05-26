@@ -22,14 +22,14 @@ function addAccomodation() {
   return (
     <Layout>
       <Head
-        title="Holidaze Add accomodation"
+        title="Holidaze | Add accomodation"
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
       <PageContainer>
         <Breadcrumb>
-          <span className="breadcrumb__link">
+          <li className="breadcrumb__link">
             <Link href="/admin">Admin/</Link>
-          </span>
+          </li>
           <Breadcrumb.Item active>Add accomodation</Breadcrumb.Item>
         </Breadcrumb>
         <Heading size="1" content="Add new accomodation" />

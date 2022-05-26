@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <Layout>
       <Head
-        title="Holidaze home"
+        title="Holidaze | Home"
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
       <ImageHead />

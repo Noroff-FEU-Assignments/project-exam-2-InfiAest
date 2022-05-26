@@ -7,6 +7,12 @@
   max-width: 650px;
   margin: 0 auto;
 }
+.btn {
+  box-shadow: $box-shadow;
+}
+.btn:hover {
+  box-shadow: $box-shadow-hover;
+}
 
 .searchForm__button {
   position: absolute;
@@ -58,7 +64,6 @@
   }
 }
 
-//solves sticky button hover thing https://css-tricks.com/solving-sticky-hover-states-with-media-hover-hover/
 @media (hover: none) {
   .filters__checkbox--input:hover {
     color: map-get($colors, dark-blue);
@@ -86,28 +91,15 @@
   }
 }
 
-//contact links
-.contact__link {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 1rem 0;
-  align-items: center;
-  width: max-content;
-  justify-content: center;
-  color: map-get($colors, body);
-  &--name {
-    display: inline-flex;
-  }
-  &--icon {
-    margin-right: 5px;
-    width: 22px;
-    color: map-get($colors, dark-blue);
-  }
-}
-
 //breadcrumb button
-.breadcrumb__link {
-  padding-right: 5px;
+.breadcrumb {
+  margin-top: 1rem;
+  &__link {
+    padding-right: 5px;
+    & a {
+      color: map-get($colors, primary);
+    }
+  }
 }
 
 //admin buttons
@@ -125,9 +117,6 @@
 }
 
 @include for-tablet {
-  .contact__info {
-    border-right: 2px solid map-get($colors, dark-blue);
-  }
   .filters__checkbox {
     &--label {
       &:hover {

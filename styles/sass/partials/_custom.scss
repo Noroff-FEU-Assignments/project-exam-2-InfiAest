@@ -27,8 +27,8 @@ $spacers: (
 $grid-gutter-width: 3rem;
 
 $h1-font-size: 2rem;
-$h2-font-size: 2rem;
-$h3-font-size: 1.75rem;
+$h2-font-size: 1.75rem;
+$h3-font-size: 1.2rem;
 $h4-font-size: 1.5rem;
 $h5-font-size: 1.4rem;
 $h6-font-size: 1.1rem;
@@ -53,7 +53,8 @@ $border-radius: 10px;
 
 $card-title-spacer-y: 0;
 $card-spacer-x: 0;
-$card-border-width: none;
+$card-border-width: 0px;
+$card-border-color: $body-background-color;
 $card-box-shadow: $box-shadow;
 $card-bg: map-get($colors, background);
 
@@ -77,37 +78,10 @@ $accordion-button-active-color: map-get($colors, body);
 $accordion-border-color: map-get($colors, light-blue);
 
 $component-active-bg: map-get($colors, body);
-$nav-tabs-link-active-bg: map-get($colors, dark-blue);
-$nav-tabs-border-color: map-get($colors, dark-blue);
-$nav-tabs-link-active-border-color: map-get($colors, dark-blue);
-$nav-tabs-link-active-color: map-get($colors, background);
+$nav-tabs-link-active-bg: map-get($colors, secondary);
+$nav-tabs-border-color: map-get($colors, secondary);
+$nav-tabs-link-active-border-color: map-get($colors, secondary);
+$nav-tabs-link-active-color: map-get($colors, body);
 $nav-link-color: map-get($colors, body);
 
 $modal-lg: 600px;
-
-.nav-link {
-  font-family: $font-headings;
-  font-size: $h5-font-size;
-}
-
-.btn {
-  box-shadow: $box-shadow;
-}
-.btn:hover {
-  box-shadow: $box-shadow-hover;
-}
-
-.breadcrumb {
-  margin-top: 1rem;
-  &__link a {
-    color: map-get($colors, primary);
-  }
-}
-
-.card {
-  border: none !important;
-}
-
-.mb-4 {
-  position: relative;
-}

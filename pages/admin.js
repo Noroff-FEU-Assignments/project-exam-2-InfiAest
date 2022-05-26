@@ -24,7 +24,7 @@ export default function Admin() {
   return (
     <Layout>
       <Head
-        title="Holidaze Admin"
+        title="Holidaze | Admin"
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
 
@@ -48,6 +48,7 @@ export default function Admin() {
               eventKey="enquiries"
               title="Enquiries"
               className="adminTabs__tab"
+              aria-label="Enquiries tab button"
             >
               <div>
                 <Enquiries />
@@ -57,6 +58,7 @@ export default function Admin() {
               eventKey="messages"
               title="Messages"
               className="adminTabs__tab"
+              aria-label="Messages tab button"
             >
               <Messages />
             </Tab>

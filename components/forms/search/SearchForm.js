@@ -24,7 +24,6 @@ export default function SearchForm() {
     async function loadResults() {
       try {
         const response = await axios.get(url);
-        // console.log(response.data.data);
         setResults(response.data.data);
       } catch (error) {
         console.log(error);
@@ -34,7 +33,6 @@ export default function SearchForm() {
   }, []);
 
   function onSelectSuggestion(suggestion) {
-    // console.log(suggestion);
     setText(suggestion.attributes.name);
     setSuggestions([]);
     setSpinnerVisible(true);
@@ -60,7 +58,6 @@ export default function SearchForm() {
     if (text.length && matches.length < 1) {
       setNoResults("No results found...");
     }
-    // console.log(matches);
     setSuggestions(matches);
     setText(text);
   }
@@ -83,6 +80,7 @@ export default function SearchForm() {
         <Button
           href={buttonHref}
           variant="link"
+          aria-label="Search bar button"
           className="searchForm__button"
           disabled={searchDisabled}
         >

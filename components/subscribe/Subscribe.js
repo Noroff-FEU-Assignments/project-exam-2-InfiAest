@@ -10,8 +10,9 @@ export default function Subscribe() {
       <div className="subscribe">
         <Container>
           <Heading
-            size="2"
+            size="3"
             content="Want us to keep you updated with exciting new deals?"
+            customClass="subscribe__heading"
           />
           <p>Subscribe to the Holidaze newsletter here</p>
           <div>

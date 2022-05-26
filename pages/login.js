@@ -6,7 +6,7 @@ export default function Login() {
   return (
     <Layout>
       <Head
-        title="Holidaze Login"
+        title="Holidaze | Login"
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
 

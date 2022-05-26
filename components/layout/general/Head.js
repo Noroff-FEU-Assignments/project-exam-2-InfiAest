@@ -15,6 +15,6 @@ export default function Head({ title = "", description }) {
 }
 
 Head.propTypes = {
-  title: PropTypes.node,
+  title: PropTypes.string,
   description: PropTypes.string,
 };

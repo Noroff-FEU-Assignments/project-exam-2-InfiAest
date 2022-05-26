@@ -40,6 +40,11 @@
   right: 1rem;
   top: 1rem;
 }
+.nav-link {
+  font-family: $font-primary;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
 
 @include for-tablet {
   .navbar {
