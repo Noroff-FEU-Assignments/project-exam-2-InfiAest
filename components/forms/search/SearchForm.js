@@ -74,7 +74,7 @@ export default function SearchForm() {
             setTimeout(() => {
               setSuggestions([]);
               setNoResults("");
-            }, 100);
+            }, 250);
           }}
         />
         <Button
