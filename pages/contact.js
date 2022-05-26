@@ -45,7 +45,11 @@ export default function Contact() {
                 </div>
               </div>
 
-              <a href="" className="contact__link">
+              <a
+                href=""
+                aria-label="Link to Holidaze facebook page"
+                className="contact__link"
+              >
                 <FontAwesomeIcon
                   className="contact__link--icon"
                   icon={faFacebookSquare}
@@ -55,7 +59,11 @@ export default function Contact() {
                 </span>
               </a>
 
-              <a href="" className="contact__link">
+              <a
+                href=""
+                aria-label="Link to Holidaze instagram page"
+                className="contact__link"
+              >
                 <FontAwesomeIcon
                   className="contact__link--icon"
                   icon={faInstagram}
