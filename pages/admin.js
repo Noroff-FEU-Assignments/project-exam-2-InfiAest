@@ -1,5 +1,6 @@
 import Head from "../components/layout/general/Head";
 import Layout from "../components/layout/general/Layout";
+import PageContainer from "../components/layout/general/PageContainer";
 import Heading from "../components/layout/headings/Heading";
 import SectionWrapper from "../components/layout/general/SectionWrapper";
 import Tabs from "react-bootstrap/Tabs";
@@ -28,7 +29,7 @@ export default function Admin() {
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
 
-      <div className="container">
+      <PageContainer>
         <div
           className="admin__heading"
           style={{
@@ -64,7 +65,7 @@ export default function Admin() {
             </Tab>
           </Tabs>
         </SectionWrapper>
-      </div>
+      </PageContainer>
     </Layout>
   );
 }

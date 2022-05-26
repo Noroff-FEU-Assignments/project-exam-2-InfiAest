@@ -1,6 +1,8 @@
 import Head from "../components/layout/general/Head";
 import Layout from "../components/layout/general/Layout";
 import LoginForm from "../components/forms/login/LoginForm";
+import Heading from "../components/layout/headings/Heading";
+import PageContainer from "../components/layout/general/PageContainer";
 
 export default function Login() {
   return (
@@ -10,10 +12,10 @@ export default function Login() {
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
 
-      <div className="container">
-        <h1>Login page</h1>
+      <PageContainer>
+        <Heading size="1" content="Login" customClass="login__header" />
         <LoginForm />
-      </div>
+      </PageContainer>
     </Layout>
   );
 }

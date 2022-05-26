@@ -1,7 +1,7 @@
 import Head from "../components/layout/general/Head";
 import Layout from "../components/layout/general/Layout";
 import Heading from "../components/layout/headings/Heading";
-import Container from "react-bootstrap/Container";
+import PageContainer from "../components/layout/general/PageContainer";
 import ContactForm from "../components/forms/contact/ContactForm";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -17,7 +17,7 @@ export default function Contact() {
         title="Holidaze | Contact"
         description="Book a hotel, apartment or house in Bergen for your Holidaze."
       />
-      <Container>
+      <PageContainer>
         <Heading size="1" content="Contact us" />
         <Row xs={1} md={2} className="g-5">
           <Col>
@@ -75,7 +75,7 @@ export default function Contact() {
             <ContactForm />
           </Col>
         </Row>
-      </Container>
+      </PageContainer>
     </Layout>
   );
 }

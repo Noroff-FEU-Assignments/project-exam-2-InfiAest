@@ -33,7 +33,7 @@ function FilterAccomodations({
             <Accordion flush className="filters__innerAccordion">
               <Accordion.Item eventKey="1">
                 <Accordion.Header
-                  as="h4"
+                  as="h3"
                   className="filters__innerAccordion__header"
                 >
                   Accomodation type
@@ -65,7 +65,7 @@ function FilterAccomodations({
               </Accordion.Item>
               <Accordion.Item eventKey="2">
                 <Accordion.Header
-                  as="h4"
+                  as="h3"
                   className="filters__innerAccordion__header"
                 >
                   Location type
@@ -96,7 +96,7 @@ function FilterAccomodations({
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="3">
-                <Accordion.Header as="h4">Price per night</Accordion.Header>
+                <Accordion.Header as="h3">Price per night</Accordion.Header>
                 <Accordion.Body>
                   <div className="filters__form__range">
                     <div>
@@ -129,7 +129,7 @@ function FilterAccomodations({
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="4">
-                <Accordion.Header as="h4">Rating</Accordion.Header>
+                <Accordion.Header as="h3">Rating</Accordion.Header>
                 <Accordion.Body>
                   {accomRatings.map((rating, index) => {
                     return (
@@ -155,7 +155,7 @@ function FilterAccomodations({
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="5">
-                <Accordion.Header as="h4">Amenities</Accordion.Header>
+                <Accordion.Header as="h3">Amenities</Accordion.Header>
                 <Accordion.Body>
                   {accomAmenities.map((amenity, index) => {
                     return (

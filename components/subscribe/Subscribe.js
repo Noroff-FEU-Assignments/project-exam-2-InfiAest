@@ -2,13 +2,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Heading from "../layout/headings/Heading";
 import SectionWrapper from "../layout/general/SectionWrapper";
-import Container from "react-bootstrap/Container";
+import PageContainer from "../layout/general/PageContainer";
 
 export default function Subscribe() {
   return (
     <SectionWrapper>
       <div className="subscribe">
-        <Container>
+        <PageContainer>
           <Heading
             size="3"
             content="Want us to keep you updated with exciting new deals?"
@@ -29,7 +29,7 @@ export default function Subscribe() {
               </Button>
             </div>
           </div>
-        </Container>
+        </PageContainer>
       </div>
     </SectionWrapper>
   );
