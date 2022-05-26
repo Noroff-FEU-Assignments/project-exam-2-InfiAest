@@ -10,6 +10,7 @@ import Image from "next/image";
 import DisplayMessage from "../../messages/DisplayMessage";
 import { formatDate } from "../../common/FormatDate";
 import DeleteEnquiryButton from "../buttons/DeleteEnquiryButton";
+import { placeholderImg } from "../../../constants/placeholderImg";
 
 function Enquiries() {
   const [enquiries, setEnquiries] = useState([]);
@@ -49,6 +50,17 @@ function Enquiries() {
             const createdAt = new Date(
               enquiry.attributes.createdAt
             ).toLocaleString();
+
+            let accomImg = "";
+            let imgAlt = "";
+
+            if (enquiry.attributes.accomodation_image.length === 0) {
+              accomImg = placeholderImg;
+              imgAlt = "";
+            } else {
+              accomImg = enquiry.attributes.accomodation_image;
+              imgAlt = enquiry.attributes.accomodation_name;
+            }
 
             return (
               <Accordion.Item eventKey={index} key={enquiry.id}>
@@ -96,10 +108,10 @@ function Enquiries() {
                   <div className="adminAccordion__image">
                     <Image
                       className="adminAccordion__img"
-                      src={enquiry.attributes.accomodation_image}
+                      src={accomImg}
                       width="115"
                       height="115"
-                      alt={enquiry.attributes.accomodation_name}
+                      alt={imgAlt}
                     />
                     <DeleteEnquiryButton
                       id={enquiry.id}

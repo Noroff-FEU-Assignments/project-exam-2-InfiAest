@@ -33,8 +33,8 @@ export default function Accomodation({ accomodation }) {
   information = information.split(/\r?\n/);
 
   const [showModal, setShowModal] = useState(false);
-  const [startDate, setStartDate] = useState(undefined);
-  const [endDate, setEndDate] = useState(undefined);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [tags, setTags] = useState([]);
 
   function hideModal() {

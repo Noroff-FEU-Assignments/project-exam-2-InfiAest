@@ -34,6 +34,7 @@ function AccomodationCard({ attributes }) {
                 <Image
                   className="accomodationCard__image"
                   src={imgSrc}
+                  objectFit="cover"
                   width="384"
                   height="384"
                   alt={imgAlt}

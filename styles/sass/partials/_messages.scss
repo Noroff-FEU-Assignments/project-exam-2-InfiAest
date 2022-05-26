@@ -1,6 +1,9 @@
 .review__alert {
   height: 140px;
 }
+.image__alert {
+  height: 250px;
+}
 
 @include for-tablet {
   .review__alert {
@@ -12,5 +15,20 @@
 @include for-desktop {
   .review__alert {
     height: 250px;
+  }
+  .image__alert {
+    height: 432px;
+  }
+}
+
+@include for-xl-desktop {
+  .image__alert {
+    height: 522px;
+  }
+}
+
+@include for-xxl-desktop {
+  .image__alert {
+    height: 552px;
   }
 }

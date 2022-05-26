@@ -26,6 +26,7 @@ function ImageCarousel({ accomodationImages }) {
                 alt={image.attributes.name}
                 width="702"
                 height="702"
+                objectFit="cover"
                 priority={true}
                 placeholder="blur"
                 blurDataURL={placeholderImg}

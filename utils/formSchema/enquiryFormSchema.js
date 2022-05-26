@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 export const ENQUIRY_FORM_SCHEMA = yup.object().shape({
   accomodation_name: yup.string().required(),
-  accomodation_image: yup.string().required(),
+  accomodation_image: yup.string(),
   accomodation: yup.number().required(),
   first_name: yup.string().required("Please enter your first name"),
   last_name: yup.string().required("Please enter your last name"),
