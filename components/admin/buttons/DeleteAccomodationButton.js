@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import AuthContext from "../../../context/AuthContext";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
 import useAxios from "../../../hooks/useAxios";
 import Button from "react-bootstrap/Button";
@@ -9,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function DeleteAccomodationButton({ id }) {
+  const [auth] = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState(null);
   const http = useAxios();
@@ -30,30 +32,37 @@ function DeleteAccomodationButton({ id }) {
     }
   }
 
-  return (
-    <>
-      <div className="admin__delete">
-        <Button
-          variant="dark"
-          className="admin__delete--button"
-          onClick={() => setShowModal(true)}
-        >
-          {error ? (
-            "Error"
-          ) : (
-            <FontAwesomeIcon icon={faTrash} className={"admin__delete--icon"} />
-          )}
-        </Button>
-      </div>
-      <DisplayModal
-        showModal={showModal}
-        cancel={hideModal}
-        title="Delete"
-        content="You sure you want to delete this Accomodation?"
-        confirmed={deleteAccomodation}
-      />
-    </>
-  );
+  if (!auth) {
+    return "";
+  } else {
+    return (
+      <>
+        <div className="admin__delete">
+          <Button
+            variant="dark"
+            className="admin__delete--button"
+            onClick={() => setShowModal(true)}
+          >
+            {error ? (
+              "Error"
+            ) : (
+              <FontAwesomeIcon
+                icon={faTrash}
+                className={"admin__delete--icon"}
+              />
+            )}
+          </Button>
+        </div>
+        <DisplayModal
+          showModal={showModal}
+          cancel={hideModal}
+          title="Delete"
+          content="You sure you want to delete this Accomodation?"
+          confirmed={deleteAccomodation}
+        />
+      </>
+    );
+  }
 }
 
 export default DeleteAccomodationButton;
