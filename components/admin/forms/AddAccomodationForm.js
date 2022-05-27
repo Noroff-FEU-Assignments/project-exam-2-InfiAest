@@ -298,7 +298,7 @@ const AddAccomodationForm = () => {
                   as="textarea"
                   rows={4}
                   onKeyUp={(e) => setInfoCount(e.target.value.length)}
-                  placeholder="Information about house rules, check-in/out etc. Separate the information with '.'"
+                  placeholder="Information about house rules, check-in/out etc. Separate the information by starting a new line with no fullstop/period."
                   {...register("information")}
                 />
                 {errors.information && (
