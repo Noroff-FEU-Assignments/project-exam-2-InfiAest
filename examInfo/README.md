@@ -1,7 +1,7 @@
 # Login details:
 
-username: admin@admin.com (or) admin
-password: Pass1234
+- username: admin@admin.com (or) admin
+- password: Pass1234
 
 # Project Exam 2
 
