@@ -89,6 +89,12 @@
       align-items: center;
     }
   }
+  &__buttons {
+    &--admin {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
 //inspiration tiles

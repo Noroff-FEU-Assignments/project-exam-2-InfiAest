@@ -24,6 +24,7 @@ import ImageCarousel from "../../components/accomodationAttributes/carousel/Imag
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Link from "next/link";
 import { EnquiryModal } from "../../components/forms/enquiry/EnquiryModal";
+import DeleteAccomodationButton from "../../components/admin/buttons/DeleteAccomodationButton";
 
 export default function Accomodation({ accomodation }) {
   const details = accomodation.data.attributes;
@@ -90,6 +91,7 @@ export default function Accomodation({ accomodation }) {
           </li>
           <Breadcrumb.Item active>{details.name}</Breadcrumb.Item>
         </Breadcrumb>
+        <DeleteAccomodationButton id={accomodation.data.id} />
         <Row xs={1} lg={2} className="g-5">
           <Col>
             <div className="details__heading">

@@ -86,5 +86,3 @@ export const ADD_ACCOMODATION_FORM_SCHEMA = ADD_FORM_SCHEMA.test(
     );
   }
 );
-
-//https://lifesaver.codes/answer/validate-at-least-one-checkbox-boolean-is-chosen-72
